@@ -1,9 +1,0 @@
----
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import AwardsView from '../../views/AwardsView.astro';
-import { site } from '../../../site.config';
-import { t } from '../../lib/i18n';
----
-<BaseLayout lang="en" title={`${t('en', 'nav_awards')} · ${site.name}`} description={site.tagline} path="/awards/">
-  <AwardsView lang="en" />
-</BaseLayout>

@@ -1,4 +1,24 @@
+# superpowers / astro legacy (kept for compatibility)
 .superpowers/
-node_modules/
 dist/
 .astro/
+
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+
+# env
+.env
+.env*.local
+
+# uploads (runtime content, not shipped in git) — keep the folder via .gitkeep
+public/uploads/*
+!public/uploads/.gitkeep
+
+# misc
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts

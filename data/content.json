@@ -1,0 +1,93 @@
+{
+  "site": {
+    "name": "Shri Builders",
+    "tagline": "Traditional temple & pond construction",
+    "owners": [
+      "Ramanna Acharya"
+    ],
+    "phone": "+919800000000",
+    "whatsapp": "919800000000",
+    "region": "Udupi, Karnataka"
+  },
+  "projects": [
+    {
+      "id": "seed-temple",
+      "slug": "sri-venkataramana-temple",
+      "title": "Sri Venkataramana Temple",
+      "type": "temple",
+      "place": "Kaup, Udupi",
+      "year": 2021,
+      "builtFor": "Kaup Temple Committee",
+      "description": "A complete reconstruction of the main sanctum and outer prakara in traditional Kerala-Tulunadu style, using hand-cut granite and a copper-clad roof over the garbhagriha. The work included fresh consecration (punah prathishta) on completion.",
+      "materials": [
+        "Granite",
+        "Teak wood",
+        "Copper roofing",
+        "Laterite"
+      ],
+      "duration": "10 months",
+      "teamSize": "14 craftsmen",
+      "ledBy": "Ramanna Acharya",
+      "status": "Completed",
+      "mapLink": "https://maps.google.com/?q=Kaup+Temple+Udupi",
+      "videoLink": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "photos": [
+        "/uploads/seed-temple-1.svg",
+        "/uploads/seed-temple-2.svg"
+      ],
+      "beforeAfter": {
+        "before": "/uploads/seed-temple-before.svg",
+        "after": "/uploads/seed-temple-after.svg"
+      },
+      "featured": true
+    },
+    {
+      "id": "seed-pond",
+      "slug": "temple-pushkarini",
+      "title": "Temple Pushkarini",
+      "type": "pond",
+      "photos": [
+        "/uploads/seed-pond-1.svg"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "id": "seed-award-1",
+      "title": "Best Heritage Restoration",
+      "givenBy": "Karnataka Temple Builders' Association",
+      "year": 2022,
+      "note": "Recognised for the restoration of Sri Venkataramana Temple, Kaup."
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "seed-testimonial-1",
+      "name": "Suresh Kamath",
+      "quote": "Ramanna Acharya and his team rebuilt our village temple with so much care and devotion. The craftsmanship reminded elders of temples from a hundred years ago.",
+      "place": "Kaup"
+    }
+  ],
+  "services": [
+    {
+      "id": "svc-1",
+      "name": "Temple Construction",
+      "blurb": "New temple construction following agama shastra, from foundation to kalasha."
+    },
+    {
+      "id": "svc-2",
+      "name": "Pond & Pushkarini Building",
+      "blurb": "Stepped temple ponds built with traditional stonework and proper water flow."
+    },
+    {
+      "id": "svc-3",
+      "name": "Renovation & Restoration",
+      "blurb": "Careful restoration of old temples, preserving original design wherever possible."
+    }
+  ],
+  "about": {
+    "body": "Shri Builders has been building and restoring temples and ponds across coastal Karnataka for three generations.\nWe specialise in traditional agama-shastra-compliant temple construction, gopura towers, and stepped pushkarinis, using hand-cut stone and time-tested methods passed down through our family.\nEvery project is carried out with the involvement of local priests and committees, from bhoomi puja to final consecration.",
+    "yearsExperience": 32,
+    "heroPhoto": "/uploads/seed-about-hero.svg"
+  }
+}

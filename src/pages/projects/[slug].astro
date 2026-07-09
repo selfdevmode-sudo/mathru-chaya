@@ -1,9 +1,0 @@
----
-import { getCollection } from 'astro:content';
-import ProjectDetailView from '../../views/ProjectDetailView.astro';
-export async function getStaticPaths() {
-  const projects = await getCollection('projects');
-  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
-}
----
-<ProjectDetailView project={Astro.props.project} lang="en" />

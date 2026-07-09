@@ -1,9 +1,0 @@
----
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import AboutView from '../../views/AboutView.astro';
-import { site } from '../../../site.config';
-import { t } from '../../lib/i18n';
----
-<BaseLayout lang="en" title={`${t('en', 'nav_about')} · ${site.name}`} description={site.tagline} path="/about/">
-  <AboutView lang="en" />
-</BaseLayout>
