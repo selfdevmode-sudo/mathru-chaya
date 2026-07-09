@@ -68,7 +68,7 @@ const about = defineCollection({
 const services = defineCollection({
   loader: file('./src/content/pages/services.yml'),
   schema: z.object({
-    id: z.string(),
+    id: z.string().trim().min(1),
     name_en: z.string().trim().min(1),
     name_kn: optionalTrimmed,
     blurb_en: optionalTrimmed,
