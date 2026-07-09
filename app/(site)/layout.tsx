@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { readContent } from "@/lib/db";
 import { telLink, waLink } from "@/lib/format";
+import ViewToggle from "@/components/ViewToggle";
 
 export const dynamic = "force-dynamic";
 
@@ -40,13 +41,16 @@ export default async function SiteLayout({
             <span className="site-header__brand-name">{site.name}</span>
             <span className="site-header__brand-tagline">{site.tagline}</span>
           </Link>
-          <nav className="site-nav">
-            {NAV_LINKS.map((link) => (
-              <Link key={link.href} href={link.href}>
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+          <div className="site-header__right">
+            <nav className="site-nav">
+              {NAV_LINKS.map((link) => (
+                <Link key={link.href} href={link.href}>
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+            <ViewToggle />
+          </div>
         </div>
       </header>
 

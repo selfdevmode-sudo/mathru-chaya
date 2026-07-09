@@ -1,21 +1,49 @@
 {
   "site": {
-    "name": "Shri Builders",
+    "name": "Mathru chaya constructions",
     "tagline": "Traditional temple & pond construction",
     "owners": [
-      "Ramanna Acharya"
+      "Eshwara panduranga nayak"
     ],
     "phone": "+919800000000",
     "whatsapp": "919800000000",
-    "region": "Udupi, Karnataka"
+    "email": "akapanther@yopmail.com",
+    "region": "Sankala Kariya, Udupi, Karnataka"
   },
   "projects": [
+    {
+      "id": "mrddebge-82dol7",
+      "slug": "kaat-boggi",
+      "title": "kaat boggi",
+      "type": "other",
+      "place": "permude",
+      "year": 1998,
+      "builtFor": "owner:ankit",
+      "description": "built for boggi",
+      "materials": [
+        "water",
+        "venom"
+      ],
+      "duration": "28",
+      "teamSize": "2",
+      "ledBy": "eshwaranner",
+      "status": "completed",
+      "photos": [
+        "/uploads/1783593618194-b7pf2y.jpg",
+        "/uploads/1783593618194-xgm0y4.jpg"
+      ],
+      "featured": true,
+      "beforeAfter": {
+        "before": "/uploads/1783593618195-3pze6v.png",
+        "after": "/uploads/1783593618196-wy11ob.jpg"
+      }
+    },
     {
       "id": "seed-temple",
       "slug": "sri-venkataramana-temple",
       "title": "Sri Venkataramana Temple",
       "type": "temple",
-      "place": "Kaup, Udupi",
+      "place": "Belman, Udupi",
       "year": 2021,
       "builtFor": "Kaup Temple Committee",
       "description": "A complete reconstruction of the main sanctum and outer prakara in traditional Kerala-Tulunadu style, using hand-cut granite and a copper-clad roof over the garbhagriha. The work included fresh consecration (punah prathishta) on completion.",
@@ -52,6 +80,13 @@
     }
   ],
   "awards": [
+    {
+      "id": "mrddev9w-acfm6c",
+      "title": "bow bow",
+      "givenBy": "ankit",
+      "year": 2026,
+      "photo": "/uploads/1783593322195-vjg0fw.jpg"
+    },
     {
       "id": "seed-award-1",
       "title": "Best Heritage Restoration",

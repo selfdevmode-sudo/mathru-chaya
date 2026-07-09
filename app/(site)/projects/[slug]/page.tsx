@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { readContent } from "@/lib/db";
 import { projectMetaLine } from "@/lib/format";
+import Lightbox from "@/components/Lightbox";
 
 export const dynamic = "force-dynamic";
 
@@ -35,7 +36,16 @@ export default async function ProjectDetailPage({
   if (project.status) facts.push({ label: "Status", value: project.status });
 
   return (
-    <article className="wrap section">
+    <article className="wrap section project-detail">
+      {project.photos.length > 0 ? (
+        <div className="detail-backdrop" aria-hidden="true">
+          <div
+            className="detail-backdrop__image"
+            style={{ backgroundImage: `url(${project.photos[0]})` }}
+          />
+        </div>
+      ) : null}
+
       <div className="section-head">
         {projectMetaLine(project) ? (
           <span className="badge">{projectMetaLine(project)}</span>
@@ -44,13 +54,7 @@ export default async function ProjectDetailPage({
         {project.builtFor ? <p>Built for {project.builtFor}</p> : null}
       </div>
 
-      {project.photos.length > 0 ? (
-        <div className="gallery">
-          {project.photos.map((photo, i) => (
-            <img key={photo + i} src={photo} alt={`${project.title} photo ${i + 1}`} />
-          ))}
-        </div>
-      ) : null}
+      <Lightbox photos={project.photos} title={project.title} />
 
       {project.description ? <p>{project.description}</p> : null}
 

@@ -26,39 +26,41 @@ export default async function AdminTestimonialsPage() {
           <Link href="/admin/testimonials/new">Add your first testimonial</Link>.
         </div>
       ) : (
-        <table className="admin-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Quote</th>
-              <th>Place</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {testimonials.map((t) => {
-              const boundDelete = deleteTestimonial.bind(null, t.id);
-              return (
-                <tr key={t.id}>
-                  <td>{t.name}</td>
-                  <td>{t.quote.length > 60 ? `${t.quote.slice(0, 60)}…` : t.quote}</td>
-                  <td>{t.place || "—"}</td>
-                  <td className="row-actions">
-                    <Link href={`/admin/testimonials/${t.id}`}>Edit</Link>
-                    <form action={boundDelete}>
-                      <ConfirmSubmitButton
-                        message={`Delete testimonial from "${t.name}"?`}
-                        className="btn-danger-inline"
-                      >
-                        Delete
-                      </ConfirmSubmitButton>
-                    </form>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="table-scroll">
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Quote</th>
+                <th>Place</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {testimonials.map((t) => {
+                const boundDelete = deleteTestimonial.bind(null, t.id);
+                return (
+                  <tr key={t.id}>
+                    <td>{t.name}</td>
+                    <td>{t.quote.length > 60 ? `${t.quote.slice(0, 60)}…` : t.quote}</td>
+                    <td>{t.place || "—"}</td>
+                    <td className="row-actions">
+                      <Link href={`/admin/testimonials/${t.id}`}>Edit</Link>
+                      <form action={boundDelete}>
+                        <ConfirmSubmitButton
+                          message={`Delete testimonial from "${t.name}"?`}
+                          className="btn-danger-inline"
+                        >
+                          Delete
+                        </ConfirmSubmitButton>
+                      </form>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

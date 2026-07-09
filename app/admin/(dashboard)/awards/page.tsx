@@ -25,43 +25,45 @@ export default async function AdminAwardsPage() {
           No awards yet. <Link href="/admin/awards/new">Add your first award</Link>.
         </div>
       ) : (
-        <table className="admin-table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Title</th>
-              <th>Given by</th>
-              <th>Year</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {awards.map((award) => {
-              const boundDelete = deleteAward.bind(null, award.id);
-              return (
-                <tr key={award.id}>
-                  <td>
-                    {award.photo ? <img className="thumb-40" src={award.photo} alt="" /> : null}
-                  </td>
-                  <td>{award.title}</td>
-                  <td>{award.givenBy || "—"}</td>
-                  <td>{award.year || "—"}</td>
-                  <td className="row-actions">
-                    <Link href={`/admin/awards/${award.id}`}>Edit</Link>
-                    <form action={boundDelete}>
-                      <ConfirmSubmitButton
-                        message={`Delete "${award.title}"?`}
-                        className="btn-danger-inline"
-                      >
-                        Delete
-                      </ConfirmSubmitButton>
-                    </form>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="table-scroll">
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Title</th>
+                <th>Given by</th>
+                <th>Year</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {awards.map((award) => {
+                const boundDelete = deleteAward.bind(null, award.id);
+                return (
+                  <tr key={award.id}>
+                    <td>
+                      {award.photo ? <img className="thumb-40" src={award.photo} alt="" /> : null}
+                    </td>
+                    <td>{award.title}</td>
+                    <td>{award.givenBy || "—"}</td>
+                    <td>{award.year || "—"}</td>
+                    <td className="row-actions">
+                      <Link href={`/admin/awards/${award.id}`}>Edit</Link>
+                      <form action={boundDelete}>
+                        <ConfirmSubmitButton
+                          message={`Delete "${award.title}"?`}
+                          className="btn-danger-inline"
+                        >
+                          Delete
+                        </ConfirmSubmitButton>
+                      </form>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

@@ -7,8 +7,22 @@
   --c-accent-contrast: #faf7f0;
   --c-gold: #c9a86a;
   --c-border: #e5ddcc;
+  --c-scrim: rgba(0, 0, 0, 0.9);
   --radius: 0.55rem;
-  --content-width: 64rem;
+
+  /* ---- layout tokens driven by viewport + the web/mobile view toggle ----
+     The auto `@media (max-width: 48rem)` block below sets the "mobile"
+     values. `html.force-mobile` mirrors those same values so the toggle
+     works even on a wide screen; `html.force-web` mirrors the desktop
+     values so it wins even on a narrow screen (see specificity note below
+     the media query). --frame-max is extra: it only does anything under
+     html.force-mobile, where it clamps the whole page to a phone-width
+     column so the mobile layout can be genuinely previewed on desktop. */
+  --content-max: 64rem;
+  --grid-cols: repeat(auto-fit, minmax(15.5rem, 1fr));
+  --nav-dir: row;
+  --frame-max: none;
+  --cta-display: none;
 }
 
 * {
@@ -72,7 +86,7 @@ ol {
 /* ---------- layout shell ---------- */
 
 .wrap {
-  max-width: var(--content-width);
+  max-width: var(--content-max);
   margin: 0 auto;
   padding: 0 1.25rem;
 }
@@ -87,10 +101,18 @@ ol {
 
 .site-header__bar {
   display: flex;
+  flex-direction: var(--nav-dir);
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem 1rem;
   padding: 0.9rem 0;
+}
+
+.site-header__right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.1rem;
 }
 
 .site-header__brand {
@@ -130,6 +152,32 @@ ol {
   border-bottom-color: var(--c-gold);
 }
 
+/* ---------- web/mobile view toggle ---------- */
+
+.view-toggle {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.view-toggle__btn {
+  border: 1px solid var(--c-border);
+  background: #fff;
+  color: var(--c-text-soft);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-family: inherit;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.view-toggle__btn.is-active {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: var(--c-accent-contrast);
+}
+
 main {
   min-height: 60vh;
   padding-bottom: 4.5rem;
@@ -155,46 +203,53 @@ main {
   color: var(--c-text);
 }
 
-/* sticky mobile call/whatsapp bar */
+/* sticky mobile call/whatsapp bar — shown whenever --cta-display is "flex",
+   which the real @media query below (or html.force-mobile) sets. Keeping the
+   positioning rules unconditional and only toggling `display` via the
+   variable avoids duplicating this whole block for the forced-mobile case. */
 .mobile-cta-bar {
-  display: none;
+  display: var(--cta-display);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  border-top: 1px solid var(--c-border);
+  background: var(--c-bg);
+  box-shadow: 0 -2px 10px rgba(61, 53, 41, 0.08);
+}
+
+.mobile-cta-bar a {
+  flex: 1;
+  text-align: center;
+  padding: 0.85rem 0.5rem;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.mobile-cta-bar a.call {
+  background: var(--c-accent);
+  color: var(--c-accent-contrast);
+}
+
+.mobile-cta-bar a.whatsapp {
+  background: var(--c-bg-alt);
+  color: var(--c-accent);
+  border-left: 1px solid var(--c-border);
 }
 
 @media (max-width: 640px) {
-  .mobile-cta-bar {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 30;
-    border-top: 1px solid var(--c-border);
-    background: var(--c-bg);
-    box-shadow: 0 -2px 10px rgba(61, 53, 41, 0.08);
-  }
-
-  .mobile-cta-bar a {
-    flex: 1;
-    text-align: center;
-    padding: 0.85rem 0.5rem;
-    text-decoration: none;
-    font-size: 0.95rem;
-  }
-
-  .mobile-cta-bar a.call {
-    background: var(--c-accent);
-    color: var(--c-accent-contrast);
-  }
-
-  .mobile-cta-bar a.whatsapp {
-    background: var(--c-bg-alt);
-    color: var(--c-accent);
-    border-left: 1px solid var(--c-border);
+  :root {
+    --cta-display: flex;
   }
 
   main {
     padding-bottom: 5.5rem;
   }
+}
+
+html.force-mobile main {
+  padding-bottom: 5.5rem;
 }
 
 /* ---------- divider ---------- */
@@ -289,7 +344,7 @@ main {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+  grid-template-columns: var(--grid-cols);
   gap: 1.5rem;
 }
 
@@ -314,6 +369,11 @@ main {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card__photo img {
+  transform: scale(1.04);
 }
 
 .card__photo.placeholder {
@@ -396,6 +456,32 @@ main {
 
 /* ---------- project detail ---------- */
 
+.project-detail {
+  position: relative;
+}
+
+/* subtle blurred backdrop behind the article, built from the cover photo.
+   Fixed + negative z-index so it sits behind normal in-flow page content
+   and never intercepts clicks; the opaque background under the blurred,
+   low-opacity image keeps text fully readable. */
+.detail-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--c-bg);
+}
+
+.detail-backdrop__image {
+  position: absolute;
+  inset: -5%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(38px);
+  opacity: 0.15;
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
@@ -403,12 +489,124 @@ main {
   margin-bottom: 1.5rem;
 }
 
-.gallery img {
-  border-radius: var(--radius);
+.gallery__item {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
   border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.gallery__item img {
   width: 100%;
   height: 14rem;
   object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.gallery__item:hover img,
+.gallery__item:focus-visible img {
+  transform: scale(1.04);
+}
+
+.gallery__item:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+/* full-screen lightbox overlay */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--c-scrim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.lightbox__image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius);
+}
+
+.lightbox__close,
+.lightbox__nav {
+  position: absolute;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-radius: 999px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.lightbox__close {
+  top: 1rem;
+  right: 1rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 1.2rem;
+}
+
+.lightbox__nav {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.75rem;
+}
+
+.lightbox__nav--prev {
+  left: 0.75rem;
+}
+
+.lightbox__nav--next {
+  right: 0.75rem;
+}
+
+.lightbox__close:hover,
+.lightbox__nav:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.lightbox__count {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+}
+
+@media (max-width: 30rem) {
+  .lightbox__nav {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.4rem;
+  }
+
+  .lightbox__close {
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 1.05rem;
+  }
 }
 
 .facts {
@@ -660,6 +858,11 @@ main {
   font-size: 0.9rem;
 }
 
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
 .admin-table {
   width: 100%;
   border-collapse: collapse;
@@ -820,6 +1023,74 @@ main {
   margin-bottom: 0.3rem;
 }
 
+/* ---------- project photo manager (add/remove before Save) ---------- */
+
+.photo-manager {
+  margin-top: 0.25rem;
+}
+
+.photo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.photo-thumb {
+  position: relative;
+  width: 6.5rem;
+  height: 5rem;
+  flex-shrink: 0;
+}
+
+.photo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.4rem;
+  border: 1px solid #ded7c6;
+}
+
+.photo-thumb__remove {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  border: 1px solid #ded7c6;
+  background: #fff;
+  color: #a33;
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(35, 32, 26, 0.2);
+}
+
+.photo-thumb__remove:hover {
+  background: #fbe7e4;
+}
+
+.photo-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  min-height: 2.75rem;
+}
+
+.photo-add-btn input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .error-banner {
   background: #fbe7e4;
   border: 1px solid #e6b3ab;
@@ -875,4 +1146,101 @@ main {
 
 .login-card .field {
   text-align: left;
+}
+
+/* ================================================================
+   RESPONSIVE + WEB/MOBILE VIEW TOGGLE
+   ----------------------------------------------------------------
+   --content-max / --grid-cols / --nav-dir are the shared layout
+   tokens (declared on :root above). This media query is the single
+   source of truth for their "mobile" values; html.force-mobile below
+   mirrors the same values so the toggle works on a wide screen, and
+   html.force-web mirrors the desktop values so it wins even on a
+   narrow one. Because `html.force-web`/`html.force-mobile` add an
+   extra type-selector to the specificity of a plain `:root`/media
+   rule, they always win the cascade regardless of source order or
+   the real viewport width — no !important needed.
+   ================================================================ */
+
+@media (max-width: 48rem) {
+  :root {
+    --content-max: 100%;
+    --grid-cols: repeat(auto-fit, minmax(9.5rem, 1fr));
+    --nav-dir: column;
+  }
+
+  .site-header__bar {
+    align-items: flex-start;
+  }
+
+  .site-header__right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .site-nav a {
+    padding: 0.4rem 0.15rem;
+  }
+}
+
+/* forced mobile preview — usable on any screen size via the ViewToggle */
+html.force-mobile {
+  --content-max: 100%;
+  --grid-cols: repeat(auto-fit, minmax(9.5rem, 1fr));
+  --nav-dir: column;
+  --cta-display: flex;
+  --frame-max: 26rem;
+}
+
+html.force-mobile .site-header__bar {
+  align-items: flex-start;
+}
+
+html.force-mobile .site-header__right {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+html.force-mobile .site-nav a {
+  padding: 0.4rem 0.15rem;
+}
+
+/* clamp the whole page to a phone-width centered column so the mobile
+   layout is genuinely previewable on a desktop-width browser */
+html.force-mobile body {
+  max-width: var(--frame-max);
+  margin: 0 auto;
+  min-height: 100vh;
+  box-shadow: 0 0 0 1px var(--c-border);
+}
+
+/* forced desktop preview — wins over the real viewport / force-mobile */
+html.force-web {
+  --content-max: 64rem;
+  --grid-cols: repeat(auto-fit, minmax(15.5rem, 1fr));
+  --nav-dir: row;
+  --cta-display: none;
+  --frame-max: none;
+}
+
+html.force-web .site-header__bar {
+  align-items: center;
+}
+
+html.force-web .site-header__right {
+  width: auto;
+  justify-content: flex-end;
+}
+
+html.force-web .site-nav a {
+  padding: 0.25rem 0;
+}
+
+html.force-web main {
+  padding-bottom: 4.5rem;
+}
+
+html.force-web body {
+  max-width: none;
+  box-shadow: none;
 }

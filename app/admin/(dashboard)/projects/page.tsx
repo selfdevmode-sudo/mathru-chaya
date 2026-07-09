@@ -26,45 +26,47 @@ export default async function AdminProjectsPage() {
           No projects yet. <Link href="/admin/projects/new">Add your first project</Link>.
         </div>
       ) : (
-        <table className="admin-table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Title</th>
-              <th>Details</th>
-              <th>Featured</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {projects.map((project) => {
-              const boundDelete = deleteProject.bind(null, project.id);
-              return (
-                <tr key={project.id}>
-                  <td>
-                    {project.photos[0] ? (
-                      <img className="thumb-40" src={project.photos[0]} alt="" />
-                    ) : null}
-                  </td>
-                  <td>{project.title}</td>
-                  <td>{projectMetaLine(project) || "—"}</td>
-                  <td>{project.featured ? "Yes" : ""}</td>
-                  <td className="row-actions">
-                    <Link href={`/admin/projects/${project.id}`}>Edit</Link>
-                    <form action={boundDelete}>
-                      <ConfirmSubmitButton
-                        message={`Delete "${project.title}"? This cannot be undone.`}
-                        className="btn-danger-inline"
-                      >
-                        Delete
-                      </ConfirmSubmitButton>
-                    </form>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="table-scroll">
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Title</th>
+                <th>Details</th>
+                <th>Featured</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {projects.map((project) => {
+                const boundDelete = deleteProject.bind(null, project.id);
+                return (
+                  <tr key={project.id}>
+                    <td>
+                      {project.photos[0] ? (
+                        <img className="thumb-40" src={project.photos[0]} alt="" />
+                      ) : null}
+                    </td>
+                    <td>{project.title}</td>
+                    <td>{projectMetaLine(project) || "—"}</td>
+                    <td>{project.featured ? "Yes" : ""}</td>
+                    <td className="row-actions">
+                      <Link href={`/admin/projects/${project.id}`}>Edit</Link>
+                      <form action={boundDelete}>
+                        <ConfirmSubmitButton
+                          message={`Delete "${project.title}"? This cannot be undone.`}
+                          className="btn-danger-inline"
+                        >
+                          Delete
+                        </ConfirmSubmitButton>
+                      </form>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

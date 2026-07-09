@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Project } from "@/lib/types";
 import { PROJECT_TYPES } from "@/lib/types";
 import { typeLabel } from "@/lib/format";
+import ProjectPhotos from "@/components/admin/ProjectPhotos";
 
 export default function ProjectForm({
   project,
@@ -43,7 +44,7 @@ export default function ProjectForm({
           <input id="place" name="place" type="text" defaultValue={project?.place} />
         </div>
         <div className="field">
-          <label htmlFor="year">Year built</label>
+          <label htmlFor="year">Year completed</label>
           <input id="year" name="year" type="number" defaultValue={project?.year} />
         </div>
       </div>
@@ -118,29 +119,7 @@ export default function ProjectForm({
         </div>
       </div>
 
-      {project && project.photos.length > 0 ? (
-        <div className="field">
-          <label>Existing photos</label>
-          <div className="existing-photos">
-            {project.photos.map((photo) => (
-              <div key={photo} className="existing-photo">
-                <img src={photo} alt="" />
-                <label>
-                  <input type="checkbox" name="removePhotos" value={photo} /> Remove
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
-      ) : null}
-
-      <div className="field">
-        <label htmlFor="photos">
-          {project ? "Add more photos" : "Photos"}{" "}
-          <span className="hint">(you can select multiple)</span>
-        </label>
-        <input id="photos" name="photos" type="file" accept="image/*" multiple />
-      </div>
+      <ProjectPhotos existing={project?.photos ?? []} />
 
       <div className="field">
         <label>Before / after photos (optional)</label>

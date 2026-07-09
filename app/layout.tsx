@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   title: "Shri Builders",
 };
 
+// Applies the visitor's saved web/mobile view-toggle choice to <html>
+// before first paint, so there is no flash back to the "auto" layout.
+// Mirrors what ViewToggle.tsx writes to localStorage.
+const VIEW_MODE_SCRIPT = `(function(){try{var m=localStorage.getItem("viewMode");var r=document.documentElement;if(m==="web"){r.classList.add("force-web");}else if(m==="mobile"){r.classList.add("force-mobile");}}catch(e){}})();`;
+
 export default function RootLayout({
   children,
 }: {
@@ -15,6 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: VIEW_MODE_SCRIPT }} />
+      </head>
       <body>{children}</body>
     </html>
   );
