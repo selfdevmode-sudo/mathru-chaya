@@ -20,9 +20,9 @@ export default async function AwardsPage() {
       </div>
 
       {awards.length > 0 ? (
-        <div className="grid">
+        <div className="award-grid">
           {awards.map((award) => (
-            <div key={award.id} className="card">
+            <div key={award.id} className="card award-card">
               <div className={`card__photo award-photo${award.photo ? "" : " placeholder"}`}>
                 {award.photo ? (
                   <img src={award.photo} alt={award.title} />

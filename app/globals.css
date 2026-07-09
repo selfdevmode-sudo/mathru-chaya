@@ -1013,6 +1013,16 @@ html.force-mobile main {
   font-size: 0.88rem;
 }
 
+/* Awards are secondary to project work: a tighter grid of smaller, uniform
+   cards (keeps its own columns so it stays multi-column on phones too,
+   rather than the single full-width column the project grid uses). */
+.award-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
 .award-photo {
   aspect-ratio: 4 / 3;
   overflow: hidden;
@@ -1022,6 +1032,19 @@ html.force-mobile main {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.award-card .card__body {
+  padding: 0.75rem 0.85rem 0.95rem;
+}
+
+.award-card h3 {
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.award-card .card__meta {
+  font-size: 0.8rem;
 }
 
 /* ---------- contact ---------- */

@@ -119,10 +119,10 @@ export default async function HomePage() {
           <Divider />
           <section className="section wrap">
             <h2>{t(lang, "section_recognition")}</h2>
-            <div className="grid">
+            <div className="award-grid">
               {awards.slice(0, 3).map((award) => (
-                <div key={award.id} className="card">
-                  <div className={`card__photo${award.photo ? "" : " placeholder"}`}>
+                <div key={award.id} className="card award-card">
+                  <div className={`card__photo award-photo${award.photo ? "" : " placeholder"}`}>
                     {award.photo ? (
                       <img src={award.photo} alt={award.title} />
                     ) : (
