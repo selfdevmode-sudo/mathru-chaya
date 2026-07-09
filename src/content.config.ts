@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob, file } from 'astro/loaders';
+import { parse as parseYaml } from 'yaml';
 
 const optionalTrimmed = z.string().trim().min(1).optional();
 
@@ -66,7 +67,13 @@ const about = defineCollection({
 });
 
 const services = defineCollection({
-  loader: file('./src/content/pages/services.yml'),
+  // Sveltia CMS edits services.yml via a `list` widget, which serializes as an
+  // `items:`-keyed YAML mapping (not a top-level array); unwrap `items` so the
+  // CMS write shape and this loader agree (Task 13 reconciliation).
+  loader: file('./src/content/pages/services.yml', {
+    parser: (text) =>
+      (parseYaml(text) as { items?: Record<string, unknown>[] } | null)?.items ?? [],
+  }),
   schema: z.object({
     id: z.string().trim().min(1),
     name_en: z.string().trim().min(1),

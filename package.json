@@ -11,7 +11,8 @@
     "test:smoke": "astro build && vitest run tests/smoke.test.ts"
   },
   "dependencies": {
-    "astro": "^5.18.2"
+    "astro": "^5.18.2",
+    "yaml": "2.9.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",

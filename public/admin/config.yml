@@ -1,0 +1,180 @@
+backend:
+  name: github
+  repo: OWNER/REPO            # PLACEHOLDER — set per instance at deploy time (Task 15)
+  branch: main
+  base_url: https://sveltia-cms-auth.WORKER.workers.dev  # PLACEHOLDER — set in Task 15
+
+media_folder: src/assets/uploads
+public_folder: /src/assets/uploads
+
+editor:
+  preview: false
+
+collections:
+  # ── PROJECTS ─────────────────────────────────────────────
+  - name: projects
+    label: Projects · ಯೋಜನೆಗಳು
+    label_singular: Project · ಯೋಜನೆ
+    folder: src/content/projects
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    identifier_field: title
+    slug: '{{slug}}'
+    summary: '{{title}} — {{place}} {{year}}'
+    sortable_fields: [year, title]
+    media_folder: /src/content/projects/_images
+    public_folder: _images
+    fields:
+      - name: title
+        label: Project name · ಯೋಜನೆಯ ಹೆಸರು
+        widget: string
+        hint: 'e.g. Shri Durgaparameshwari Temple · ಉದಾ: ಶ್ರೀ ದುರ್ಗಾಪರಮೇಶ್ವರಿ ದೇವಸ್ಥಾನ'
+      - name: photos
+        label: Photos · ಫೋಟೋಗಳು
+        label_singular: Photo · ಫೋಟೋ
+        widget: list
+        min: 1
+        field: { name: photo, label: Photo · ಫೋಟೋ, widget: image }
+        hint: 'First photo is the main photo · ಮೊದಲ ಫೋಟೋ ಮುಖ್ಯ ಫೋಟೋ'
+      - name: type
+        label: Type of work · ಕೆಲಸದ ಪ್ರಕಾರ
+        widget: select
+        required: false
+        options:
+          - { value: temple, label: Temple · ದೇವಸ್ಥಾನ }
+          - { value: pond, label: Pond / Kalyani · ಕಲ್ಯಾಣಿ / ಕೆರೆ }
+          - { value: gopura, label: Gopura · ಗೋಪುರ }
+          - { value: renovation, label: Renovation · ಜೀರ್ಣೋದ್ಧಾರ }
+          - { value: other, label: Other · ಇತರೆ }
+      - name: place
+        label: Place · ಸ್ಥಳ
+        widget: string
+        required: false
+        hint: 'Town, district · ಊರು, ಜಿಲ್ಲೆ'
+      - name: year
+        label: Year completed · ಮುಗಿದ ವರ್ಷ
+        widget: number
+        value_type: int
+        min: 1900
+        max: 2100
+        required: false
+      - name: builtFor
+        label: Built for (trust / committee) · ಯಾರಿಗಾಗಿ (ಟ್ರಸ್ಟ್ / ಸಮಿತಿ)
+        widget: string
+        required: false
+      - name: description_en
+        label: Description (English) · ವಿವರಣೆ (ಇಂಗ್ಲಿಷ್)
+        widget: text
+        required: false
+        hint: 'A few sentences about the work · ಕೆಲಸದ ಬಗ್ಗೆ ಕೆಲವು ಸಾಲುಗಳು'
+      - name: description_kn
+        label: Description (Kannada) · ವಿವರಣೆ (ಕನ್ನಡ)
+        widget: text
+        required: false
+        hint: 'If empty, English text is shown · ಖಾಲಿ ಇದ್ದರೆ ಇಂಗ್ಲಿಷ್ ತೋರಿಸಲಾಗುತ್ತದೆ'
+      - name: materials
+        label: Materials used · ಬಳಸಿದ ಸಾಮಗ್ರಿಗಳು
+        widget: list
+        required: false
+        field: { name: material, label: Material · ಸಾಮಗ್ರಿ, widget: string }
+        hint: 'e.g. Laterite stone, Granite · ಉದಾ: ಮುರಕಲ್ಲು, ಕಣಶಿಲೆ'
+      - name: facts
+        label: More details (all optional) · ಹೆಚ್ಚಿನ ವಿವರ (ಐಚ್ಛಿಕ)
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { name: duration, label: How long it took · ಎಷ್ಟು ಸಮಯ, widget: string, required: false, hint: 'e.g. 14 months · ಉದಾ: ೧೪ ತಿಂಗಳು' }
+          - { name: teamSize, label: Team · ತಂಡ, widget: string, required: false, hint: 'e.g. 12 artisans · ಉದಾ: ೧೨ ಶಿಲ್ಪಿಗಳು' }
+          - { name: ledBy, label: Led by · ನೇತೃತ್ವ, widget: string, required: false }
+          - { name: status, label: Status · ಸ್ಥಿತಿ, widget: string, required: false, hint: 'e.g. Completed 2021 · ಉದಾ: ೨೦೨೧ರಲ್ಲಿ ಪೂರ್ಣ' }
+      - name: mapLink
+        label: Google Maps link · ಗೂಗಲ್ ನಕ್ಷೆ ಲಿಂಕ್
+        widget: string
+        required: false
+        pattern: ['^https?://.+', 'Paste a full link starting with https:// · https:// ನಿಂದ ಆರಂಭವಾಗುವ ಪೂರ್ಣ ಲಿಂಕ್ ಹಾಕಿ']
+        hint: 'Open the place in Google Maps app → Share → Copy link, paste here · ನಕ್ಷೆಯಲ್ಲಿ ಸ್ಥಳ ತೆರೆದು Share → Copy link ಮಾಡಿ ಇಲ್ಲಿ ಹಾಕಿ'
+      - name: videoLink
+        label: YouTube video link · ಯೂಟ್ಯೂಬ್ ವೀಡಿಯೊ ಲಿಂಕ್
+        widget: string
+        required: false
+        pattern: ['^https?://.+', 'Paste a full link starting with https:// · https:// ನಿಂದ ಆರಂಭವಾಗುವ ಪೂರ್ಣ ಲಿಂಕ್ ಹಾಕಿ']
+      - name: beforeAfter
+        label: Before / After photos · ಮೊದಲು / ನಂತರ ಫೋಟೋ
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { name: before, label: Before · ಮೊದಲು, widget: image }
+          - { name: after, label: After · ನಂತರ, widget: image }
+      - name: featured
+        label: Show on home page · ಮುಖಪುಟದಲ್ಲಿ ತೋರಿಸಿ
+        widget: boolean
+        default: false
+        required: false
+
+  # ── AWARDS ───────────────────────────────────────────────
+  - name: awards
+    label: Awards · ಪ್ರಶಸ್ತಿಗಳು
+    label_singular: Award · ಪ್ರಶಸ್ತಿ
+    folder: src/content/awards
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    identifier_field: title
+    summary: '{{title}} — {{year}}'
+    media_folder: /src/content/awards/_images
+    public_folder: _images
+    fields:
+      - { name: title, label: Award name · ಪ್ರಶಸ್ತಿ ಹೆಸರು, widget: string }
+      - { name: givenBy, label: Given by · ನೀಡಿದವರು, widget: string, required: false }
+      - { name: year, label: Year · ವರ್ಷ, widget: number, value_type: int, min: 1900, max: 2100, required: false }
+      - { name: photo, label: Photo of award or certificate · ಪ್ರಶಸ್ತಿ / ಪ್ರಮಾಣಪತ್ರದ ಫೋಟೋ, widget: image, required: false }
+      - { name: note_en, label: Note (English) · ಟಿಪ್ಪಣಿ (ಇಂಗ್ಲಿಷ್), widget: text, required: false }
+      - { name: note_kn, label: Note (Kannada) · ಟಿಪ್ಪಣಿ (ಕನ್ನಡ), widget: text, required: false }
+
+  # ── TESTIMONIALS ─────────────────────────────────────────
+  - name: testimonials
+    label: Kind words · ಅಭಿಪ್ರಾಯಗಳು
+    label_singular: Testimonial · ಅಭಿಪ್ರಾಯ
+    folder: src/content/testimonials
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    identifier_field: name
+    fields:
+      - { name: name, label: Who said it · ಹೇಳಿದವರು, widget: string, hint: 'Person or committee name · ವ್ಯಕ್ತಿ ಅಥವಾ ಸಮಿತಿಯ ಹೆಸರು' }
+      - { name: quote_en, label: What they said (English) · ಅವರ ಮಾತು (ಇಂಗ್ಲಿಷ್), widget: text }
+      - { name: quote_kn, label: What they said (Kannada) · ಅವರ ಮಾತು (ಕನ್ನಡ), widget: text, required: false }
+      - { name: place, label: Place · ಸ್ಥಳ, widget: string, required: false }
+      - { name: role, label: Role · ಪಾತ್ರ, widget: string, required: false, hint: 'e.g. Trust president · ಉದಾ: ಟ್ರಸ್ಟ್ ಅಧ್ಯಕ್ಷರು' }
+
+  # ── PAGES (About + Services) ─────────────────────────────
+  - name: pages
+    label: Pages · ಪುಟಗಳು
+    files:
+      - name: about
+        label: About page · ನಮ್ಮ ಬಗ್ಗೆ ಪುಟ
+        file: src/content/pages/about.md
+        media_folder: /src/content/pages/_images
+        public_folder: _images
+        fields:
+          - { name: body, label: Our story (English) · ನಮ್ಮ ಕಥೆ (ಇಂಗ್ಲಿಷ್), widget: text }
+          - { name: body_kn, label: Our story (Kannada) · ನಮ್ಮ ಕಥೆ (ಕನ್ನಡ), widget: text, required: false }
+          - { name: yearsExperience, label: Years of experience · ಅನುಭವದ ವರ್ಷಗಳು, widget: number, value_type: int, min: 1, required: false }
+          - { name: heroPhoto, label: Photo · ಫೋಟೋ, widget: image, required: false }
+      - name: services
+        label: Services · ಸೇವೆಗಳು
+        file: src/content/pages/services.yml
+        fields:
+          - name: items
+            label: Services · ಸೇವೆಗಳು
+            label_singular: Service · ಸೇವೆ
+            widget: list
+            fields:
+              - { name: id, label: ID (English, no spaces) · ಐಡಿ, widget: string }
+              - { name: name_en, label: Name (English) · ಹೆಸರು (ಇಂಗ್ಲಿಷ್), widget: string }
+              - { name: name_kn, label: Name (Kannada) · ಹೆಸರು (ಕನ್ನಡ), widget: string, required: false }
+              - { name: blurb_en, label: One line about it (English) · ಒಂದು ಸಾಲು (ಇಂಗ್ಲಿಷ್), widget: string, required: false }
+              - { name: blurb_kn, label: One line about it (Kannada) · ಒಂದು ಸಾಲು (ಕನ್ನಡ), widget: string, required: false }
