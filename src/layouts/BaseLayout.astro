@@ -8,7 +8,8 @@ import Footer from '../components/Footer.astro';
 import StickyContact from '../components/StickyContact.astro';
 
 const themes = import.meta.glob('../styles/themes/*.css', { query: '?url', import: 'default', eager: true });
-const themeHref = themes[`../styles/themes/${site.theme}.css`] as string;
+const themeHref = (themes[`../styles/themes/${site.theme}.css`]
+  ?? themes['../styles/themes/stone.css']) as string;
 
 const { lang, title, description, path = '/' } =
   Astro.props as { lang: Lang; title: string; description?: string; path?: string };

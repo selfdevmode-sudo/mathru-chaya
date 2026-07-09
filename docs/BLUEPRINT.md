@@ -61,7 +61,7 @@ Statuses: `planned` → `in progress` → `done` (or `dropped`). Update **before
 | F5 | Project detail page (all optional blocks: gallery, description, materials, facts, map, video, before/after) | planned | plug-n-play guarantee, ADR-0007 |
 | F6 | Awards page | planned | |
 | F7 | About page (lineage story) + testimonials section | planned | |
-| F8 | Contact page + sticky mobile call/WhatsApp bar | planned | |
+| F8 | Contact page + sticky mobile call/WhatsApp bar | in progress | Task 4 shipped the sticky mobile call/WhatsApp bar (`src/components/StickyContact.astro`, mobile-only, `tel:`/`wa.me` from `site`). Contact page itself lands in Task 9. |
 | F9 | Multilingual (EN/KN routes, strings files, fallback) | in progress | Task 2 done: i18n core module shipped — `src/lib/i18n.ts` with EN/KN strings, `t()` (English fallback), `pickText()` (empty/whitespace fields fall back to English), `localePath()`, `otherLangs()`; 6 unit tests passing (`tests/i18n.test.ts`). EN/KN static routing (consuming this module in pages/layouts) lands in Tasks 5+, so F9 stays `in progress`. |
 | F10 | Sveltia CMS admin (`/admin`, collections, bilingual labels) | planned | ADR-0003 |
 | F11 | Image pipeline (compression, responsive sizes, dimensions) | planned | |
