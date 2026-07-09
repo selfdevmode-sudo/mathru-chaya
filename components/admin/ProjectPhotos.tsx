@@ -8,6 +8,22 @@ interface PendingPhoto {
   url: string;
 }
 
+export interface ProjectPhotosLabels {
+  photosLabel: string;
+  addRemoveHint: string;
+  noPhotosYet: string;
+  addImages: string;
+  removePhoto: string;
+}
+
+const DEFAULT_LABELS: ProjectPhotosLabels = {
+  photosLabel: "Photos",
+  addRemoveHint: "(add or remove one at a time)",
+  noPhotosYet: "No photos yet.",
+  addImages: "Add images",
+  removePhoto: "Remove this photo",
+};
+
 /**
  * Lets an admin add and remove project photos one at a time (in as many
  * batches as they like) before hitting Save, while still submitting through
@@ -21,8 +37,18 @@ interface PendingPhoto {
  *   name="photos" multiple>` via a DataTransfer object, so the action's
  *   `formData.getAll("photos")` still sees exactly the files the admin
  *   decided to keep, in order.
+ *
+ * `labels` carries the already-translated UI strings from the server
+ * parent (ProjectForm) — this is a client component and must not read
+ * cookies()/i18n itself.
  */
-export default function ProjectPhotos({ existing }: { existing: string[] }) {
+export default function ProjectPhotos({
+  existing,
+  labels = DEFAULT_LABELS,
+}: {
+  existing: string[];
+  labels?: ProjectPhotosLabels;
+}) {
   const [keptExisting, setKeptExisting] = useState<string[]>(existing);
   const [removed, setRemoved] = useState<string[]>([]);
   const [pending, setPending] = useState<PendingPhoto[]>([]);
@@ -83,7 +109,7 @@ export default function ProjectPhotos({ existing }: { existing: string[] }) {
   return (
     <div className="field photo-manager">
       <label htmlFor={inputId}>
-        Photos <span className="hint">(add or remove one at a time)</span>
+        {labels.photosLabel} <span className="hint">{labels.addRemoveHint}</span>
       </label>
 
       {hasPhotos ? (
@@ -94,7 +120,7 @@ export default function ProjectPhotos({ existing }: { existing: string[] }) {
               <button
                 type="button"
                 className="photo-thumb__remove"
-                aria-label="Remove this photo"
+                aria-label={labels.removePhoto}
                 onClick={() => removeExisting(photo)}
               >
                 ✕
@@ -107,7 +133,7 @@ export default function ProjectPhotos({ existing }: { existing: string[] }) {
               <button
                 type="button"
                 className="photo-thumb__remove"
-                aria-label="Remove this photo"
+                aria-label={labels.removePhoto}
                 onClick={() => removePending(p.id)}
               >
                 ✕
@@ -117,12 +143,12 @@ export default function ProjectPhotos({ existing }: { existing: string[] }) {
         </div>
       ) : (
         <p className="hint" style={{ margin: "0 0 0.75rem" }}>
-          No photos yet.
+          {labels.noPhotosYet}
         </p>
       )}
 
       <label className="btn btn-secondary photo-add-btn" htmlFor={inputId}>
-        + Add images
+        + {labels.addImages}
         <input
           id={inputId}
           type="file"

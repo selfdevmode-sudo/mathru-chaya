@@ -1,4 +1,5 @@
 import { readContent } from "@/lib/db";
+import { getLang, t } from "@/lib/i18n";
 
 export const dynamic = "force-dynamic";
 
@@ -9,15 +10,20 @@ export const metadata = {
 export default async function AboutPage() {
   const content = await readContent();
   const { about, services, testimonials, site } = content;
+  const lang = await getLang();
 
   const paragraphs = about.body.split("\n").filter((line) => line.trim() !== "");
 
   return (
     <div className="wrap section">
       <div className="section-head">
-        <h1>About {site.name}</h1>
+        <h1>
+          {t(lang, "about")} {site.name}
+        </h1>
         {about.yearsExperience ? (
-          <p className="card__meta">{about.yearsExperience}+ years of experience</p>
+          <p className="card__meta">
+            {about.yearsExperience}+ {t(lang, "years_experience_suffix")}
+          </p>
         ) : null}
       </div>
 
@@ -39,12 +45,12 @@ export default async function AboutPage() {
       {paragraphs.length > 0 ? (
         paragraphs.map((para, i) => <p key={i}>{para}</p>)
       ) : (
-        <p>More about us coming soon.</p>
+        <p>{t(lang, "about_empty")}</p>
       )}
 
       {services.length > 0 ? (
         <>
-          <h2>What We Do</h2>
+          <h2>{t(lang, "section_what_we_do")}</h2>
           <div className="grid">
             {services.map((service) => (
               <div key={service.id} className="card">
@@ -60,15 +66,15 @@ export default async function AboutPage() {
 
       {testimonials.length > 0 ? (
         <>
-          <h2>What Our Clients Say</h2>
+          <h2>{t(lang, "section_testimonials")}</h2>
           <div className="grid">
-            {testimonials.map((t) => (
-              <div key={t.id} className="testimonial">
-                <p className="quote">&ldquo;{t.quote}&rdquo;</p>
+            {testimonials.map((tItem) => (
+              <div key={tItem.id} className="testimonial">
+                <p className="quote">&ldquo;{tItem.quote}&rdquo;</p>
                 <p className="who">
-                  {t.name}
-                  {t.role ? `, ${t.role}` : ""}
-                  {t.place ? ` — ${t.place}` : ""}
+                  {tItem.name}
+                  {tItem.role ? `, ${tItem.role}` : ""}
+                  {tItem.place ? ` — ${tItem.place}` : ""}
                 </p>
               </div>
             ))}

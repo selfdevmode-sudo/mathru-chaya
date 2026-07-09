@@ -1,5 +1,6 @@
 import { readContent } from "@/lib/db";
 import { updateAbout } from "@/lib/actions";
+import { getLang, t } from "@/lib/i18n";
 
 export const dynamic = "force-dynamic";
 
@@ -13,31 +14,32 @@ export default async function AdminAboutPage({
   const content = await readContent();
   const { about } = content;
   const params = await searchParams;
+  const lang = await getLang();
 
   return (
     <div>
       <div className="admin-header">
-        <h1>About</h1>
+        <h1>{t(lang, "admin_about")}</h1>
       </div>
 
-      {params.saved ? <div className="success-banner">Saved.</div> : null}
+      {params.saved ? <div className="success-banner">{t(lang, "saved")}</div> : null}
 
       <form action={updateAbout} className="form-card" encType="multipart/form-data">
         <div className="field">
           <label htmlFor="body">
-            About text <span className="hint">(one paragraph per line)</span>
+            {t(lang, "about_text_label")} <span className="hint">{t(lang, "one_para_per_line")}</span>
           </label>
           <textarea
             id="body"
             name="body"
             rows={10}
             defaultValue={about.body}
-            placeholder="Tell visitors about your work, your family tradition, your craftsmanship..."
+            placeholder={t(lang, "about_text_placeholder")}
           />
         </div>
 
         <div className="field">
-          <label htmlFor="yearsExperience">Years of experience</label>
+          <label htmlFor="yearsExperience">{t(lang, "years_experience_label")}</label>
           <input
             id="yearsExperience"
             name="yearsExperience"
@@ -48,7 +50,7 @@ export default async function AdminAboutPage({
 
         {about.heroPhoto ? (
           <div className="field">
-            <label>Current photo</label>
+            <label>{t(lang, "current_photo")}</label>
             <div className="existing-photos">
               <div className="existing-photo">
                 <img src={about.heroPhoto} alt="" />
@@ -58,13 +60,15 @@ export default async function AdminAboutPage({
         ) : null}
 
         <div className="field">
-          <label htmlFor="heroPhoto">{about.heroPhoto ? "Replace photo" : "Photo"}</label>
+          <label htmlFor="heroPhoto">
+            {about.heroPhoto ? t(lang, "replace_photo") : t(lang, "photo_label")}
+          </label>
           <input id="heroPhoto" name="heroPhoto" type="file" accept="image/*" />
         </div>
 
         <div className="btn-row">
           <button type="submit" className="btn">
-            Save
+            {t(lang, "save")}
           </button>
         </div>
       </form>

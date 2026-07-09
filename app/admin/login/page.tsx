@@ -1,4 +1,5 @@
 import { login } from "@/lib/auth";
+import { getLang, t } from "@/lib/i18n";
 
 export const metadata = {
   title: "Admin Login",
@@ -11,20 +12,21 @@ export default async function AdminLoginPage({
 }) {
   const params = await searchParams;
   const hasError = params.error === "1";
+  const lang = await getLang();
 
   return (
     <div className="login-shell">
       <div className="login-card">
-        <h1>Admin Login</h1>
-        <p className="sub">Enter the admin password to continue.</p>
+        <h1>{t(lang, "admin_login_heading")}</h1>
+        <p className="sub">{t(lang, "admin_login_sub")}</p>
 
         {hasError ? (
-          <div className="error-banner">Incorrect password. Please try again.</div>
+          <div className="error-banner">{t(lang, "incorrect_password")}</div>
         ) : null}
 
         <form action={login}>
           <div className="field">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t(lang, "password")}</label>
             <input
               id="password"
               name="password"
@@ -34,7 +36,7 @@ export default async function AdminLoginPage({
             />
           </div>
           <button type="submit" className="btn btn-block">
-            Log in
+            {t(lang, "login")}
           </button>
         </form>
       </div>

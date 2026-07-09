@@ -13,6 +13,22 @@ function applyMode(mode: ViewMode) {
   else if (mode === "mobile") root.classList.add("force-mobile");
 }
 
+export interface ViewToggleLabels {
+  web: string;
+  mobile: string;
+  webTitle: string;
+  mobileTitle: string;
+  groupAria: string;
+}
+
+const DEFAULT_LABELS: ViewToggleLabels = {
+  web: "Web",
+  mobile: "Mobile",
+  webTitle: "Preview web layout",
+  mobileTitle: "Preview mobile layout",
+  groupAria: "Preview site layout",
+};
+
 /**
  * Lets a visitor preview the site as "Web" or "Mobile" regardless of their
  * actual screen size, persisted in localStorage. The heavy lifting (which
@@ -20,8 +36,15 @@ function applyMode(mode: ViewMode) {
  * html.force-mobile; this component only flips the class + remembers the
  * choice. A tiny inline script in the root layout's <head> applies the
  * saved class before first paint so there is no flash back to "auto".
+ *
+ * `labels` is passed in (already translated) by the server layout — this is
+ * a client component and must not read cookies()/i18n itself.
  */
-export default function ViewToggle() {
+export default function ViewToggle({
+  labels = DEFAULT_LABELS,
+}: {
+  labels?: ViewToggleLabels;
+}) {
   const [mode, setMode] = useState<ViewMode>("auto");
 
   useEffect(() => {
@@ -43,24 +66,24 @@ export default function ViewToggle() {
   }
 
   return (
-    <div className="view-toggle" role="group" aria-label="Preview site layout">
+    <div className="view-toggle" role="group" aria-label={labels.groupAria}>
       <button
         type="button"
         className={`view-toggle__btn${mode === "web" ? " is-active" : ""}`}
         onClick={() => choose("web")}
         aria-pressed={mode === "web"}
-        title="Preview web layout"
+        title={labels.webTitle}
       >
-        🖥 Web
+        🖥 {labels.web}
       </button>
       <button
         type="button"
         className={`view-toggle__btn${mode === "mobile" ? " is-active" : ""}`}
         onClick={() => choose("mobile")}
         aria-pressed={mode === "mobile"}
-        title="Preview mobile layout"
+        title={labels.mobileTitle}
       >
-        📱 Mobile
+        📱 {labels.mobile}
       </button>
     </div>
   );

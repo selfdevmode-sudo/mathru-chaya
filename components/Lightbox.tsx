@@ -2,19 +2,43 @@
 
 import { useCallback, useEffect, useState } from "react";
 
+export interface LightboxLabels {
+  closePhotoViewer: string;
+  previousPhoto: string;
+  nextPhoto: string;
+  /** One pre-translated aria-label per photo, e.g. "View photo 2 of 5 full-screen". */
+  photoAriaLabels: string[];
+  /** Pre-translated dialog aria-label, e.g. "Sri Venkataramana Temple photo viewer". */
+  viewerAriaLabel: string;
+}
+
+const DEFAULT_LABELS: LightboxLabels = {
+  closePhotoViewer: "Close photo viewer",
+  previousPhoto: "Previous photo",
+  nextPhoto: "Next photo",
+  photoAriaLabels: [],
+  viewerAriaLabel: "photo viewer",
+};
+
 /**
  * Renders a thumbnail grid of real <img> tags (so photos still show with
  * JS disabled) and, on click, a full-screen lightbox overlay with
  * prev/next controls, a position indicator, and keyboard/click-to-close
  * support. This is progressive enhancement only — the thumbnails work as
  * plain images even if the overlay behaviour never activates.
+ *
+ * `labels` carries the already-translated UI strings from the server
+ * parent (this is a client component and must not read cookies()/i18n
+ * itself).
  */
 export default function Lightbox({
   photos,
   title,
+  labels = DEFAULT_LABELS,
 }: {
   photos: string[];
   title: string;
+  labels?: LightboxLabels;
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -50,7 +74,7 @@ export default function Lightbox({
             type="button"
             className="gallery__item"
             onClick={() => setOpenIndex(i)}
-            aria-label={`View photo ${i + 1} of ${photos.length} full-screen`}
+            aria-label={labels.photoAriaLabels[i] ?? `${title} photo ${i + 1}`}
           >
             <img src={photo} alt={`${title} photo ${i + 1}`} />
           </button>
@@ -62,13 +86,13 @@ export default function Lightbox({
           className="lightbox"
           role="dialog"
           aria-modal="true"
-          aria-label={`${title} photo viewer`}
+          aria-label={labels.viewerAriaLabel}
           onClick={close}
         >
           <button
             type="button"
             className="lightbox__close"
-            aria-label="Close photo viewer"
+            aria-label={labels.closePhotoViewer}
             onClick={(e) => {
               e.stopPropagation();
               close();
@@ -81,7 +105,7 @@ export default function Lightbox({
             <button
               type="button"
               className="lightbox__nav lightbox__nav--prev"
-              aria-label="Previous photo"
+              aria-label={labels.previousPhoto}
               onClick={(e) => {
                 e.stopPropagation();
                 prev();
@@ -102,7 +126,7 @@ export default function Lightbox({
             <button
               type="button"
               className="lightbox__nav lightbox__nav--next"
-              aria-label="Next photo"
+              aria-label={labels.nextPhoto}
               onClick={(e) => {
                 e.stopPropagation();
                 next();

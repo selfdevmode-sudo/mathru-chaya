@@ -178,6 +178,45 @@ ol {
   color: var(--c-accent-contrast);
 }
 
+/* ---------- language switcher ---------- */
+
+.lang-switch {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.lang-switch__btn {
+  border: 1px solid var(--c-border);
+  background: #fff;
+  color: var(--c-text-soft);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-family: inherit;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.lang-switch__btn.is-active {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: var(--c-accent-contrast);
+}
+
+/* dark variant for the admin sidebar */
+.lang-switch--admin .lang-switch__btn {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #d8d2c4;
+}
+
+.lang-switch--admin .lang-switch__btn.is-active {
+  background: #f1ede4;
+  border-color: #f1ede4;
+  color: #23201a;
+}
+
 main {
   min-height: 60vh;
   padding-bottom: 4.5rem;
@@ -746,6 +785,11 @@ html.force-mobile main {
 .admin-sidebar h2 {
   color: #f1ede4;
   font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-sidebar .lang-switch {
+  flex-wrap: wrap;
   margin-bottom: 1.5rem;
 }
 

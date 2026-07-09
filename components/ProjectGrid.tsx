@@ -3,14 +3,19 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { Project } from "@/lib/types";
+import type { Lang } from "@/lib/i18n";
 import { projectMetaLine, typeLabel } from "@/lib/format";
 
 export default function ProjectGrid({
   projects,
   types,
+  lang,
+  allLabel,
 }: {
   projects: Project[];
   types: string[];
+  lang: Lang;
+  allLabel: string;
 }) {
   const [active, setActive] = useState<string>("all");
 
@@ -26,7 +31,7 @@ export default function ProjectGrid({
             className={`filter-btn${active === "all" ? " is-active" : ""}`}
             onClick={() => setActive("all")}
           >
-            All
+            {allLabel}
           </button>
           {types.map((type) => (
             <button
@@ -35,7 +40,7 @@ export default function ProjectGrid({
               className={`filter-btn${active === type ? " is-active" : ""}`}
               onClick={() => setActive(type)}
             >
-              {typeLabel(type)}
+              {typeLabel(type, lang)}
             </button>
           ))}
         </div>
@@ -57,8 +62,8 @@ export default function ProjectGrid({
             </div>
             <div className="card__body">
               <h3>{project.title}</h3>
-              {projectMetaLine(project) ? (
-                <p className="card__meta">{projectMetaLine(project)}</p>
+              {projectMetaLine(project, lang) ? (
+                <p className="card__meta">{projectMetaLine(project, lang)}</p>
               ) : null}
             </div>
           </Link>

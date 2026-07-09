@@ -1,5 +1,6 @@
 import { readContent } from "@/lib/db";
 import { telLink, waLink } from "@/lib/format";
+import { getLang, t } from "@/lib/i18n";
 
 export const dynamic = "force-dynamic";
 
@@ -10,11 +11,12 @@ export const metadata = {
 export default async function ContactPage() {
   const content = await readContent();
   const { site } = content;
+  const lang = await getLang();
 
   return (
     <div className="wrap section">
       <div className="section-head">
-        <h1>Contact Us</h1>
+        <h1>{t(lang, "contact_heading")}</h1>
         <p>
           {site.region}
           {site.owners.length ? ` · ${site.owners.join(", ")}` : ""}
@@ -23,35 +25,35 @@ export default async function ContactPage() {
 
       <div className="contact-grid">
         <div className="contact-card">
-          <h3>Call Us</h3>
+          <h3>{t(lang, "call_us")}</h3>
           <p>{site.phone}</p>
           <a className="btn" href={telLink(site.phone)}>
-            Call {site.phone}
+            {t(lang, "call")} {site.phone}
           </a>
         </div>
 
         <div className="contact-card">
-          <h3>WhatsApp</h3>
-          <p>Send us photos or details of your project.</p>
+          <h3>{t(lang, "whatsapp")}</h3>
+          <p>{t(lang, "whatsapp_blurb")}</p>
           <a
             className="btn"
             href={waLink(
               site.whatsapp,
-              `Hello ${site.name}, I would like to know more about your work.`,
+              t(lang, "whatsapp_greeting", { name: site.name }),
             )}
             target="_blank"
             rel="noopener noreferrer"
           >
-            Chat on WhatsApp
+            {t(lang, "chat_whatsapp")}
           </a>
         </div>
 
         {site.email ? (
           <div className="contact-card">
-            <h3>Email</h3>
+            <h3>{t(lang, "email_label")}</h3>
             <p>{site.email}</p>
             <a className="btn btn-secondary" href={`mailto:${site.email}`}>
-              Send email
+              {t(lang, "send_email")}
             </a>
           </div>
         ) : null}

@@ -1,12 +1,15 @@
 import Link from "next/link";
+import { getLang, t } from "@/lib/i18n";
 
-export default function NotFound() {
+export default async function NotFound() {
+  const lang = await getLang();
+
   return (
     <div className="wrap not-found">
-      <h1>Page not found</h1>
-      <p>The page you are looking for may have moved or no longer exists.</p>
+      <h1>{t(lang, "not_found_heading")}</h1>
+      <p>{t(lang, "not_found_body")}</p>
       <Link href="/" className="btn">
-        Back to home
+        {t(lang, "back_home")}
       </Link>
     </div>
   );

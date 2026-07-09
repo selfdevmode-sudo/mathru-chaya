@@ -2,21 +2,24 @@ import Link from "next/link";
 import type { Project } from "@/lib/types";
 import { PROJECT_TYPES } from "@/lib/types";
 import { typeLabel } from "@/lib/format";
+import { t, type Lang } from "@/lib/i18n";
 import ProjectPhotos from "@/components/admin/ProjectPhotos";
 
 export default function ProjectForm({
   project,
   action,
   submitLabel,
+  lang,
 }: {
   project?: Project;
   action: (formData: FormData) => void | Promise<void>;
   submitLabel: string;
+  lang: Lang;
 }) {
   return (
     <form action={action} className="form-card" encType="multipart/form-data">
       <div className="field">
-        <label htmlFor="title">Title *</label>
+        <label htmlFor="title">{t(lang, "title")} *</label>
         <input
           id="title"
           name="title"
@@ -29,28 +32,28 @@ export default function ProjectForm({
 
       <div className="field-row">
         <div className="field">
-          <label htmlFor="type">Type</label>
+          <label htmlFor="type">{t(lang, "type_label")}</label>
           <select id="type" name="type" defaultValue={project?.type ?? ""}>
-            <option value="">— Not set —</option>
-            {PROJECT_TYPES.map((t) => (
-              <option key={t} value={t}>
-                {typeLabel(t)}
+            <option value="">{t(lang, "not_set")}</option>
+            {PROJECT_TYPES.map((ty) => (
+              <option key={ty} value={ty}>
+                {typeLabel(ty, lang)}
               </option>
             ))}
           </select>
         </div>
         <div className="field">
-          <label htmlFor="place">Place</label>
+          <label htmlFor="place">{t(lang, "place")}</label>
           <input id="place" name="place" type="text" defaultValue={project?.place} />
         </div>
         <div className="field">
-          <label htmlFor="year">Year completed</label>
+          <label htmlFor="year">{t(lang, "year_completed")}</label>
           <input id="year" name="year" type="number" defaultValue={project?.year} />
         </div>
       </div>
 
       <div className="field">
-        <label htmlFor="builtFor">Built for</label>
+        <label htmlFor="builtFor">{t(lang, "built_for")}</label>
         <input
           id="builtFor"
           name="builtFor"
@@ -61,7 +64,7 @@ export default function ProjectForm({
       </div>
 
       <div className="field">
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description">{t(lang, "description")}</label>
         <textarea
           id="description"
           name="description"
@@ -71,7 +74,7 @@ export default function ProjectForm({
 
       <div className="field">
         <label htmlFor="materials">
-          Materials <span className="hint">(comma separated)</span>
+          {t(lang, "materials")} <span className="hint">{t(lang, "comma_separated")}</span>
         </label>
         <input
           id="materials"
@@ -84,21 +87,21 @@ export default function ProjectForm({
 
       <div className="field-row">
         <div className="field">
-          <label htmlFor="duration">Duration</label>
+          <label htmlFor="duration">{t(lang, "duration")}</label>
           <input id="duration" name="duration" type="text" defaultValue={project?.duration} placeholder="e.g. 8 months" />
         </div>
         <div className="field">
-          <label htmlFor="teamSize">Team size</label>
+          <label htmlFor="teamSize">{t(lang, "team_size")}</label>
           <input id="teamSize" name="teamSize" type="text" defaultValue={project?.teamSize} placeholder="e.g. 12 workers" />
         </div>
         <div className="field">
-          <label htmlFor="ledBy">Led by</label>
+          <label htmlFor="ledBy">{t(lang, "led_by")}</label>
           <input id="ledBy" name="ledBy" type="text" defaultValue={project?.ledBy} />
         </div>
       </div>
 
       <div className="field">
-        <label htmlFor="status">Status</label>
+        <label htmlFor="status">{t(lang, "status")}</label>
         <input
           id="status"
           name="status"
@@ -110,45 +113,54 @@ export default function ProjectForm({
 
       <div className="field-row">
         <div className="field">
-          <label htmlFor="mapLink">Location map link</label>
+          <label htmlFor="mapLink">{t(lang, "map_link")}</label>
           <input id="mapLink" name="mapLink" type="url" defaultValue={project?.mapLink} placeholder="https://maps.google.com/..." />
         </div>
         <div className="field">
-          <label htmlFor="videoLink">Video link</label>
+          <label htmlFor="videoLink">{t(lang, "video_link")}</label>
           <input id="videoLink" name="videoLink" type="url" defaultValue={project?.videoLink} placeholder="https://youtube.com/..." />
         </div>
       </div>
 
-      <ProjectPhotos existing={project?.photos ?? []} />
+      <ProjectPhotos
+        existing={project?.photos ?? []}
+        labels={{
+          photosLabel: t(lang, "photos_label"),
+          addRemoveHint: t(lang, "add_remove_hint"),
+          noPhotosYet: t(lang, "no_photos_yet"),
+          addImages: t(lang, "add_images"),
+          removePhoto: t(lang, "remove_photo_aria"),
+        }}
+      />
 
       <div className="field">
-        <label>Before / after photos (optional)</label>
+        <label>{t(lang, "before_after_photos")}</label>
         {project?.beforeAfter ? (
           <div className="existing-photos">
             <div className="existing-photo">
               <img src={project.beforeAfter.before} alt="Before" />
-              <span>Before</span>
+              <span>{t(lang, "before")}</span>
             </div>
             <div className="existing-photo">
               <img src={project.beforeAfter.after} alt="After" />
-              <span>After</span>
+              <span>{t(lang, "after")}</span>
             </div>
           </div>
         ) : null}
         <div className="field-row">
           <div className="field">
-            <label htmlFor="beforePhoto">Before photo</label>
+            <label htmlFor="beforePhoto">{t(lang, "before_photo")}</label>
             <input id="beforePhoto" name="beforePhoto" type="file" accept="image/*" />
           </div>
           <div className="field">
-            <label htmlFor="afterPhoto">After photo</label>
+            <label htmlFor="afterPhoto">{t(lang, "after_photo")}</label>
             <input id="afterPhoto" name="afterPhoto" type="file" accept="image/*" />
           </div>
         </div>
         {project?.beforeAfter ? (
           <div className="checkbox-field" style={{ marginTop: "0.6rem" }}>
             <input type="checkbox" id="clearBeforeAfter" name="clearBeforeAfter" />
-            <label htmlFor="clearBeforeAfter">Remove before/after photos</label>
+            <label htmlFor="clearBeforeAfter">{t(lang, "remove_before_after")}</label>
           </div>
         ) : null}
       </div>
@@ -160,7 +172,7 @@ export default function ProjectForm({
           name="featured"
           defaultChecked={project?.featured}
         />
-        <label htmlFor="featured">Feature this project on the home page</label>
+        <label htmlFor="featured">{t(lang, "feature_on_home")}</label>
       </div>
 
       <div className="btn-row">
@@ -168,7 +180,7 @@ export default function ProjectForm({
           {submitLabel}
         </button>
         <Link href="/admin/projects" className="btn btn-secondary">
-          Cancel
+          {t(lang, "cancel")}
         </Link>
       </div>
     </form>

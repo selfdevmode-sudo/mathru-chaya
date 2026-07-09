@@ -1,5 +1,6 @@
 import { readContent } from "@/lib/db";
 import { updateSiteInfo } from "@/lib/actions";
+import { getLang, t } from "@/lib/i18n";
 
 export const dynamic = "force-dynamic";
 
@@ -13,23 +14,24 @@ export default async function AdminSettingsPage({
   const content = await readContent();
   const { site } = content;
   const params = await searchParams;
+  const lang = await getLang();
 
   return (
     <div>
       <div className="admin-header">
-        <h1>Site Info</h1>
+        <h1>{t(lang, "admin_settings")}</h1>
       </div>
 
-      {params.saved ? <div className="success-banner">Saved.</div> : null}
+      {params.saved ? <div className="success-banner">{t(lang, "saved")}</div> : null}
 
       <form action={updateSiteInfo} className="form-card">
         <div className="field">
-          <label htmlFor="name">Business name *</label>
+          <label htmlFor="name">{t(lang, "business_name")} *</label>
           <input id="name" name="name" type="text" required defaultValue={site.name} />
         </div>
 
         <div className="field">
-          <label htmlFor="tagline">Tagline *</label>
+          <label htmlFor="tagline">{t(lang, "tagline_label")} *</label>
           <input
             id="tagline"
             name="tagline"
@@ -41,7 +43,7 @@ export default async function AdminSettingsPage({
 
         <div className="field">
           <label htmlFor="owners">
-            Owners <span className="hint">(comma separated)</span>
+            {t(lang, "owners_label")} <span className="hint">{t(lang, "comma_separated")}</span>
           </label>
           <input
             id="owners"
@@ -53,12 +55,13 @@ export default async function AdminSettingsPage({
 
         <div className="field-row">
           <div className="field">
-            <label htmlFor="phone">Phone *</label>
+            <label htmlFor="phone">{t(lang, "phone_label")} *</label>
             <input id="phone" name="phone" type="tel" required defaultValue={site.phone} />
           </div>
           <div className="field">
             <label htmlFor="whatsapp">
-              WhatsApp number <span className="hint">(digits only, with country code)</span>
+              {t(lang, "whatsapp_number_label")}{" "}
+              <span className="hint">{t(lang, "digits_with_country_code")}</span>
             </label>
             <input
               id="whatsapp"
@@ -71,12 +74,12 @@ export default async function AdminSettingsPage({
         </div>
 
         <div className="field">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{t(lang, "email_label")}</label>
           <input id="email" name="email" type="email" defaultValue={site.email} />
         </div>
 
         <div className="field">
-          <label htmlFor="region">Region *</label>
+          <label htmlFor="region">{t(lang, "region_label")} *</label>
           <input
             id="region"
             name="region"
@@ -89,7 +92,7 @@ export default async function AdminSettingsPage({
 
         <div className="btn-row">
           <button type="submit" className="btn">
-            Save
+            {t(lang, "save")}
           </button>
         </div>
       </form>

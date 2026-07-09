@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { readContent } from "@/lib/db";
 import { telLink, waLink } from "@/lib/format";
+import { getLang, t } from "@/lib/i18n";
 import ViewToggle from "@/components/ViewToggle";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export const dynamic = "force-dynamic";
 
@@ -17,14 +19,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About" },
-  { href: "/awards", label: "Awards" },
-  { href: "/contact", label: "Contact" },
-];
-
 export default async function SiteLayout({
   children,
 }: {
@@ -32,6 +26,15 @@ export default async function SiteLayout({
 }) {
   const content = await readContent();
   const { site } = content;
+  const lang = await getLang();
+
+  const NAV_LINKS = [
+    { href: "/", label: t(lang, "nav_home") },
+    { href: "/projects", label: t(lang, "nav_projects") },
+    { href: "/about", label: t(lang, "nav_about") },
+    { href: "/awards", label: t(lang, "nav_awards") },
+    { href: "/contact", label: t(lang, "nav_contact") },
+  ];
 
   return (
     <>
@@ -49,7 +52,16 @@ export default async function SiteLayout({
                 </Link>
               ))}
             </nav>
-            <ViewToggle />
+            <LanguageSwitcher lang={lang} />
+            <ViewToggle
+              labels={{
+                web: t(lang, "view_web"),
+                mobile: t(lang, "view_mobile"),
+                webTitle: t(lang, "preview_web_layout"),
+                mobileTitle: t(lang, "preview_mobile_layout"),
+                groupAria: t(lang, "preview_site_layout"),
+              }}
+            />
           </div>
         </div>
       </header>
@@ -71,7 +83,7 @@ export default async function SiteLayout({
 
       <div className="mobile-cta-bar">
         <a className="call" href={telLink(site.phone)}>
-          Call
+          {t(lang, "call")}
         </a>
         <a
           className="whatsapp"
@@ -79,7 +91,7 @@ export default async function SiteLayout({
           target="_blank"
           rel="noopener noreferrer"
         >
-          WhatsApp
+          {t(lang, "whatsapp")}
         </a>
       </div>
     </>

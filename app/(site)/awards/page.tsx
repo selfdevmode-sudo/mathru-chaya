@@ -1,4 +1,5 @@
 import { readContent } from "@/lib/db";
+import { getLang, t } from "@/lib/i18n";
 
 export const dynamic = "force-dynamic";
 
@@ -9,11 +10,12 @@ export const metadata = {
 export default async function AwardsPage() {
   const content = await readContent();
   const { awards } = content;
+  const lang = await getLang();
 
   return (
     <div className="wrap section">
       <div className="section-head">
-        <h1>Awards &amp; Recognition</h1>
+        <h1>{t(lang, "awards_heading")}</h1>
       </div>
 
       {awards.length > 0 ? (
@@ -29,7 +31,11 @@ export default async function AwardsPage() {
               </div>
               <div className="card__body">
                 <h3>{award.title}</h3>
-                {award.givenBy ? <p className="card__meta">Given by {award.givenBy}</p> : null}
+                {award.givenBy ? (
+                  <p className="card__meta">
+                    {t(lang, "given_by")} {award.givenBy}
+                  </p>
+                ) : null}
                 {award.year ? <p className="card__meta">{award.year}</p> : null}
                 {award.note ? <p>{award.note}</p> : null}
               </div>
@@ -37,7 +43,7 @@ export default async function AwardsPage() {
           ))}
         </div>
       ) : (
-        <div className="empty-state">Awards and recognitions will appear here.</div>
+        <div className="empty-state">{t(lang, "awards_empty")}</div>
       )}
     </div>
   );

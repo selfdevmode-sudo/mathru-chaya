@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { readContent } from "@/lib/db";
 import { projectMetaLine } from "@/lib/format";
+import { getLang, t } from "@/lib/i18n";
 import Lightbox from "@/components/Lightbox";
 
 export const dynamic = "force-dynamic";
@@ -24,16 +25,21 @@ export default async function ProjectDetailPage({
   const { slug } = await params;
   const content = await readContent();
   const project = content.projects.find((p) => p.slug === slug);
+  const lang = await getLang();
 
   if (!project) {
     notFound();
   }
 
   const facts: { label: string; value: string }[] = [];
-  if (project.duration) facts.push({ label: "Duration", value: project.duration });
-  if (project.teamSize) facts.push({ label: "Team size", value: project.teamSize });
-  if (project.ledBy) facts.push({ label: "Led by", value: project.ledBy });
-  if (project.status) facts.push({ label: "Status", value: project.status });
+  if (project.duration) facts.push({ label: t(lang, "duration"), value: project.duration });
+  if (project.teamSize) facts.push({ label: t(lang, "team_size"), value: project.teamSize });
+  if (project.ledBy) facts.push({ label: t(lang, "led_by"), value: project.ledBy });
+  if (project.status) facts.push({ label: t(lang, "status"), value: project.status });
+
+  const photoLabels = project.photos.map((_, i) =>
+    t(lang, "photo_view_full", { n: i + 1, total: project.photos.length }),
+  );
 
   return (
     <article className="wrap section project-detail">
@@ -47,20 +53,34 @@ export default async function ProjectDetailPage({
       ) : null}
 
       <div className="section-head">
-        {projectMetaLine(project) ? (
-          <span className="badge">{projectMetaLine(project)}</span>
+        {projectMetaLine(project, lang) ? (
+          <span className="badge">{projectMetaLine(project, lang)}</span>
         ) : null}
         <h1>{project.title}</h1>
-        {project.builtFor ? <p>Built for {project.builtFor}</p> : null}
+        {project.builtFor ? (
+          <p>
+            {t(lang, "built_for")} {project.builtFor}
+          </p>
+        ) : null}
       </div>
 
-      <Lightbox photos={project.photos} title={project.title} />
+      <Lightbox
+        photos={project.photos}
+        title={project.title}
+        labels={{
+          closePhotoViewer: t(lang, "close_photo_viewer"),
+          previousPhoto: t(lang, "previous_photo"),
+          nextPhoto: t(lang, "next_photo"),
+          photoAriaLabels: photoLabels,
+          viewerAriaLabel: `${project.title} ${t(lang, "photo_viewer_suffix")}`,
+        }}
+      />
 
       {project.description ? <p>{project.description}</p> : null}
 
       {project.materials && project.materials.length > 0 ? (
         <>
-          <h3>Materials</h3>
+          <h3>{t(lang, "materials")}</h3>
           <div className="chip-row">
             {project.materials.map((m) => (
               <span key={m} className="chip">
@@ -84,15 +104,15 @@ export default async function ProjectDetailPage({
 
       {project.beforeAfter ? (
         <>
-          <h3>Before &amp; After</h3>
+          <h3>{t(lang, "before_after")}</h3>
           <div className="before-after">
             <figure>
               <img src={project.beforeAfter.before} alt={`${project.title} before`} />
-              <figcaption>Before</figcaption>
+              <figcaption>{t(lang, "before")}</figcaption>
             </figure>
             <figure>
               <img src={project.beforeAfter.after} alt={`${project.title} after`} />
-              <figcaption>After</figcaption>
+              <figcaption>{t(lang, "after")}</figcaption>
             </figure>
           </div>
         </>
@@ -106,7 +126,7 @@ export default async function ProjectDetailPage({
             target="_blank"
             rel="noopener noreferrer"
           >
-            Watch video
+            {t(lang, "watch_video")}
           </a>
         ) : null}
         {project.mapLink ? (
@@ -116,7 +136,7 @@ export default async function ProjectDetailPage({
             target="_blank"
             rel="noopener noreferrer"
           >
-            View location
+            {t(lang, "view_location")}
           </a>
         ) : null}
       </div>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { readContent } from "@/lib/db";
 import { deleteProject } from "@/lib/actions";
 import { projectMetaLine } from "@/lib/format";
+import { getLang, t } from "@/lib/i18n";
 import ConfirmSubmitButton from "@/components/ConfirmSubmitButton";
 
 export const dynamic = "force-dynamic";
@@ -11,19 +12,21 @@ export const metadata = { title: "Projects" };
 export default async function AdminProjectsPage() {
   const content = await readContent();
   const { projects } = content;
+  const lang = await getLang();
 
   return (
     <div>
       <div className="admin-header">
-        <h1>Projects</h1>
+        <h1>{t(lang, "admin_projects")}</h1>
         <Link href="/admin/projects/new" className="btn">
-          + Add project
+          {t(lang, "add_project")}
         </Link>
       </div>
 
       {projects.length === 0 ? (
         <div className="empty-state">
-          No projects yet. <Link href="/admin/projects/new">Add your first project</Link>.
+          {t(lang, "no_projects_yet")}{" "}
+          <Link href="/admin/projects/new">{t(lang, "add_first_project")}</Link>.
         </div>
       ) : (
         <div className="table-scroll">
@@ -31,9 +34,9 @@ export default async function AdminProjectsPage() {
             <thead>
               <tr>
                 <th></th>
-                <th>Title</th>
-                <th>Details</th>
-                <th>Featured</th>
+                <th>{t(lang, "title")}</th>
+                <th>{t(lang, "details_col")}</th>
+                <th>{t(lang, "featured_col")}</th>
                 <th></th>
               </tr>
             </thead>
@@ -48,16 +51,16 @@ export default async function AdminProjectsPage() {
                       ) : null}
                     </td>
                     <td>{project.title}</td>
-                    <td>{projectMetaLine(project) || "—"}</td>
-                    <td>{project.featured ? "Yes" : ""}</td>
+                    <td>{projectMetaLine(project, lang) || "—"}</td>
+                    <td>{project.featured ? t(lang, "yes") : ""}</td>
                     <td className="row-actions">
-                      <Link href={`/admin/projects/${project.id}`}>Edit</Link>
+                      <Link href={`/admin/projects/${project.id}`}>{t(lang, "edit")}</Link>
                       <form action={boundDelete}>
                         <ConfirmSubmitButton
-                          message={`Delete "${project.title}"? This cannot be undone.`}
+                          message={t(lang, "confirm_delete_project", { title: project.title })}
                           className="btn-danger-inline"
                         >
-                          Delete
+                          {t(lang, "delete")}
                         </ConfirmSubmitButton>
                       </form>
                     </td>
