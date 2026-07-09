@@ -4,6 +4,12 @@ backend:
   branch: main
   base_url: https://sveltia-cms-auth.WORKER.workers.dev  # PLACEHOLDER — set in Task 15
 
+# Sveltia requires a top-level media_folder to initialize, even though every
+# collection below overrides it with its own _images folder beside the content.
+# This global value is only a fallback and is effectively never used for uploads.
+media_folder: src/content/uploads
+public_folder: /uploads
+
 editor:
   preview: false
 
