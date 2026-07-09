@@ -1,0 +1,12 @@
+- id: temples
+  name_en: Temple construction
+  name_kn: ದೇವಸ್ಥಾನ ನಿರ್ಮಾಣ
+- id: ponds
+  name_en: Temple ponds (kalyani)
+  name_kn: ಕಲ್ಯಾಣಿ ನಿರ್ಮಾಣ
+- id: gopura
+  name_en: Gopura & stone work
+  name_kn: ಗೋಪುರ ಮತ್ತು ಕಲ್ಲಿನ ಕೆಲಸ
+- id: renovation
+  name_en: Renovation & restoration
+  name_kn: ಜೀರ್ಣೋದ್ಧಾರ
