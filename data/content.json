@@ -12,10 +12,55 @@
   },
   "projects": [
     {
+      "id": "mrdif8jo-60x53l",
+      "slug": "sdfgh",
+      "title": "sdfgh",
+      "type": "pond",
+      "place": "Belman, Udupi",
+      "year": 2022,
+      "builtFor": "dfghj",
+      "description": "ghj",
+      "materials": [
+        "water",
+        "venom"
+      ],
+      "duration": "10 months",
+      "teamSize": "2",
+      "ledBy": "eshwaranner",
+      "status": "Completed",
+      "mapLink": "https://maps.google.com/?q=Kaup+Temple+Udupi",
+      "videoLink": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "photos": [
+        "/uploads/1783601737475-x4iscs.jpg"
+      ],
+      "featured": true
+    },
+    {
+      "id": "mrdenc3j-jre38j",
+      "slug": "testt-tmepleme",
+      "title": "testt tmepleme",
+      "type": "renovation",
+      "place": "permude",
+      "year": 2022,
+      "builtFor": "owner:ankit",
+      "description": "testt tmepleme",
+      "materials": [
+        "testt tmepleme"
+      ],
+      "duration": "10 months",
+      "teamSize": "14 craftsmen",
+      "ledBy": "eshwaranner",
+      "status": "Completed",
+      "photos": [
+        "/uploads/1783595396862-ligvkn.jpg"
+      ],
+      "featured": false
+    },
+    {
       "id": "mrddebge-82dol7",
       "slug": "kaat-boggi",
       "title": "kaat boggi",
-      "type": "other",
+      "type": "temple",
       "place": "permude",
       "year": 1998,
       "builtFor": "owner:ankit",
@@ -60,8 +105,8 @@
       "mapLink": "https://maps.google.com/?q=Kaup+Temple+Udupi",
       "videoLink": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "photos": [
-        "/uploads/seed-temple-1.svg",
-        "/uploads/seed-temple-2.svg"
+        "/uploads/1783595280548-mgzh7v.jpg",
+        "/uploads/1783595280548-khp4j8.jpg"
       ],
       "beforeAfter": {
         "before": "/uploads/seed-temple-before.svg",
