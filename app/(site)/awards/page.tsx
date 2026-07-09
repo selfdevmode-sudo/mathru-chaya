@@ -1,5 +1,6 @@
 import { readContent } from "@/lib/db";
 import { getLang, t } from "@/lib/i18n";
+import KalyaniMark from "@/components/KalyaniMark";
 
 export const dynamic = "force-dynamic";
 
@@ -26,7 +27,7 @@ export default async function AwardsPage() {
                 {award.photo ? (
                   <img src={award.photo} alt={award.title} />
                 ) : (
-                  <span>🏆</span>
+                  <KalyaniMark size={44} />
                 )}
               </div>
               <div className="card__body">

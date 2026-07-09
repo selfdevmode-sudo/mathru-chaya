@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Project } from "@/lib/types";
 import type { Lang } from "@/lib/i18n";
 import { projectMetaLine, typeLabel } from "@/lib/format";
+import KalyaniMark from "@/components/KalyaniMark";
 
 export default function ProjectGrid({
   projects,
@@ -57,7 +58,7 @@ export default function ProjectGrid({
               {project.photos[0] ? (
                 <img src={project.photos[0]} alt={project.title} />
               ) : (
-                <span>🛕</span>
+                <KalyaniMark size={44} />
               )}
             </div>
             <div className="card__body">

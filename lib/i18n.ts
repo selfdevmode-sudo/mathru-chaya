@@ -52,6 +52,7 @@ const dict: Record<string, Record<Lang, string>> = {
     kn: "ಮೊಬೈಲ್ ವಿನ್ಯಾಸ ಪೂರ್ವವೀಕ್ಷಣೆ",
     hi: "मोबाइल लेआउट पूर्वावलोकन",
   },
+  nav_menu: { en: "Menu", kn: "ಮೆನು", hi: "मेनू" },
 
   // ---------- project types ----------
   type_temple: { en: "Temple", kn: "ದೇವಸ್ಥಾನ", hi: "मंदिर" },
@@ -136,6 +137,11 @@ const dict: Record<string, Record<Lang, string>> = {
   year_label: { en: "Year", kn: "ವರ್ಷ", hi: "वर्ष" },
 
   // ---------- home page ----------
+  hero_line: {
+    en: "Temples, ponds and gopuras — built and restored in the traditional way.",
+    kn: "ದೇವಸ್ಥಾನಗಳು, ಕೊಳಗಳು ಮತ್ತು ಗೋಪುರಗಳು — ಸಾಂಪ್ರದಾಯಿಕ ರೀತಿಯಲ್ಲಿ ನಿರ್ಮಿಸಿ ಜೀರ್ಣೋದ್ಧಾರಗೊಳಿಸಲಾಗುತ್ತದೆ.",
+    hi: "मंदिर, तालाब और गोपुर — पारंपरिक तरीके से निर्मित और जीर्णोद्धारित।",
+  },
   section_our_work: { en: "Our Work", kn: "ನಮ್ಮ ಕೆಲಸ", hi: "हमारा काम" },
   section_about_us: { en: "About Us", kn: "ನಮ್ಮ ಬಗ್ಗೆ", hi: "हमारे बारे में" },
   read_more_about: {

@@ -72,18 +72,27 @@ export default function ViewToggle({
         className={`view-toggle__btn${mode === "web" ? " is-active" : ""}`}
         onClick={() => choose("web")}
         aria-pressed={mode === "web"}
+        aria-label={labels.webTitle}
         title={labels.webTitle}
       >
-        🖥 {labels.web}
+        <svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false">
+          <rect x="2.5" y="3.5" width="15" height="10" rx="1" />
+          <line x1="7.5" y1="17" x2="12.5" y2="17" />
+          <line x1="10" y1="13.5" x2="10" y2="17" />
+        </svg>
       </button>
       <button
         type="button"
         className={`view-toggle__btn${mode === "mobile" ? " is-active" : ""}`}
         onClick={() => choose("mobile")}
         aria-pressed={mode === "mobile"}
+        aria-label={labels.mobileTitle}
         title={labels.mobileTitle}
       >
-        📱 {labels.mobile}
+        <svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false">
+          <rect x="5.5" y="2.5" width="9" height="15" rx="1.5" />
+          <line x1="8.5" y1="15" x2="11.5" y2="15" />
+        </svg>
       </button>
     </div>
   );

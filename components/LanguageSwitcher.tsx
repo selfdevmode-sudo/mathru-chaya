@@ -5,10 +5,19 @@ import type { Lang } from "@/lib/i18n";
 // Mirrors LANG_LABELS in lib/i18n.ts. Duplicated locally (rather than
 // imported) because lib/i18n.ts pulls in `next/headers`, which cannot be
 // bundled into a client component — see the note at the top of that file.
-const LABELS: Record<Lang, string> = {
+const FULL_LABELS: Record<Lang, string> = {
   en: "English",
   kn: "ಕನ್ನಡ",
   hi: "हिंदी",
+};
+
+// Compact three-letter forms shown in the header so the switcher stays a
+// small control (EN · ಕನ · हि) — the full name is still available via
+// `title`/aria for accessibility.
+const SHORT_LABELS: Record<Lang, string> = {
+  en: "EN",
+  kn: "ಕನ",
+  hi: "हि",
 };
 
 const LANGS: Lang[] = ["en", "kn", "hi"];
@@ -45,9 +54,11 @@ export default function LanguageSwitcher({
           type="button"
           className={`lang-switch__btn${lang === code ? " is-active" : ""}`}
           aria-pressed={lang === code}
+          aria-label={FULL_LABELS[code]}
+          title={FULL_LABELS[code]}
           onClick={() => setLangCookie(code)}
         >
-          {LABELS[code]}
+          {SHORT_LABELS[code]}
         </button>
       ))}
     </div>

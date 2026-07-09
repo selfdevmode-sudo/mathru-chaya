@@ -3,6 +3,7 @@ import { readContent } from "@/lib/db";
 import { projectMetaLine } from "@/lib/format";
 import { getLang, t } from "@/lib/i18n";
 import Divider from "@/components/Divider";
+import KalyaniMark from "@/components/KalyaniMark";
 
 export const dynamic = "force-dynamic";
 
@@ -14,14 +15,61 @@ export default async function HomePage() {
   const featured = projects.filter((p) => p.featured);
   const showcase = (featured.length > 0 ? featured : projects).slice(0, 3);
 
+  // Hero visual: the featured project's cover photo, falling back to the
+  // first project, falling back to nothing (renders a calm placeholder
+  // panel instead of a broken image — see .hero-frame--fallback below).
+  const heroProject = projects.find((p) => p.featured) ?? projects[0];
+  const heroPhoto = heroProject?.photos[0];
+  const heroCaption = heroProject
+    ? [heroProject.title, heroProject.place].filter(Boolean).join(", ")
+    : "";
+
   return (
     <>
-      <section className="hero wrap">
-        <h1>{site.name}</h1>
-        <p className="tagline">{site.tagline}</p>
-        <Link href="/projects" className="btn">
-          {t(lang, "cta_view_work")}
-        </Link>
+      <section className="hero">
+        <div className="wrap hero-grid">
+          <div className="hero__col hero__col--text">
+            <p className="eyebrow">
+              <KalyaniMark size={16} className="eyebrow__mark" />
+              {site.region}
+            </p>
+            <h1>{site.name}</h1>
+            <p className="tagline">{site.tagline}</p>
+            <p className="hero__line">{t(lang, "hero_line")}</p>
+            <div className="btn-row">
+              <Link href="/projects" className="btn">
+                {t(lang, "cta_view_work")}
+              </Link>
+              <Link href="/contact" className="btn btn-secondary">
+                {t(lang, "nav_contact")}
+              </Link>
+            </div>
+          </div>
+
+          <div className="hero__col hero__col--visual">
+            {heroPhoto && heroProject ? (
+              <figure className="hero-frame">
+                <div className="hero-frame__image">
+                  <img src={heroPhoto} alt={heroProject.title} />
+                </div>
+                <div className="hero-frame__steps" aria-hidden="true">
+                  <span className="hero-frame__step hero-frame__step--1" />
+                  <span className="hero-frame__step hero-frame__step--2" />
+                  <span className="hero-frame__step hero-frame__step--3" />
+                  <KalyaniMark size={16} className="hero-frame__mark" />
+                </div>
+                {heroCaption ? (
+                  <figcaption className="hero-frame__caption">{heroCaption}</figcaption>
+                ) : null}
+              </figure>
+            ) : (
+              <div className="hero-frame hero-frame--fallback">
+                <KalyaniMark size={72} />
+                <p>{site.tagline}</p>
+              </div>
+            )}
+          </div>
+        </div>
       </section>
 
       {showcase.length > 0 ? (
@@ -40,7 +88,7 @@ export default async function HomePage() {
                   {project.photos[0] ? (
                     <img src={project.photos[0]} alt={project.title} />
                   ) : (
-                    <span>🛕</span>
+                    <KalyaniMark size={44} />
                   )}
                 </div>
                 <div className="card__body">
@@ -78,7 +126,7 @@ export default async function HomePage() {
                     {award.photo ? (
                       <img src={award.photo} alt={award.title} />
                     ) : (
-                      <span>🏆</span>
+                      <KalyaniMark size={44} />
                     )}
                   </div>
                   <div className="card__body">

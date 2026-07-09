@@ -44,25 +44,49 @@ export default async function SiteLayout({
             <span className="site-header__brand-name">{site.name}</span>
             <span className="site-header__brand-tagline">{site.tagline}</span>
           </Link>
-          <div className="site-header__right">
-            <nav className="site-nav">
-              {NAV_LINKS.map((link) => (
-                <Link key={link.href} href={link.href}>
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-            <LanguageSwitcher lang={lang} />
-            <ViewToggle
-              labels={{
-                web: t(lang, "view_web"),
-                mobile: t(lang, "view_mobile"),
-                webTitle: t(lang, "preview_web_layout"),
-                mobileTitle: t(lang, "preview_mobile_layout"),
-                groupAria: t(lang, "preview_site_layout"),
-              }}
-            />
-          </div>
+
+          {/* No-JS disclosure: on wide screens the panel below is forced
+              open and the summary hamburger is hidden (see globals.css),
+              so desktop sees a single row. On narrow screens it collapses
+              behind the hamburger so the header stays a slim single bar. */}
+          <details className="nav-disclosure">
+            <summary aria-label={t(lang, "nav_menu")}>
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 22 22"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <line x1="3" y1="6" x2="19" y2="6" />
+                <line x1="3" y1="11" x2="19" y2="11" />
+                <line x1="3" y1="16" x2="19" y2="16" />
+              </svg>
+            </summary>
+            <div className="nav-disclosure__panel">
+              <nav className="site-nav">
+                {NAV_LINKS.map((link) => (
+                  <Link key={link.href} href={link.href}>
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+              <LanguageSwitcher lang={lang} />
+              <ViewToggle
+                labels={{
+                  web: t(lang, "view_web"),
+                  mobile: t(lang, "view_mobile"),
+                  webTitle: t(lang, "preview_web_layout"),
+                  mobileTitle: t(lang, "preview_mobile_layout"),
+                  groupAria: t(lang, "preview_site_layout"),
+                }}
+              />
+            </div>
+          </details>
         </div>
       </header>
 

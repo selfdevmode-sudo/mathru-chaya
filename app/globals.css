@@ -1,14 +1,38 @@
 :root {
-  --c-bg: #faf7f0;
-  --c-bg-alt: #f3ecdd;
-  --c-text: #3d3529;
-  --c-text-soft: #746856;
-  --c-accent: #7a2e1d;
-  --c-accent-contrast: #faf7f0;
-  --c-gold: #c9a86a;
-  --c-border: #e5ddcc;
+  /* ---- laterite & granite palette ----
+     Warm laterite-tinted parchment background, granite-charcoal text, a
+     deep laterite/kavi-red accent, and brass/gold reserved for hairlines
+     and tiny decorative accents only (never body text — see --c-gold
+     usage below). --c-text-soft is verified ≥4.5:1 contrast on both
+     --c-bg (~5.01:1) and --c-bg-alt (~4.50:1). */
+  --c-bg: #f3ece1;
+  --c-bg-alt: #eae0d0;
+  --c-text: #241f19;
+  --c-text-soft: #6e6353;
+  --c-accent: #8e3a21;
+  --c-accent-deep: #6e2a16;
+  --c-accent-contrast: #f6f0e6;
+  --c-gold: #b0842f;
+  --c-granite: #3b342c;
+  --c-border: #d8cbb6;
   --c-scrim: rgba(0, 0, 0, 0.9);
   --radius: 0.55rem;
+
+  /* ---- typography ----
+     Display/heading face = Marcellus (English) with Noto Serif Kannada /
+     Devanagari as the same-role fallback for those scripts, so headings
+     keep an inscriptional, temple-stone character in every language.
+     Body/UI = Inter (Latin) with the matching Noto Sans script fallback.
+     The next/font variables (--font-display, --font-body-latin,
+     --font-head-kn, --font-head-hi, --font-body-kn, --font-body-hi) are
+     set as classes on <html> in app/layout.tsx; if next/font could not
+     fetch at build time these variables are simply undefined and the
+     plain CSS fallback stack (Georgia / system-ui + Noto family names)
+     below takes over automatically. */
+  --font-head: var(--font-display), var(--font-head-kn), var(--font-head-hi),
+    Georgia, "Noto Serif Kannada", "Noto Serif Devanagari", serif;
+  --font-body: var(--font-body-latin), var(--font-body-kn), var(--font-body-hi),
+    system-ui, "Noto Sans Kannada", "Noto Sans Devanagari", sans-serif;
 
   /* ---- layout tokens driven by viewport + the web/mobile view toggle ----
      The auto `@media (max-width: 48rem)` block below sets the "mobile"
@@ -20,7 +44,6 @@
      column so the mobile layout can be genuinely previewed on desktop. */
   --content-max: 64rem;
   --grid-cols: repeat(auto-fit, minmax(15.5rem, 1fr));
-  --nav-dir: row;
   --frame-max: none;
   --cta-display: none;
 }
@@ -38,7 +61,7 @@ body {
 body {
   background: var(--c-bg);
   color: var(--c-text);
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: var(--font-body);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
@@ -48,21 +71,58 @@ h2,
 h3,
 h4 {
   color: var(--c-accent);
-  font-weight: normal;
-  line-height: 1.25;
+  font-family: var(--font-head);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   margin: 0 0 0.6em;
+  /* long unbroken words/business names must never force horizontal
+     scroll on narrow phones — see the mobile-overflow fixes note further
+     down for the matching body-level backstop. */
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 
 h1 {
-  font-size: 2.1rem;
+  font-size: clamp(2.1rem, 1.4rem + 3.4vw, 3.6rem);
+  line-height: 1.12;
 }
 
 h2 {
-  font-size: 1.55rem;
+  font-size: clamp(1.5rem, 1.25rem + 1.2vw, 2.05rem);
 }
 
 h3 {
-  font-size: 1.2rem;
+  font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.3rem);
+}
+
+/* ---------- eyebrow labels ---------- */
+
+.eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--c-gold);
+  margin: 0 0 1rem;
+}
+
+.eyebrow__mark {
+  flex-shrink: 0;
+}
+
+/* Universal border-box reset — without this, any element with width:100%
+   plus padding/border exceeds its container and pushes the page wider than
+   the screen (the root cause of horizontal scroll on phones). */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 p {
@@ -100,19 +160,13 @@ ol {
 }
 
 .site-header__bar {
+  position: relative;
   display: flex;
-  flex-direction: var(--nav-dir);
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem 1rem;
-  padding: 0.9rem 0;
-}
-
-.site-header__right {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.6rem 1.1rem;
+  padding-block: 0.9rem;
 }
 
 .site-header__brand {
@@ -120,11 +174,15 @@ ol {
   display: flex;
   flex-direction: column;
   line-height: 1.15;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .site-header__brand-name {
+  display: block;
   color: var(--c-accent);
-  font-size: 1.3rem;
+  font-family: var(--font-head);
+  font-size: clamp(1.05rem, 0.9rem + 1vw, 1.3rem);
 }
 
 .site-header__brand-tagline {
@@ -152,24 +210,90 @@ ol {
   border-bottom-color: var(--c-gold);
 }
 
+/* ---------- mobile nav disclosure ----------
+   A plain, no-JS <details>/<summary> disclosure holds the nav links,
+   language switcher and view toggle. By default (and whenever the real
+   viewport or the forced "web" preview counts as desktop) the panel is
+   forced open and the hamburger summary is hidden, so wide screens show
+   everything inline as a single row. The @media/html.force-mobile blocks
+   further down flip this: hamburger visible, panel collapsed until the
+   visitor opens it — see the "RESPONSIVE" section at the end of this file
+   for those overrides, which follow the same html.force-web/force-mobile
+   specificity pattern used for the layout tokens above. */
+/* Positioning context for the mobile dropdown panel is the whole header
+   bar (see .site-header__bar's `position: relative` below), not this
+   element itself — .nav-disclosure is only as wide as the hamburger
+   button, and anchoring the panel to *that* narrow box would compute an
+   almost-zero panel width with its content overflowing off the edge of
+   the screen. */
+
+.nav-disclosure > summary {
+  display: none;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.nav-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-disclosure > summary::marker {
+  content: "";
+}
+
+.nav-disclosure__panel {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.1rem;
+}
+
+/* Modern browsers implement <details>'s open/close via an internal
+   ::details-content pseudo-element that gets `content-visibility: hidden`
+   (not just `display: none`) while closed — content-visibility:hidden
+   skips layout for its subtree entirely, so overriding `display` on our
+   own panel div isn't enough on its own; the ancestor pseudo-element also
+   has to be told to actually render. Default (desktop, unqualified) forces
+   it visible; the mobile media query / html.force-mobile below `revert`
+   this back to the browser's native open-attribute-driven behaviour so
+   the real collapse/expand disclosure still works there, and
+   html.force-web forces it visible again regardless of real viewport. */
+.nav-disclosure::details-content {
+  content-visibility: visible;
+}
+
 /* ---------- web/mobile view toggle ---------- */
 
 .view-toggle {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 
 .view-toggle__btn {
   border: 1px solid var(--c-border);
-  background: #fff;
+  background: transparent;
   color: var(--c-text-soft);
   border-radius: 999px;
-  padding: 0.35rem 0.7rem;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: inherit;
-  font-size: 0.78rem;
-  line-height: 1.2;
+  font-size: 0.85rem;
+  line-height: 1;
   cursor: pointer;
-  white-space: nowrap;
 }
 
 .view-toggle__btn.is-active {
@@ -190,9 +314,10 @@ ol {
   background: #fff;
   color: var(--c-text-soft);
   border-radius: 999px;
-  padding: 0.35rem 0.7rem;
+  padding: 0.3rem 0.6rem;
+  min-width: 2rem;
   font-family: inherit;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   line-height: 1.2;
   cursor: pointer;
   white-space: nowrap;
@@ -297,16 +422,18 @@ html.force-mobile main {
   display: flex;
   align-items: center;
   gap: 1rem;
-  color: var(--c-gold);
   margin: 2.75rem 0;
 }
 
-.divider::before,
-.divider::after {
-  content: "";
+.divider__line {
   flex: 1;
   height: 1px;
   background: var(--c-border);
+}
+
+.divider__mark {
+  flex-shrink: 0;
+  color: var(--c-gold);
 }
 
 /* ---------- buttons ---------- */
@@ -323,15 +450,29 @@ html.force-mobile main {
   font-size: 1rem;
   cursor: pointer;
   text-align: center;
+  transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
 }
 
 .btn:hover {
   opacity: 0.92;
 }
 
+.btn:not(.btn-secondary):not(.btn-danger):hover {
+  opacity: 1;
+  background: var(--c-accent-deep);
+  border-color: var(--c-accent-deep);
+}
+
 .btn.btn-secondary {
   background: transparent;
   color: var(--c-accent);
+}
+
+.btn.btn-secondary:hover {
+  opacity: 1;
+  background: var(--c-bg-alt);
+  border-color: var(--c-accent-deep);
+  color: var(--c-accent-deep);
 }
 
 .btn.btn-danger {
@@ -355,7 +496,7 @@ html.force-mobile main {
 /* ---------- sections & hero ---------- */
 
 .section {
-  padding: 3rem 0;
+  padding-block: 3rem;
 }
 
 .section-head {
@@ -363,20 +504,152 @@ html.force-mobile main {
 }
 
 .hero {
-  padding: 3.5rem 0 2.5rem;
-  text-align: center;
+  padding: 3.5rem 0 3rem;
+}
+
+/* Editorial split hero: text left, featured-project image right (stacks
+   with the image below the text on narrow screens — see the mobile
+   overrides further down, which follow the same real-media /
+   html.force-mobile / html.force-web pattern as the rest of this file). */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.5rem;
+  align-items: center;
+  animation: hero-rise 0.7s ease both;
+}
+
+.hero__col--text {
+  min-width: 0;
 }
 
 .hero h1 {
-  max-width: 42rem;
-  margin: 0 auto 0.5rem;
+  max-width: none;
+  margin: 0 0 0.6rem;
 }
 
 .hero p.tagline {
   color: var(--c-text-soft);
   font-size: 1.15rem;
   max-width: 34rem;
-  margin: 0 auto 1.75rem;
+  margin: 0 0 0.6rem;
+}
+
+.hero__line {
+  color: var(--c-text-soft);
+  max-width: 32rem;
+  margin: 0 0 1.5rem;
+}
+
+.hero__col--text .btn-row {
+  margin: 0.25rem 0 0;
+}
+
+/* ---------- hero image frame (the "kalyani step" motif) ---------- */
+
+.hero-frame {
+  margin: 0;
+}
+
+.hero-frame__image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid var(--c-border);
+  border-bottom: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+  background: var(--c-bg-alt);
+}
+
+.hero-frame__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* a short "stepped base" beneath the image — three descending bars
+   evoking the stone steps of a kalyani, with the Kalyani Step mark
+   sitting at the bottom, narrowest step. */
+.hero-frame__steps {
+  position: relative;
+  height: 1.9rem;
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-frame__step {
+  position: absolute;
+  height: 0.34rem;
+  border-radius: 1px;
+  background: var(--c-border);
+}
+
+.hero-frame__step--1 {
+  width: 100%;
+  left: 0;
+  bottom: 1.15rem;
+}
+
+.hero-frame__step--2 {
+  width: 64%;
+  left: 18%;
+  bottom: 0.62rem;
+}
+
+.hero-frame__step--3 {
+  width: 34%;
+  left: 33%;
+  bottom: 0.1rem;
+  background: var(--c-gold);
+}
+
+.hero-frame__mark {
+  position: relative;
+  z-index: 1;
+  color: var(--c-gold);
+  margin-bottom: 0.15rem;
+}
+
+.hero-frame__caption {
+  margin-top: 0.65rem;
+  font-size: 0.85rem;
+  color: var(--c-text-soft);
+  text-align: center;
+}
+
+.hero-frame--fallback {
+  aspect-ratio: 4 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  color: var(--c-gold);
+}
+
+.hero-frame--fallback p {
+  color: var(--c-text-soft);
+  margin: 0;
+  max-width: 20rem;
+}
+
+@keyframes hero-rise {
+  from {
+    transform: translateY(12px);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 /* ---------- cards / grid ---------- */
@@ -394,6 +667,9 @@ html.force-mobile main {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  max-width: 100%;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   text-decoration: none;
   color: inherit;
 }
@@ -409,6 +685,11 @@ html.force-mobile main {
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(36, 31, 25, 0.1);
 }
 
 .card:hover .card__photo img {
@@ -502,7 +783,11 @@ html.force-mobile main {
 /* subtle blurred backdrop behind the article, built from the cover photo.
    Fixed + negative z-index so it sits behind normal in-flow page content
    and never intercepts clicks; the opaque background under the blurred,
-   low-opacity image keeps text fully readable. */
+   low-opacity image keeps text fully readable. The image is oversized
+   (inset: -20%) so the soft falloff at its own edges never reaches the
+   visible viewport, and a radial-gradient scrim on top fades it evenly
+   into --c-bg in every direction regardless of the source photo's aspect
+   ratio — this is what keeps the wash uniform instead of uneven/patchy. */
 .detail-backdrop {
   position: fixed;
   inset: 0;
@@ -514,11 +799,18 @@ html.force-mobile main {
 
 .detail-backdrop__image {
   position: absolute;
-  inset: -5%;
+  inset: -20%;
   background-size: cover;
   background-position: center;
-  filter: blur(38px);
-  opacity: 0.15;
+  filter: blur(56px);
+  opacity: 0.13;
+}
+
+.detail-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, var(--c-bg) 88%);
 }
 
 .gallery {
@@ -765,7 +1057,7 @@ html.force-mobile main {
 
 .admin-body {
   background: #f1ede4;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-family: var(--font-body);
   color: #23201a;
 }
 
@@ -1163,7 +1455,7 @@ html.force-mobile main {
   align-items: center;
   justify-content: center;
   background: var(--c-bg);
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: var(--font-body);
   padding: 1.5rem;
 }
 
@@ -1195,58 +1487,141 @@ html.force-mobile main {
 /* ================================================================
    RESPONSIVE + WEB/MOBILE VIEW TOGGLE
    ----------------------------------------------------------------
-   --content-max / --grid-cols / --nav-dir are the shared layout
-   tokens (declared on :root above). This media query is the single
-   source of truth for their "mobile" values; html.force-mobile below
-   mirrors the same values so the toggle works on a wide screen, and
-   html.force-web mirrors the desktop values so it wins even on a
-   narrow one. Because `html.force-web`/`html.force-mobile` add an
-   extra type-selector to the specificity of a plain `:root`/media
-   rule, they always win the cascade regardless of source order or
-   the real viewport width — no !important needed.
+   --content-max / --grid-cols are the shared layout tokens (declared
+   on :root above). This media query is the single source of truth for
+   their "mobile" values; html.force-mobile below mirrors the same
+   values so the toggle works on a wide screen, and html.force-web
+   mirrors the desktop values so it wins even on a narrow one. Because
+   `html.force-web`/`html.force-mobile` add an extra type-selector to
+   the specificity of a plain `:root`/media rule, they always win the
+   cascade regardless of source order or the real viewport width — no
+   !important needed for the custom properties themselves.
+
+   --grid-cols is a single column (1fr) on mobile — project/award/
+   testimonial card grids never try to fit two narrow columns that
+   could overflow a phone screen. The nav-disclosure display toggles
+   below DO need !important: they're overriding the <details> element's
+   native UA-stylesheet rule that hides non-summary content when the
+   element isn't [open], which plain-specificity author rules can't
+   beat cleanly — see the comment by .nav-disclosure earlier in this
+   file.
    ================================================================ */
 
 @media (max-width: 48rem) {
   :root {
     --content-max: 100%;
-    --grid-cols: repeat(auto-fit, minmax(9.5rem, 1fr));
-    --nav-dir: column;
+    --grid-cols: 1fr;
   }
 
-  .site-header__bar {
-    align-items: flex-start;
+  .nav-disclosure::details-content {
+    content-visibility: revert;
   }
 
-  .site-header__right {
-    width: 100%;
-    justify-content: flex-start;
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .hero__col--visual {
+    order: 2;
+  }
+
+  .hero__col--text {
+    order: 1;
+  }
+
+  .nav-disclosure > summary {
+    display: inline-flex;
+  }
+
+  .nav-disclosure__panel {
+    display: none !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.85rem;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    width: min(18rem, calc(100vw - 2.5rem));
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    box-shadow: 0 8px 24px rgba(36, 31, 25, 0.14);
+    z-index: 25;
+  }
+
+  details.nav-disclosure[open] .nav-disclosure__panel {
+    display: flex !important;
+  }
+
+  .site-nav {
+    flex-direction: column;
+    gap: 0.15rem;
   }
 
   .site-nav a {
-    padding: 0.4rem 0.15rem;
+    padding: 0.5rem 0.15rem;
   }
 }
 
 /* forced mobile preview — usable on any screen size via the ViewToggle */
 html.force-mobile {
   --content-max: 100%;
-  --grid-cols: repeat(auto-fit, minmax(9.5rem, 1fr));
-  --nav-dir: column;
+  --grid-cols: 1fr;
   --cta-display: flex;
   --frame-max: 26rem;
 }
 
-html.force-mobile .site-header__bar {
-  align-items: flex-start;
+html.force-mobile .hero-grid {
+  grid-template-columns: 1fr;
+  gap: 2rem;
 }
 
-html.force-mobile .site-header__right {
-  width: 100%;
-  justify-content: flex-start;
+html.force-mobile .hero__col--visual {
+  order: 2;
+}
+
+html.force-mobile .hero__col--text {
+  order: 1;
+}
+
+html.force-mobile .nav-disclosure::details-content {
+  content-visibility: revert;
+}
+
+html.force-mobile .nav-disclosure > summary {
+  display: inline-flex;
+}
+
+html.force-mobile .nav-disclosure__panel {
+  display: none !important;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.85rem;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: min(18rem, calc(100vw - 2.5rem));
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: 0 8px 24px rgba(36, 31, 25, 0.14);
+  z-index: 25;
+}
+
+html.force-mobile details.nav-disclosure[open] .nav-disclosure__panel {
+  display: flex !important;
+}
+
+html.force-mobile .site-nav {
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
 html.force-mobile .site-nav a {
-  padding: 0.4rem 0.15rem;
+  padding: 0.5rem 0.15rem;
 }
 
 /* clamp the whole page to a phone-width centered column so the mobile
@@ -1262,18 +1637,41 @@ html.force-mobile body {
 html.force-web {
   --content-max: 64rem;
   --grid-cols: repeat(auto-fit, minmax(15.5rem, 1fr));
-  --nav-dir: row;
   --cta-display: none;
   --frame-max: none;
 }
 
-html.force-web .site-header__bar {
-  align-items: center;
+html.force-web .hero-grid {
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.5rem;
 }
 
-html.force-web .site-header__right {
-  width: auto;
-  justify-content: flex-end;
+html.force-web .hero__col--visual,
+html.force-web .hero__col--text {
+  order: 0;
+}
+
+html.force-web .nav-disclosure::details-content {
+  content-visibility: visible;
+}
+
+html.force-web .nav-disclosure > summary {
+  display: none;
+}
+
+html.force-web .nav-disclosure__panel {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  position: static;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+html.force-web .site-nav {
+  flex-direction: row;
 }
 
 html.force-web .site-nav a {
@@ -1287,4 +1685,54 @@ html.force-web main {
 html.force-web body {
   max-width: none;
   box-shadow: none;
+}
+
+/* ---------- reduced motion ----------
+   A single broad reset: every animation/transition on the page collapses
+   to (near) zero duration, so the hero fade/rise, card hover lift and
+   button/nav transitions all become instant for visitors who've asked
+   for reduced motion, without having to enumerate each animated rule. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- mobile-overflow backstop ---------- */
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Long words / unbroken strings (place names, URLs) must wrap instead of
+   pushing the layout wider than the screen. */
+h1,
+h2,
+h3,
+h4,
+p,
+li,
+a,
+figcaption,
+.badge,
+.eyebrow {
+  overflow-wrap: break-word;
+}
+
+/* Grid/flex children default to min-width:auto, which refuses to shrink
+   below their content and is the usual cause of horizontal overflow on
+   phones. Let the common containers' children shrink. */
+.hero-grid > *,
+.card-grid > *,
+.cards > *,
+.btn-row > *,
+.site-nav,
+.mobile-cta-bar > * {
+  min-width: 0;
 }
