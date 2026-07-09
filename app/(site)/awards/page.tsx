@@ -38,7 +38,7 @@ export default async function AwardsPage() {
                   </p>
                 ) : null}
                 {award.year ? <p className="card__meta">{award.year}</p> : null}
-                {award.note ? <p>{award.note}</p> : null}
+                {award.note ? <p className="award-note">{award.note}</p> : null}
               </div>
             </div>
           ))}
