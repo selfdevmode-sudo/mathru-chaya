@@ -1,0 +1,15 @@
+---
+import { site } from '../../site.config';
+import { t } from '../lib/i18n';
+import type { Lang } from '../../site.config';
+const { lang } = Astro.props as { lang: Lang };
+---
+<div class="sticky-contact">
+  <a href={`tel:${site.phone}`}>📞 {t(lang, 'cta_call')}</a>
+  <a href={`https://wa.me/${site.whatsapp}`}>🟢 {t(lang, 'cta_whatsapp')}</a>
+</div>
+<style>
+  .sticky-contact { position: fixed; bottom: 0; inset-inline: 0; display: flex; z-index: 20; }
+  .sticky-contact a { flex: 1; text-align: center; padding: .8rem; background: var(--c-accent); color: var(--c-accent-contrast); text-decoration: none; border-top: 1px solid var(--c-gold); }
+  @media (min-width: 48rem) { .sticky-contact { display: none; } }
+</style>

@@ -1,0 +1,9 @@
+:root {
+  --c-bg: #fcfcfa; --c-bg-alt: #f1f1ed;
+  --c-text: #26241f; --c-text-soft: #75705f;
+  --c-accent: #d9822b; --c-accent-contrast: #fcfcfa;
+  --c-gold: #26241f; --c-border: #e2e0da;
+  --font-head: system-ui, sans-serif;
+  --font-body: system-ui, sans-serif;
+  --motif: '';
+}

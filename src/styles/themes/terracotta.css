@@ -1,0 +1,9 @@
+:root {
+  --c-bg: #fdf6ee; --c-bg-alt: #f7ecd9;
+  --c-text: #40302a; --c-text-soft: #8a6f5f;
+  --c-accent: #5c2a1e; --c-accent-contrast: #f7ecd9;
+  --c-gold: #d9a441; --c-border: #ecd9c2;
+  --font-head: Georgia, 'Times New Roman', serif;
+  --font-body: Georgia, 'Times New Roman', serif;
+  --motif: '▲';
+}

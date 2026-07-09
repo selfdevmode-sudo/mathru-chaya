@@ -1,0 +1,35 @@
+---
+import { site } from '../../site.config';
+import { t, localePath, otherLangs, type StringKey } from '../lib/i18n';
+import type { Lang } from '../../site.config';
+const { lang, path = '/' } = Astro.props as { lang: Lang; path?: string };
+const nav: [StringKey, string][] = [
+  ['nav_projects', '/projects/'], ['nav_about', '/about/'],
+  ['nav_awards', '/awards/'], ['nav_contact', '/contact/'],
+];
+---
+<header class="wrap">
+  <a class="brand" href={localePath(lang, '/')}>
+    {site.logo ? <img src={site.logo} alt={site.name} height="36" /> : <span class="mono">{site.name.slice(0, 1)}</span>}
+    <b>{site.name}</b>
+  </a>
+  <details class="menu">
+    <summary aria-label="Menu">☰</summary>
+    <nav>
+      {nav.map(([key, p]) => <a href={localePath(lang, p)}>{t(lang, key)}</a>)}
+      {otherLangs(lang).map((l) => <a class="lang" href={localePath(l, path)}>{l === 'en' ? 'English' : 'ಕನ್ನಡ'}</a>)}
+    </nav>
+  </details>
+</header>
+<style>
+  header { display: flex; justify-content: space-between; align-items: center; padding-block: .8rem; border-bottom: 1px solid var(--c-border); }
+  .brand { display: flex; gap: .5rem; align-items: center; text-decoration: none; color: var(--c-accent); }
+  .mono { border: 1px solid var(--c-gold); border-radius: 4px; padding: .1rem .5rem; font-family: var(--font-head); }
+  summary { cursor: pointer; list-style: none; font-size: 1.3rem; }
+  nav { display: flex; flex-direction: column; gap: .6rem; position: absolute; right: 1rem; background: var(--c-bg); border: 1px solid var(--c-border); padding: 1rem; border-radius: 6px; z-index: 10; }
+  nav a { text-decoration: none; }
+  @media (min-width: 48rem) {
+    summary { display: none; }
+    .menu, nav { position: static; display: flex; flex-direction: row; border: 0; padding: 0; background: none; }
+  }
+</style>

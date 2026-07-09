@@ -1,0 +1,30 @@
+---
+import '../styles/global.css';
+import { site } from '../../site.config';
+import type { Lang } from '../../site.config';
+import Seo from '../components/Seo.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StickyContact from '../components/StickyContact.astro';
+
+const themes = import.meta.glob('../styles/themes/*.css', { query: '?url', import: 'default', eager: true });
+const themeHref = themes[`../styles/themes/${site.theme}.css`] as string;
+
+const { lang, title, description, path = '/' } =
+  Astro.props as { lang: Lang; title: string; description?: string; path?: string };
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href={themeHref} />
+    <Seo {title} {description} />
+  </head>
+  <body>
+    <Header {lang} {path} />
+    <main><slot /></main>
+    <Footer {lang} />
+    <StickyContact {lang} />
+  </body>
+</html>
