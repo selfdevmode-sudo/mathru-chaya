@@ -54,7 +54,7 @@ Statuses: `planned` → `in progress` → `done` (or `dropped`). Update **before
 
 | # | Feature | Status | Notes |
 |---|---|---|---|
-| F1 | Project scaffold (Astro, content collections, config, CI-ready build) | planned | |
+| F1 | Project scaffold (Astro, content collections, config, CI-ready build) | done | Astro 5.18 project scaffolded: `package.json` (dev/build/preview/check/test/test:smoke scripts), `astro.config.ts`, `tsconfig.json` (extends `astro/tsconfigs/strict`), `site.config.ts` (placeholder `Shri Builders` identity, typed `SiteConfig`/`Lang`/`ThemeName`), `.nvmrc` (20), placeholder `src/pages/index.astro` rendering `{site.name}` (replaced in F3/Task 6). Content collections not yet added — deferred to the task that introduces project content. Verified: `npm run build` succeeds and `dist/index.html` contains "Shri Builders"; `npm run check` reports 0 errors/warnings/hints. |
 | F2 | Theme system + `stone` preset (layout, header/footer, typography, motifs) | planned | `terracotta`, `ink` presets after |
 | F3 | Home page (hero, featured projects, about teaser, awards strip, contact block) | planned | |
 | F4 | Projects listing + type filter | planned | |
@@ -73,3 +73,4 @@ Statuses: `planned` → `in progress` → `done` (or `dropped`). Update **before
 ## Work log
 
 - **2026-07-09** — Brainstormed and approved design (theme direction "Warm Stone" chosen from 3 mockups; project detail blocks approved incl. optional video + before/after). Spec committed. ADRs and this blueprint created. No code yet.
+- **2026-07-09** — Task 1 (F1): Scaffolded Astro 5 project skeleton — `package.json`, `astro.config.ts`, `tsconfig.json`, `site.config.ts`, placeholder `src/pages/index.astro`, `.nvmrc`; added `.astro/` to `.gitignore`. Installed `astro@^5`, `typescript`, `@astrojs/check`, `vitest@^3`. Verified with `npm run build && npm run check` (build succeeds, `dist/index.html` contains "Shri Builders", check reports 0 errors).
