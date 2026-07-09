@@ -1,9 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import type { Lang } from '../../site.config';
+import { t } from '../lib/i18n';
 
 type Photos = CollectionEntry<'projects'>['data']['photos'];
-const { photos, title } = Astro.props as { photos: Photos; title: string };
+const { photos, title, lang } = Astro.props as { photos: Photos; title: string; lang: Lang };
 const thumbs = photos.slice(1);
 ---
 <div class="gallery">
@@ -17,7 +19,7 @@ const thumbs = photos.slice(1);
   )}
 </div>
 <dialog class="lightbox">
-  <button type="button" class="close" aria-label="Close">✕</button>
+  <button type="button" class="close" aria-label={t(lang, 'a11y_close')}>✕</button>
   <img alt="" />
 </dialog>
 <script>

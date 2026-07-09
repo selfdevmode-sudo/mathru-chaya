@@ -4,9 +4,6 @@ backend:
   branch: main
   base_url: https://sveltia-cms-auth.WORKER.workers.dev  # PLACEHOLDER — set in Task 15
 
-media_folder: src/assets/uploads
-public_folder: /src/assets/uploads
-
 editor:
   preview: false
 

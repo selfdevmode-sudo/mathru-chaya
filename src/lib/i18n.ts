@@ -2,7 +2,7 @@ import type { Lang } from '../../site.config';
 import { site } from '../../site.config';
 
 const en = {
-  nav_home: 'Home', nav_projects: 'Projects', nav_about: 'About',
+  nav_projects: 'Projects', nav_about: 'About',
   nav_awards: 'Awards', nav_contact: 'Contact',
   cta_view_work: 'View our work', cta_call: 'Call', cta_whatsapp: 'WhatsApp', cta_read_more: 'Read more',
   home_featured: 'Our work', home_awards: 'Recognition', home_testimonials: 'Kind words',
@@ -21,10 +21,11 @@ const en = {
   notfound_title: 'Page not found', notfound_body: 'The page you are looking for does not exist.',
   notfound_home: 'Go to home page',
   footer_rights: 'All rights reserved.',
+  a11y_menu: 'Menu', a11y_close: 'Close',
 };
 
 const kn: Partial<Record<keyof typeof en, string>> = {
-  nav_home: 'ಮುಖಪುಟ', nav_projects: 'ಯೋಜನೆಗಳು', nav_about: 'ನಮ್ಮ ಬಗ್ಗೆ',
+  nav_projects: 'ಯೋಜನೆಗಳು', nav_about: 'ನಮ್ಮ ಬಗ್ಗೆ',
   nav_awards: 'ಪ್ರಶಸ್ತಿಗಳು', nav_contact: 'ಸಂಪರ್ಕ',
   cta_view_work: 'ನಮ್ಮ ಕೆಲಸ ನೋಡಿ', cta_call: 'ಕರೆ ಮಾಡಿ', cta_whatsapp: 'ವಾಟ್ಸಾಪ್', cta_read_more: 'ಇನ್ನಷ್ಟು ಓದಿ',
   home_featured: 'ನಮ್ಮ ಕೆಲಸ', home_awards: 'ಮನ್ನಣೆ', home_testimonials: 'ಅಭಿಪ್ರಾಯಗಳು',
@@ -43,6 +44,7 @@ const kn: Partial<Record<keyof typeof en, string>> = {
   notfound_title: 'ಪುಟ ಸಿಗಲಿಲ್ಲ', notfound_body: 'ನೀವು ಹುಡುಕುತ್ತಿರುವ ಪುಟ ಇಲ್ಲ.',
   notfound_home: 'ಮುಖಪುಟಕ್ಕೆ ಹೋಗಿ',
   footer_rights: 'ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.',
+  a11y_menu: 'ಮೆನು', a11y_close: 'ಮುಚ್ಚಿ',
 };
 
 export type StringKey = keyof typeof en;

@@ -14,7 +14,7 @@ const nav: [StringKey, string][] = [
     <b>{site.name}</b>
   </a>
   <details class="menu">
-    <summary aria-label="Menu">☰</summary>
+    <summary aria-label={t(lang, 'a11y_menu')}>☰</summary>
     <nav>
       {nav.map(([key, p]) => <a href={localePath(lang, p)}>{t(lang, key)}</a>)}
       {otherLangs(lang).map((l) => <a class="lang" href={localePath(l, path)}>{l === 'en' ? 'English' : 'ಕನ್ನಡ'}</a>)}

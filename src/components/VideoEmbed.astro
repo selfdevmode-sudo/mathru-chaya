@@ -50,7 +50,7 @@ const { href, lang } = Astro.props as { href: string; lang: Lang };
       const iframe = document.createElement('iframe');
       iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
       iframe.loading = 'lazy';
-      iframe.allow = 'accelerate; autoplay; encrypted-media; picture-in-picture';
+      iframe.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture';
       iframe.allowFullscreen = true;
       iframe.title = link.textContent?.trim() || 'video';
       iframe.className = 'video-frame';

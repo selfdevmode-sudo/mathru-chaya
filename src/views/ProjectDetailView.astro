@@ -23,7 +23,7 @@ const hasFacts = d.facts && Object.values(d.facts).some(Boolean);
     {headline && <p class="label">{headline}</p>}
     <h1>{d.title}</h1>
     {metaLine && <p class="label" style="color: var(--c-text-soft)">{metaLine}</p>}
-    <PhotoGallery photos={d.photos} title={d.title} />
+    <PhotoGallery photos={d.photos} title={d.title} {lang} />
     {description && <section><h2 class="label">{t(lang, 'detail_about')}</h2><p>{description}</p></section>}
     {d.materials && d.materials.length > 0 && <section><h2 class="label">{t(lang, 'detail_materials')}</h2><MaterialsChips items={d.materials} /></section>}
     {hasFacts && <section><h2 class="label">{t(lang, 'detail_details')}</h2><FactsGrid facts={d.facts!} {lang} /></section>}
