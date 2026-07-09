@@ -6,7 +6,7 @@ import ProjectGrid from "@/components/ProjectGrid";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Projects",
+  title: "Our Work",
 };
 
 export default async function ProjectsPage() {

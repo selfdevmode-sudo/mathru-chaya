@@ -28,7 +28,7 @@ export const LANG_LABELS: Record<Lang, string> = {
 const dict: Record<string, Record<Lang, string>> = {
   // ---------- public nav / header / footer ----------
   nav_home: { en: "Home", kn: "ಮುಖಪುಟ", hi: "होम" },
-  nav_projects: { en: "Projects", kn: "ಯೋಜನೆಗಳು", hi: "परियोजनाएँ" },
+  nav_projects: { en: "Our Work", kn: "ನಮ್ಮ ಕೆಲಸಗಳು", hi: "हमारा काम" },
   nav_about: { en: "About", kn: "ನಮ್ಮ ಬಗ್ಗೆ", hi: "हमारे बारे में" },
   nav_awards: { en: "Awards", kn: "ಪ್ರಶಸ್ತಿಗಳು", hi: "पुरस्कार" },
   nav_contact: { en: "Contact", kn: "ಸಂಪರ್ಕ", hi: "संपर्क" },
@@ -86,7 +86,7 @@ const dict: Record<string, Record<Lang, string>> = {
 
   // ---------- admin nav ----------
   admin_dashboard: { en: "Dashboard", kn: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್", hi: "डैशबोर्ड" },
-  admin_projects: { en: "Projects", kn: "ಯೋಜನೆಗಳು", hi: "परियोजनाएँ" },
+  admin_projects: { en: "Our Work", kn: "ನಮ್ಮ ಕೆಲಸಗಳು", hi: "हमारा काम" },
   admin_awards: { en: "Awards", kn: "ಪ್ರಶಸ್ತಿಗಳು", hi: "पुरस्कार" },
   admin_testimonials: { en: "Testimonials", kn: "ಅಭಿಪ್ರಾಯಗಳು", hi: "प्रशंसापत्र" },
   admin_about: { en: "About", kn: "ನಮ್ಮ ಬಗ್ಗೆ", hi: "हमारे बारे में" },
@@ -154,7 +154,7 @@ const dict: Record<string, Record<Lang, string>> = {
   contact_us_btn: { en: "Contact us", kn: "ಸಂಪರ್ಕಿಸಿ", hi: "संपर्क करें" },
 
   // ---------- projects listing ----------
-  projects_heading: { en: "Our Projects", kn: "ನಮ್ಮ ಯೋಜನೆಗಳು", hi: "हमारी परियोजनाएँ" },
+  projects_heading: { en: "Our Work", kn: "ನಮ್ಮ ಕೆಲಸಗಳು", hi: "हमारा काम" },
   projects_subheading: {
     en: "Temples, ponds and gopuras built and restored across the region.",
     kn: "ಪ್ರದೇಶದಾದ್ಯಂತ ನಿರ್ಮಿಸಲಾದ ಮತ್ತು ಜೀರ್ಣೋದ್ಧಾರಗೊಳಿಸಲಾದ ದೇವಸ್ಥಾನಗಳು, ಕೊಳಗಳು ಮತ್ತು ಗೋಪುರಗಳು.",
