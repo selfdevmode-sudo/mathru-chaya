@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { t, localePath } from '../lib/i18n';
+import type { Lang } from '../../site.config';
+const { project, lang } = Astro.props as { project: CollectionEntry<'projects'>; lang: Lang };
+const d = project.data;
+const meta = [d.type ? t(lang, `type_${d.type}`) : null, d.place, d.year].filter(Boolean).join(' · ');
+---
+<a class="card" href={localePath(lang, `/projects/${project.id}/`)}>
+  <Image src={d.photos[0]} alt={d.title} widths={[400, 800]} sizes="(max-width: 48rem) 100vw, 20rem" />
+  <h3>{d.title}</h3>
+  {meta && <p class="label">{meta}</p>}
+</a>
+<style>
+  .card { text-decoration: none; }
+  .card img { border-radius: 6px; aspect-ratio: 4/3; object-fit: cover; }
+  .card h3 { font-size: 1.05rem; margin-top: .5rem; }
+</style>

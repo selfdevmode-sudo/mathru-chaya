@@ -1,10 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HomeView from '../../views/HomeView.astro';
 import { site, type Lang } from '../../../site.config';
 import { nonDefaultLangs } from '../../lib/routes';
 export const getStaticPaths = nonDefaultLangs;
 const lang = Astro.params.lang as Lang;
 ---
-<BaseLayout {lang} title={site.name} path="/">
-  <h1 class="wrap">{site.name}</h1>
+<BaseLayout {lang} title={site.name} description={site.tagline} path="/">
+  <HomeView {lang} />
 </BaseLayout>

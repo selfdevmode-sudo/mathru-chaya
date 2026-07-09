@@ -1,0 +1,109 @@
+---
+import { getCollection } from 'astro:content';
+import { site } from '../../site.config';
+import type { Lang } from '../../site.config';
+import { t, pickText, localePath } from '../lib/i18n';
+import SectionDivider from '../components/SectionDivider.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+
+const { lang } = Astro.props as { lang: Lang };
+
+// Featured projects: explicit `featured: true` entries, falling back to the
+// newest 3 (by year) when nothing is marked featured. Section is omitted
+// entirely when there are zero projects (ADR-0007).
+const allProjects = await getCollection('projects');
+const byNewest = (a: (typeof allProjects)[number], b: (typeof allProjects)[number]) =>
+  (b.data.year ?? 0) - (a.data.year ?? 0);
+const featuredFlagged = allProjects.filter((p) => p.data.featured);
+const featuredProjects = featuredFlagged.length > 0
+  ? featuredFlagged
+  : allProjects.slice().sort(byNewest).slice(0, 3);
+
+// Awards strip: only rendered if at least one award exists; capped at 3, newest first.
+const awards = (await getCollection('awards'))
+  .slice()
+  .sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0))
+  .slice(0, 3);
+
+// Testimonials: only rendered if at least one exists.
+const testimonials = await getCollection('testimonials');
+
+// About teaser: first ~160 chars of the about body, bilingual (English markdown
+// body vs. the `body_kn` plain-text frontmatter field), only shown if non-empty.
+const about = (await getCollection('about'))[0];
+const aboutTextEn = about?.rendered?.html
+  ? about.rendered.html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+  : undefined;
+const aboutBody = about
+  ? pickText(lang, { body_en: aboutTextEn, body_kn: about.data.body_kn }, 'body')
+  : undefined;
+const aboutExcerpt = aboutBody
+  ? (aboutBody.length > 160 ? `${aboutBody.slice(0, 160).trimEnd()}…` : aboutBody)
+  : undefined;
+---
+<section class="hero wrap">
+  <h1>{site.name}</h1>
+  <p class="tagline">{site.tagline}</p>
+  <a class="btn" href={localePath(lang, '/projects/')}>{t(lang, 'cta_view_work')}</a>
+</section>
+
+<SectionDivider />
+
+{featuredProjects.length > 0 && (
+  <section class="section wrap">
+    <h2>{t(lang, 'home_featured')}</h2>
+    <div class="grid-cards">
+      {featuredProjects.map((project) => <ProjectCard project={project} lang={lang} />)}
+    </div>
+  </section>
+)}
+
+{aboutExcerpt && (
+  <section class="section wrap about-teaser">
+    <h2>{t(lang, 'nav_about')}</h2>
+    <p>{aboutExcerpt}</p>
+    <a class="btn btn-outline" href={localePath(lang, '/about/')}>{t(lang, 'cta_read_more')}</a>
+  </section>
+)}
+
+{awards.length > 0 && (
+  <section class="section wrap awards-strip">
+    <p class="label">{t(lang, 'home_awards')}</p>
+    <ul class="awards-list">
+      {awards.map((award) => (
+        <li class="chip">{[award.data.title, award.data.year].filter(Boolean).join(' · ')}</li>
+      ))}
+    </ul>
+  </section>
+)}
+
+{testimonials.length > 0 && (
+  <section class="section wrap">
+    <h2>{t(lang, 'home_testimonials')}</h2>
+    <div class="grid-cards">
+      {testimonials.map((testimonial) => <TestimonialCard testimonial={testimonial} lang={lang} />)}
+    </div>
+  </section>
+)}
+
+<section class="section wrap contact-block">
+  <h2>{t(lang, 'contact_title')}</h2>
+  <div class="contact-actions">
+    <a class="btn" href={`tel:${site.phone}`}>{t(lang, 'cta_call')}</a>
+    <a class="btn btn-outline" href={`https://wa.me/${site.whatsapp}`}>{t(lang, 'cta_whatsapp')}</a>
+  </div>
+  <p class="region"><span class="label">{t(lang, 'contact_region')}</span> {site.region}</p>
+</section>
+
+<style>
+  .hero { text-align: center; padding-block: 3rem; }
+  .hero .tagline { color: var(--c-text-soft); margin-top: .5rem; }
+  .hero .btn { margin-top: 1.2rem; }
+  .about-teaser p { max-width: 40rem; margin-block: .8rem 1.2rem; }
+  .awards-list { list-style: none; display: flex; flex-wrap: wrap; padding: 0; margin: .5rem 0 0; }
+  .contact-block { text-align: center; }
+  .contact-actions { display: flex; gap: 1rem; justify-content: center; margin-block: 1rem; }
+  .contact-block .region { color: var(--c-text-soft); }
+  .contact-block .region .label { margin-right: .4rem; }
+</style>

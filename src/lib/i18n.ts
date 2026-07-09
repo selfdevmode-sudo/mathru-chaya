@@ -4,7 +4,7 @@ import { site } from '../../site.config';
 const en = {
   nav_home: 'Home', nav_projects: 'Projects', nav_about: 'About',
   nav_awards: 'Awards', nav_contact: 'Contact',
-  cta_view_work: 'View our work', cta_call: 'Call', cta_whatsapp: 'WhatsApp',
+  cta_view_work: 'View our work', cta_call: 'Call', cta_whatsapp: 'WhatsApp', cta_read_more: 'Read more',
   home_featured: 'Our work', home_awards: 'Recognition', home_testimonials: 'Kind words',
   projects_all: 'All', projects_filter: 'Filter by type',
   type_temple: 'Temple', type_pond: 'Pond / Kalyani', type_gopura: 'Gopura',
@@ -25,7 +25,7 @@ const en = {
 const kn: Partial<Record<keyof typeof en, string>> = {
   nav_home: 'ಮುಖಪುಟ', nav_projects: 'ಯೋಜನೆಗಳು', nav_about: 'ನಮ್ಮ ಬಗ್ಗೆ',
   nav_awards: 'ಪ್ರಶಸ್ತಿಗಳು', nav_contact: 'ಸಂಪರ್ಕ',
-  cta_view_work: 'ನಮ್ಮ ಕೆಲಸ ನೋಡಿ', cta_call: 'ಕರೆ ಮಾಡಿ', cta_whatsapp: 'ವಾಟ್ಸಾಪ್',
+  cta_view_work: 'ನಮ್ಮ ಕೆಲಸ ನೋಡಿ', cta_call: 'ಕರೆ ಮಾಡಿ', cta_whatsapp: 'ವಾಟ್ಸಾಪ್', cta_read_more: 'ಇನ್ನಷ್ಟು ಓದಿ',
   home_featured: 'ನಮ್ಮ ಕೆಲಸ', home_awards: 'ಮನ್ನಣೆ', home_testimonials: 'ಅಭಿಪ್ರಾಯಗಳು',
   projects_all: 'ಎಲ್ಲಾ', projects_filter: 'ಪ್ರಕಾರದಂತೆ ಆಯ್ಕೆ',
   type_temple: 'ದೇವಸ್ಥಾನ', type_pond: 'ಕಲ್ಯಾಣಿ / ಕೆರೆ', type_gopura: 'ಗೋಪುರ',
