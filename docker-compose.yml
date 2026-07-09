@@ -1,0 +1,15 @@
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      # CHANGE THESE before using in production.
+      ADMIN_PASSWORD: "change-me"
+      SESSION_SECRET: "change-this-to-a-long-random-string"
+    volumes:
+      # Persist content and uploaded images on the host so they survive
+      # container rebuilds/restarts.
+      - ./data:/app/data
+      - ./public/uploads:/app/public/uploads
+    restart: unless-stopped
