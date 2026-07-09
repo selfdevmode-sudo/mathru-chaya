@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactView from '../../views/ContactView.astro';
+import { site } from '../../../site.config';
+import { t } from '../../lib/i18n';
+---
+<BaseLayout lang="en" title={`${t('en', 'nav_contact')} · ${site.name}`} description={site.tagline} path="/contact/">
+  <ContactView lang="en" />
+</BaseLayout>

@@ -1,0 +1,32 @@
+---
+import { site } from '../../site.config';
+import type { Lang } from '../../site.config';
+import { t } from '../lib/i18n';
+
+const { lang } = Astro.props as { lang: Lang };
+---
+<section class="section wrap contact">
+  <h1>{t(lang, 'contact_title')}</h1>
+
+  <div class="contact-actions">
+    <a class="btn" href={`tel:${site.phone}`}>{t(lang, 'cta_call')}</a>
+    <a class="btn btn-outline" href={`https://wa.me/${site.whatsapp}`}>{t(lang, 'cta_whatsapp')}</a>
+  </div>
+
+  {site.email && (
+    <p class="email"><a href={`mailto:${site.email}`}>{site.email}</a></p>
+  )}
+
+  <p class="region"><span class="label">{t(lang, 'contact_region')}</span> {site.region}</p>
+
+  {site.owners.length > 0 && <p class="owners">{site.owners.join(', ')}</p>}
+</section>
+
+<style>
+  .contact { text-align: center; }
+  .contact-actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-block: 1.5rem; }
+  .contact .email { margin-top: .5rem; }
+  .contact .region { color: var(--c-text-soft); margin-top: 1rem; }
+  .contact .region .label { margin-right: .4rem; }
+  .contact .owners { color: var(--c-text-soft); margin-top: .3rem; font-size: .9rem; }
+</style>

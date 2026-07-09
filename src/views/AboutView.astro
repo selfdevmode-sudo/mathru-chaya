@@ -1,0 +1,83 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import type { Lang } from '../../site.config';
+import { t, pickText } from '../lib/i18n';
+import TestimonialCard from '../components/TestimonialCard.astro';
+
+const { lang } = Astro.props as { lang: Lang };
+
+// About entry: at most one (`about.md`). English body is the file's markdown
+// body itself, rendered via `render()`; Kannada shows the plain-text `body_kn`
+// frontmatter field when present, else falls back to the English body
+// (plug-n-play, same fallback shape as HomeView's about teaser).
+const about = (await getCollection('about'))[0];
+const { Content } = about ? await render(about) : { Content: undefined };
+const showKnBody = lang !== 'en' && Boolean(about?.data.body_kn);
+
+// Services and testimonials: independently guarded, omitted entirely at zero.
+const services = await getCollection('services');
+const testimonials = await getCollection('testimonials');
+---
+<article class="wrap section about">
+  <h1>{t(lang, 'nav_about')}</h1>
+
+  {about && (
+    <>
+      {about.data.heroPhoto && (
+        <Image
+          src={about.data.heroPhoto}
+          alt={t(lang, 'nav_about')}
+          widths={[480, 960]}
+          sizes="(max-width: 48rem) 100vw, 40rem"
+        />
+      )}
+      {about.data.yearsExperience && (
+        <p class="label">{about.data.yearsExperience} {t(lang, 'about_years_experience')}</p>
+      )}
+      <div class="body">
+        {showKnBody ? <p>{about.data.body_kn}</p> : Content && <Content />}
+      </div>
+    </>
+  )}
+
+  {services.length > 0 && (
+    <section>
+      <h2>{t(lang, 'about_services')}</h2>
+      <div class="grid-cards">
+        {services.map((svc) => {
+          const name = pickText(lang, svc.data, 'name') ?? svc.data.name_en;
+          const blurb = pickText(lang, svc.data, 'blurb');
+          return (
+            <div class="service">
+              <h3>{name}</h3>
+              {blurb && <p>{blurb}</p>}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  )}
+
+  {testimonials.length > 0 && (
+    <section>
+      <h2>{t(lang, 'home_testimonials')}</h2>
+      <div class="grid-cards">
+        {testimonials.map((testimonial) => <TestimonialCard testimonial={testimonial} lang={lang} />)}
+      </div>
+    </section>
+  )}
+</article>
+
+<style>
+  .about .label { margin-block: .8rem 0; }
+  .about .body { max-width: 42rem; margin-block: 1rem 1rem; }
+  .about .body :global(p) { margin-block: 0 1rem; }
+  .about section { margin-top: 2rem; }
+  .service {
+    background: var(--c-bg-alt); border: 1px solid var(--c-border);
+    border-radius: 6px; padding: 1.2rem;
+  }
+  .service h3 { font-size: 1rem; margin-bottom: .4rem; }
+  .service p { color: var(--c-text-soft); font-size: .9rem; }
+</style>
