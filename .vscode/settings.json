@@ -1,0 +1,4 @@
+{
+  "//": "Serve the generated static site (out/) as the web root, so VS Code Live Server loads the absolute /_next and /uploads paths correctly. Run 'npm run generate' first. Alternatively use 'npm run preview'.",
+  "liveServer.settings.root": "/out"
+}
