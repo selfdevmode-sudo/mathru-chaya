@@ -3,6 +3,7 @@ import Link from "next/link";
 import { readContent } from "@/lib/db";
 import { telLink, waLink } from "@/lib/format";
 import { getLang, t } from "@/lib/i18n";
+import { localizedHref } from "@/lib/paths";
 import ViewToggle from "@/components/ViewToggle";
 import LanguageLinks from "@/components/LanguageLinks";
 
@@ -40,7 +41,7 @@ export default async function SiteLayout({
     <>
       <header className="site-header">
         <div className="wrap site-header__bar">
-          <Link href="/" className="site-header__brand">
+          <Link href={localizedHref(lang, "/")} className="site-header__brand">
             <span className="site-header__brand-name">{site.name}</span>
             <span className="site-header__brand-tagline">{site.tagline}</span>
           </Link>
@@ -70,7 +71,7 @@ export default async function SiteLayout({
             <div className="nav-disclosure__panel">
               <nav className="site-nav">
                 {NAV_LINKS.map((link) => (
-                  <Link key={link.href} href={link.href}>
+                  <Link key={link.href} href={localizedHref(lang, link.href)}>
                     {link.label}
                   </Link>
                 ))}

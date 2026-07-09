@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Project } from "@/lib/types";
 import type { Lang } from "@/lib/i18n";
 import { projectMetaLine, typeLabel } from "@/lib/format";
+import { localizedHref } from "@/lib/paths";
 import KalyaniMark from "@/components/KalyaniMark";
 
 export default function ProjectGrid({
@@ -51,7 +52,7 @@ export default function ProjectGrid({
         {visible.map((project) => (
           <Link
             key={project.id}
-            href={`/projects/${project.slug}`}
+            href={localizedHref(lang, `/projects/${project.slug}`)}
             className="card"
           >
             <div className={`card__photo${project.photos[0] ? "" : " placeholder"}`}>
