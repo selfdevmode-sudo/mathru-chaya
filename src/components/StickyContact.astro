@@ -9,7 +9,16 @@ const { lang } = Astro.props as { lang: Lang };
   <a href={`https://wa.me/${site.whatsapp}`}>🟢 {t(lang, 'cta_whatsapp')}</a>
 </div>
 <style>
-  .sticky-contact { position: fixed; bottom: 0; inset-inline: 0; display: flex; z-index: 20; }
-  .sticky-contact a { flex: 1; text-align: center; padding: .8rem; background: var(--c-accent); color: var(--c-accent-contrast); text-decoration: none; border-top: 1px solid var(--c-gold); }
+  /* Height matches --sticky-h (global.css), which is what body's
+     mobile padding-bottom reserves — keep the two in sync. */
+  .sticky-contact { position: fixed; bottom: 0; inset-inline: 0; display: flex; z-index: 20; min-height: var(--sticky-h); }
+  .sticky-contact a {
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: .4rem;
+    text-align: center; padding-inline: .8rem; background: var(--c-accent); color: var(--c-accent-contrast);
+    text-decoration: none; border-top: 1px solid var(--c-gold); font-size: .95rem;
+    transition: filter .15s ease;
+  }
+  .sticky-contact a:hover, .sticky-contact a:focus-visible { filter: brightness(1.1); }
+  .sticky-contact a:first-child { border-right: 1px solid var(--c-scrim); }
   @media (min-width: 48rem) { .sticky-contact { display: none; } }
 </style>

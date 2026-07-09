@@ -14,10 +14,12 @@ const year = new Date().getFullYear();
   </div>
 </footer>
 <style>
-  footer { border-top: 1px solid var(--c-border); background: var(--c-bg-alt); padding-block: 1.5rem; margin-top: 2rem; }
-  footer .wrap { display: flex; flex-direction: column; gap: .3rem; text-align: center; color: var(--c-text-soft); font-size: .85rem; }
-  footer a { color: var(--c-text-soft); }
-  .name { font-family: var(--font-head); color: var(--c-accent); font-weight: bold; font-size: 1rem; }
+  footer { border-top: 1px solid var(--c-border); background: var(--c-bg-alt); padding-block: 2.25rem; margin-top: clamp(2rem, 4vw, 3rem); }
+  footer .wrap { display: flex; flex-direction: column; gap: .35rem; text-align: center; color: var(--c-text-soft); font-size: .85rem; }
+  footer a { color: var(--c-text-soft); text-decoration: underline; text-decoration-color: var(--c-border); text-underline-offset: .2em; }
+  footer a:hover, footer a:focus-visible { color: var(--c-accent); text-decoration-color: currentColor; }
+  .name { font-family: var(--font-head); color: var(--c-accent); font-weight: bold; font-size: 1.05rem; }
+  .rights { margin-top: .3rem; }
   @media (min-width: 48rem) {
     footer .wrap { text-align: left; }
   }

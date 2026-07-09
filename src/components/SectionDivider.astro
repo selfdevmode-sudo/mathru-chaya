@@ -1,5 +1,18 @@
-<div class="divider" aria-hidden="true"></div>
+<div class="divider" aria-hidden="true"><span class="glyph"></span></div>
 <style>
-  .divider { text-align: center; color: var(--c-gold); letter-spacing: .6em; padding-block: .5rem; }
-  .divider::before { content: var(--motif); }
+  /* Flanking hairlines are always drawn, so every theme shows at least a
+     quiet line at the section boundary; the motif glyph (❖ / ▲) sits between
+     them when a theme defines one. In `ink`, --motif is empty on purpose
+     (ADR-0006: "maximum minimal") so only the hairline shows there — a
+     single accent line rather than an invisible gap. */
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    gap: .85rem; padding-block: 1.5rem; color: var(--c-divider);
+  }
+  .divider::before, .divider::after {
+    content: ''; flex: 1 1 auto; max-width: 5rem; height: 1px;
+    background: var(--c-divider); opacity: .55;
+  }
+  .divider .glyph { font-size: .85rem; line-height: 1; }
+  .divider .glyph::before { content: var(--motif); }
 </style>

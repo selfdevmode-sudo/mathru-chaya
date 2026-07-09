@@ -1,9 +1,14 @@
 :root {
   --c-bg: #fdf6ee; --c-bg-alt: #f7ecd9;
-  --c-text: #40302a; --c-text-soft: #8a6f5f;
+  /* --c-text-soft darkened from #8a6f5f (4.34:1 on --c-bg, fails WCAG AA
+     4.5:1 for body-size text) to #7e6557 (5.04:1 on --c-bg, 4.62:1 on
+     --c-bg-alt) — same warm taupe hue, just deep enough to read. */
+  --c-text: #40302a; --c-text-soft: #7e6557;
   --c-accent: #5c2a1e; --c-accent-contrast: #f7ecd9;
   --c-gold: #d9a441; --c-border: #ecd9c2;
   --c-scrim: rgba(46, 24, 16, .72);
+  /* Divider/hairline color: turmeric-gold, matching the ▲ roofline motif. */
+  --c-divider: var(--c-gold);
   --font-head: Georgia, 'Times New Roman', serif;
   --font-body: Georgia, 'Times New Roman', serif;
   --motif: '▲';

@@ -42,51 +42,64 @@ const aboutExcerpt = aboutBody
   ? (aboutBody.length > 160 ? `${aboutBody.slice(0, 160).trimEnd()}…` : aboutBody)
   : undefined;
 ---
-<section class="hero wrap">
-  <h1>{site.name}</h1>
-  <p class="tagline">{site.tagline}</p>
-  <a class="btn" href={localePath(lang, '/projects/')}>{t(lang, 'cta_view_work')}</a>
+<section class="hero">
+  <div class="wrap">
+    <h1>{site.name}</h1>
+    <p class="tagline">{site.tagline}</p>
+    <a class="btn" href={localePath(lang, '/projects/')}>{t(lang, 'cta_view_work')}</a>
+  </div>
 </section>
 
-<SectionDivider />
-
 {featuredProjects.length > 0 && (
-  <section class="section wrap">
-    <h2>{t(lang, 'home_featured')}</h2>
-    <div class="grid-cards">
-      {featuredProjects.map((project) => <ProjectCard project={project} lang={lang} />)}
-    </div>
-  </section>
+  <>
+    <SectionDivider />
+    <section class="section wrap">
+      <h2>{t(lang, 'home_featured')}</h2>
+      <div class="grid-cards">
+        {featuredProjects.map((project) => <ProjectCard project={project} lang={lang} />)}
+      </div>
+    </section>
+  </>
 )}
 
 {aboutExcerpt && (
-  <section class="section wrap about-teaser">
-    <h2>{t(lang, 'nav_about')}</h2>
-    <p>{aboutExcerpt}</p>
-    <a class="btn btn-outline" href={localePath(lang, '/about/')}>{t(lang, 'cta_read_more')}</a>
-  </section>
+  <>
+    <SectionDivider />
+    <section class="section wrap about-teaser">
+      <h2>{t(lang, 'nav_about')}</h2>
+      <p>{aboutExcerpt}</p>
+      <a class="btn btn-outline" href={localePath(lang, '/about/')}>{t(lang, 'cta_read_more')}</a>
+    </section>
+  </>
 )}
 
 {awards.length > 0 && (
-  <section class="section wrap awards-strip">
-    <p class="label">{t(lang, 'home_awards')}</p>
-    <ul class="awards-list">
-      {awards.map((award) => (
-        <li class="chip">{[award.data.title, award.data.year].filter(Boolean).join(' · ')}</li>
-      ))}
-    </ul>
-  </section>
+  <>
+    <SectionDivider />
+    <section class="section wrap awards-strip">
+      <p class="label">{t(lang, 'home_awards')}</p>
+      <ul class="awards-list">
+        {awards.map((award) => (
+          <li class="chip">{[award.data.title, award.data.year].filter(Boolean).join(' · ')}</li>
+        ))}
+      </ul>
+    </section>
+  </>
 )}
 
 {testimonials.length > 0 && (
-  <section class="section wrap">
-    <h2>{t(lang, 'home_testimonials')}</h2>
-    <div class="grid-cards">
-      {testimonials.map((testimonial) => <TestimonialCard testimonial={testimonial} lang={lang} />)}
-    </div>
-  </section>
+  <>
+    <SectionDivider />
+    <section class="section wrap">
+      <h2>{t(lang, 'home_testimonials')}</h2>
+      <div class="grid-cards">
+        {testimonials.map((testimonial) => <TestimonialCard testimonial={testimonial} lang={lang} />)}
+      </div>
+    </section>
+  </>
 )}
 
+<SectionDivider />
 <section class="section wrap contact-block">
   <h2>{t(lang, 'contact_title')}</h2>
   <div class="contact-actions">
@@ -97,13 +110,18 @@ const aboutExcerpt = aboutBody
 </section>
 
 <style>
-  .hero { text-align: center; padding-block: 3rem; }
-  .hero .tagline { color: var(--c-text-soft); margin-top: .5rem; }
-  .hero .btn { margin-top: 1.2rem; }
+  .hero { text-align: center; background: linear-gradient(180deg, var(--c-bg-alt), var(--c-bg) 78%); }
+  .hero .wrap { padding-block: clamp(3.5rem, 3rem + 4vw, 6rem) clamp(2.5rem, 2rem + 2vw, 4rem); }
+  .hero h1 { font-size: clamp(2rem, 1.6rem + 2vw, 3.25rem); line-height: 1.1; letter-spacing: -.01em; }
+  .hero .tagline {
+    color: var(--c-text-soft); margin-top: .75rem; margin-inline: auto; max-width: 34rem;
+    font-size: clamp(1rem, .95rem + .3vw, 1.15rem);
+  }
+  .hero .btn { margin-top: 1.85rem; }
   .about-teaser p { max-width: 40rem; margin-block: .8rem 1.2rem; }
-  .awards-list { list-style: none; display: flex; flex-wrap: wrap; padding: 0; margin: .5rem 0 0; }
+  .awards-list { list-style: none; display: flex; flex-wrap: wrap; padding: 0; margin: .75rem 0 0; }
   .contact-block { text-align: center; }
-  .contact-actions { display: flex; gap: 1rem; justify-content: center; margin-block: 1rem; }
+  .contact-actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-block: 1.25rem; }
   .contact-block .region { color: var(--c-text-soft); }
   .contact-block .region .label { margin-right: .4rem; }
 </style>

@@ -1,9 +1,17 @@
 :root {
   --c-bg: #fcfcfa; --c-bg-alt: #f1f1ed;
-  --c-text: #26241f; --c-text-soft: #75705f;
+  /* --c-text-soft darkened from #75705f (4.82:1 on --c-bg — already
+     technically AA, but only 4.37:1 on --c-bg-alt where it's also used, e.g.
+     the footer) to #716c5c (5.11:1 on --c-bg, 4.63:1 on --c-bg-alt). */
+  --c-text: #26241f; --c-text-soft: #716c5c;
   --c-accent: #d9822b; --c-accent-contrast: #fcfcfa;
   --c-gold: #26241f; --c-border: #e2e0da;
   --c-scrim: rgba(20, 19, 16, .72);
+  /* Divider/hairline color: the single saffron accent line per ADR-0006
+     ("maximum minimal") — --c-gold is repurposed as near-black here, so the
+     divider keys off --c-accent instead to stay a visible warm line, not a
+     dark one. */
+  --c-divider: var(--c-accent);
   --font-head: system-ui, sans-serif;
   --font-body: system-ui, sans-serif;
   --motif: '';

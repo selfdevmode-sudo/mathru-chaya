@@ -42,12 +42,12 @@ const thumbs = photos.slice(1);
   }
 </script>
 <style>
-  .gallery { display: grid; gap: .5rem; }
-  .gallery img, .cover { border-radius: 6px; }
+  .gallery { display: grid; gap: .6rem; }
+  .gallery img, .cover { border-radius: var(--radius); }
   .cover { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
-  .thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr)); gap: .5rem; }
+  .thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr)); gap: .6rem; }
   .thumbs img { aspect-ratio: 1/1; object-fit: cover; width: 100%; }
-  .lightbox { position: relative; border: 0; border-radius: 6px; background: var(--c-bg); padding: .5rem; max-width: min(90vw, 60rem); }
+  .lightbox { position: relative; border: 0; border-radius: var(--radius); background: var(--c-bg); padding: .5rem; max-width: min(90vw, 60rem); }
   .lightbox::backdrop { background: var(--c-scrim); }
   .lightbox img { max-width: 100%; max-height: 80vh; display: block; margin-inline: auto; }
   .lightbox .close {

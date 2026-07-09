@@ -60,11 +60,13 @@ const { href, lang } = Astro.props as { href: string; lang: Lang };
 </script>
 <style>
   .video-link {
-    display: inline-block; padding: .6rem 1.2rem; border-radius: 6px;
+    display: inline-block; padding: .6rem 1.3rem; border-radius: var(--radius);
     background: var(--c-bg-alt); border: 1px solid var(--c-border);
     color: var(--c-text); text-decoration: none;
+    transition: border-color .15s ease, background-color .15s ease;
   }
+  .video-link:hover, .video-link:focus-visible { border-color: var(--c-accent); background: var(--c-bg); }
   .video-embed :global(.video-frame) {
-    width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 6px; display: block;
+    width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: var(--radius); display: block;
   }
 </style>

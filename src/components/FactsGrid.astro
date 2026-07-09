@@ -13,6 +13,11 @@ const { facts, lang } = Astro.props as { facts: Facts; lang: Lang };
   {facts.status && <div><b class="label">{t(lang, 'detail_status')}</b>{facts.status}</div>}
 </div>
 <style>
-  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem 1rem; }
-  .facts .label { display: block; margin-bottom: .1rem; }
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem 1.5rem; }
+  .facts .label { display: block; margin-bottom: .2rem; }
+  /* Single column on very small phones (~320-360px) so longer values (e.g. a
+     builder's full name) never feel squeezed against the facts grid's gutter. */
+  @media (max-width: 26rem) {
+    .facts { grid-template-columns: 1fr; gap: .9rem; }
+  }
 </style>

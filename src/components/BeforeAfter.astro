@@ -20,6 +20,9 @@ const { pair, lang } = Astro.props as { pair: Pair; lang: Lang };
 <style>
   .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .before-after figure { margin: 0; }
-  .before-after img { border-radius: 6px; aspect-ratio: 4/3; object-fit: cover; width: 100%; }
-  .before-after figcaption { text-align: center; margin-top: .3rem; }
+  .before-after img { border-radius: var(--radius); aspect-ratio: 4/3; object-fit: cover; width: 100%; }
+  .before-after figcaption {
+    text-align: center; margin-top: .5rem; font-size: .72rem; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--c-gold); font-family: system-ui, sans-serif;
+  }
 </style>
