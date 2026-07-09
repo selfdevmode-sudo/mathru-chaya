@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { Lang } from '../../site.config';
+import { t } from '../lib/i18n';
+
+type Facts = NonNullable<CollectionEntry<'projects'>['data']['facts']>;
+const { facts, lang } = Astro.props as { facts: Facts; lang: Lang };
+---
+<div class="facts">
+  {facts.duration && <div><b class="label">{t(lang, 'detail_duration')}</b>{facts.duration}</div>}
+  {facts.teamSize && <div><b class="label">{t(lang, 'detail_team')}</b>{facts.teamSize}</div>}
+  {facts.ledBy && <div><b class="label">{t(lang, 'detail_led_by')}</b>{facts.ledBy}</div>}
+  {facts.status && <div><b class="label">{t(lang, 'detail_status')}</b>{facts.status}</div>}
+</div>
+<style>
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem 1rem; }
+  .facts .label { display: block; margin-bottom: .1rem; }
+</style>

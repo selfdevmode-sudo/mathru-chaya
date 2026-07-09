@@ -3,6 +3,7 @@
   --c-text: #3d3529; --c-text-soft: #8a7c66;
   --c-accent: #7a2e1d; --c-accent-contrast: #faf7f0;
   --c-gold: #c9a86a; --c-border: #e5ddcc;
+  --c-scrim: rgba(61, 53, 41, .72);
   --font-head: Georgia, 'Times New Roman', serif;
   --font-body: Georgia, 'Times New Roman', serif;
   --motif: '❖';

@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectDetailView from '../../../views/ProjectDetailView.astro';
+import { site } from '../../../../site.config';
+import type { Lang } from '../../../../site.config';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  const langs = site.languages.filter((l) => l !== 'en');
+  return langs.flatMap((lang) =>
+    projects.map((project) => ({ params: { lang, slug: project.id }, props: { project } })),
+  );
+}
+---
+<ProjectDetailView project={Astro.props.project} lang={Astro.params.lang as Lang} />

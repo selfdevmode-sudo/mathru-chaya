@@ -1,0 +1,25 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import type { Lang } from '../../site.config';
+import { t } from '../lib/i18n';
+
+type Pair = NonNullable<CollectionEntry<'projects'>['data']['beforeAfter']>;
+const { pair, lang } = Astro.props as { pair: Pair; lang: Lang };
+---
+<div class="before-after">
+  <figure>
+    <Image src={pair.before} alt={t(lang, 'detail_before')} widths={[400, 800]} sizes="(max-width: 48rem) 50vw, 20rem" />
+    <figcaption class="label">{t(lang, 'detail_before')}</figcaption>
+  </figure>
+  <figure>
+    <Image src={pair.after} alt={t(lang, 'detail_after')} widths={[400, 800]} sizes="(max-width: 48rem) 50vw, 20rem" />
+    <figcaption class="label">{t(lang, 'detail_after')}</figcaption>
+  </figure>
+</div>
+<style>
+  .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .before-after figure { margin: 0; }
+  .before-after img { border-radius: 6px; aspect-ratio: 4/3; object-fit: cover; width: 100%; }
+  .before-after figcaption { text-align: center; margin-top: .3rem; }
+</style>

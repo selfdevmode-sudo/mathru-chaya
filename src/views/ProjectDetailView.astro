@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { Lang } from '../../site.config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhotoGallery from '../components/PhotoGallery.astro';
+import MaterialsChips from '../components/MaterialsChips.astro';
+import FactsGrid from '../components/FactsGrid.astro';
+import MapLink from '../components/MapLink.astro';
+import VideoEmbed from '../components/VideoEmbed.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import SectionDivider from '../components/SectionDivider.astro';
+import { t, pickText, localePath } from '../lib/i18n';
+
+const { project, lang } = Astro.props as { project: CollectionEntry<'projects'>; lang: Lang };
+const d = project.data;
+const description = pickText(lang, d, 'description');
+const headline = [d.type ? t(lang, `type_${d.type}`) : null, d.year].filter(Boolean).join(' · ');
+const metaLine = [d.place, d.builtFor ? `${t(lang, 'detail_built_for')}: ${d.builtFor}` : null].filter(Boolean).join(' · ');
+const hasFacts = d.facts && Object.values(d.facts).some(Boolean);
+---
+<BaseLayout {lang} title={`${d.title}`} description={description} path={`/projects/${project.id}/`}>
+  <article class="wrap section">
+    {headline && <p class="label">{headline}</p>}
+    <h1>{d.title}</h1>
+    {metaLine && <p class="label" style="color: var(--c-text-soft)">{metaLine}</p>}
+    <PhotoGallery photos={d.photos} title={d.title} />
+    {description && <section><h2 class="label">{t(lang, 'detail_about')}</h2><p>{description}</p></section>}
+    {d.materials && d.materials.length > 0 && <section><h2 class="label">{t(lang, 'detail_materials')}</h2><MaterialsChips items={d.materials} /></section>}
+    {hasFacts && <section><h2 class="label">{t(lang, 'detail_details')}</h2><FactsGrid facts={d.facts!} {lang} /></section>}
+    {d.beforeAfter && <BeforeAfter pair={d.beforeAfter} {lang} />}
+    {d.videoLink && <VideoEmbed href={d.videoLink} {lang} />}
+    {d.mapLink && <section><h2 class="label">{t(lang, 'detail_location')}</h2><MapLink href={d.mapLink} {lang} /></section>}
+    <SectionDivider />
+    <a class="btn-outline btn" href={localePath(lang, '/projects/')}>← {t(lang, 'detail_more_projects')}</a>
+  </article>
+</BaseLayout>

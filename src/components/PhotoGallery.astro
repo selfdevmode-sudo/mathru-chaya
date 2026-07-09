@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+type Photos = CollectionEntry<'projects'>['data']['photos'];
+const { photos, title } = Astro.props as { photos: Photos; title: string };
+const thumbs = photos.slice(1);
+---
+<div class="gallery">
+  <Image class="cover" src={photos[0]} alt={title} widths={[800, 1200]} sizes="(max-width: 48rem) 100vw, 40rem" />
+  {thumbs.length > 0 && (
+    <div class="thumbs">
+      {thumbs.map((photo, i) => (
+        <Image src={photo} alt={`${title} — ${i + 2}`} widths={[300, 600]} sizes="(max-width: 48rem) 33vw, 12rem" />
+      ))}
+    </div>
+  )}
+</div>
+<dialog class="lightbox">
+  <button type="button" class="close" aria-label="Close">✕</button>
+  <img alt="" />
+</dialog>
+<script>
+  // Progressive enhancement only: without JS the gallery is just visible
+  // images (no links, no dead buttons). With JS, clicking any photo opens a
+  // <dialog> lightbox showing a larger version of that same image.
+  const dialog = document.querySelector<HTMLDialogElement>('.lightbox');
+  const bigImg = dialog?.querySelector('img');
+  if (dialog && bigImg) {
+    document.querySelectorAll<HTMLImageElement>('.gallery img').forEach((img) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => {
+        bigImg.src = img.currentSrc || img.src;
+        bigImg.alt = img.alt;
+        dialog.showModal();
+      });
+    });
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+    dialog.querySelector('.close')?.addEventListener('click', () => dialog.close());
+  }
+</script>
+<style>
+  .gallery { display: grid; gap: .5rem; }
+  .gallery img, .cover { border-radius: 6px; }
+  .cover { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+  .thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr)); gap: .5rem; }
+  .thumbs img { aspect-ratio: 1/1; object-fit: cover; width: 100%; }
+  .lightbox { position: relative; border: 0; border-radius: 6px; background: var(--c-bg); padding: .5rem; max-width: min(90vw, 60rem); }
+  .lightbox::backdrop { background: var(--c-scrim); }
+  .lightbox img { max-width: 100%; max-height: 80vh; display: block; margin-inline: auto; }
+  .lightbox .close {
+    position: absolute; top: .3rem; right: .5rem; background: none; border: 0;
+    font-size: 1.2rem; line-height: 1; cursor: pointer; color: var(--c-text); padding: .3rem;
+  }
+</style>
