@@ -4,7 +4,7 @@ import { readContent } from "@/lib/db";
 import { telLink, waLink } from "@/lib/format";
 import { getLang, t } from "@/lib/i18n";
 import ViewToggle from "@/components/ViewToggle";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import LanguageLinks from "@/components/LanguageLinks";
 
 export const dynamic = "force-dynamic";
 
@@ -75,7 +75,7 @@ export default async function SiteLayout({
                   </Link>
                 ))}
               </nav>
-              <LanguageSwitcher lang={lang} />
+              <LanguageLinks lang={lang} />
               <ViewToggle
                 labels={{
                   web: t(lang, "view_web"),

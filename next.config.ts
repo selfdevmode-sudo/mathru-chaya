@@ -1,13 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Node server runtime (not static export) — admin writes to the filesystem
-  // at request time, so this app must run on a persistent Node host.
+  // On the `static-site` branch the app is snapshotted to a static `out/`
+  // directory (see scripts/snapshot.mjs, `npm run generate`) and hosted on
+  // free static hosting. Trailing slashes make each page map cleanly to a
+  // `<path>/index.html` file on a static host.
   //
-  // "standalone" bundles a minimal self-contained server into
-  // .next/standalone so the Docker image can run without the full
-  // node_modules. Local `npm start` still works exactly the same.
-  output: "standalone",
+  // (The full server + Docker version lives on `main`, tag `server-version`.)
+  trailingSlash: true,
 };
 
 export default nextConfig;
