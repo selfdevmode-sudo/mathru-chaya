@@ -95,7 +95,7 @@ All presets: mobile-first, high readability, subtle traditional motifs only.
 ## Admin (Sveltia CMS)
 
 - `/admin` on the same site; GitHub-backed; one-time login set up by Ankit on the owner's phone, bookmarked, stays logged in.
-- Collections: Projects, Awards, Testimonials, About, (Site settings — hidden or Ankit-only if possible).
+- Collections: Projects, Awards, Testimonials, About. Site settings (`site.config.ts`) are deliberately NOT in the CMS — only Ankit edits them, directly in the repo.
 - Form labels short and bilingual (English + Kannada).
 - Photo upload from phone gallery; images compressed/resized at build time (not by the user).
 - Every save = git commit → full history; Ankit can recover anything.
