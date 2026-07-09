@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../../site.config';
+import { t, localePath } from '../lib/i18n';
+---
+<BaseLayout lang="en" title={`${t('en', 'notfound_title')} · ${site.name}`}>
+  <section class="wrap section notfound">
+    <h1>{t('en', 'notfound_title')}</h1>
+    <p>{t('en', 'notfound_body')}</p>
+    <a class="btn" href={localePath('en', '/')}>{t('en', 'notfound_home')}</a>
+  </section>
+</BaseLayout>
+<style>
+  .notfound { text-align: center; }
+  .notfound p { color: var(--c-text-soft); margin-block: .8rem 1.4rem; }
+</style>
