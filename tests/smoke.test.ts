@@ -21,6 +21,8 @@ describe.skipIf(!fixturesPresent)('plug-n-play rendering', () => {
   it('kannada route exists with Kannada chrome and English fallback text', () => {
     const html = read('kn/projects/sample-pond/index.html');
     expect(html).toContain('ಯೋಜನೆಗಳು');
+    // sample-pond has no Kannada title, so ADR-0008 fallback must show the English one
+    expect(html).toContain('Temple Pond (Sample)');
   });
   it('404 and core pages exist', () => {
     for (const p of ['404.html', 'index.html', 'projects/index.html', 'awards/index.html', 'about/index.html', 'contact/index.html', 'kn/index.html'])
