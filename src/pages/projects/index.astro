@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectsView from '../../views/ProjectsView.astro';
+import { site } from '../../../site.config';
+import { t } from '../../lib/i18n';
+---
+<BaseLayout lang="en" title={`${t('en', 'nav_projects')} · ${site.name}`} description={site.tagline} path="/projects/">
+  <ProjectsView lang="en" />
+</BaseLayout>

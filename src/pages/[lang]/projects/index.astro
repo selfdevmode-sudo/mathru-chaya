@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProjectsView from '../../../views/ProjectsView.astro';
+import { site, type Lang } from '../../../../site.config';
+import { nonDefaultLangs } from '../../../lib/routes';
+import { t } from '../../../lib/i18n';
+export const getStaticPaths = nonDefaultLangs;
+const lang = Astro.params.lang as Lang;
+---
+<BaseLayout {lang} title={`${t(lang, 'nav_projects')} · ${site.name}`} description={site.tagline} path="/projects/">
+  <ProjectsView {lang} />
+</BaseLayout>

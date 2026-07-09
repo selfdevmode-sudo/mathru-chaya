@@ -1,0 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+import type { Lang } from '../../site.config';
+import { t } from '../lib/i18n';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const { lang } = Astro.props as { lang: Lang };
+
+// All projects, newest year first; projects with no year sort last (NaN-safe —
+// `?? 0` avoids `undefined - undefined` producing NaN — same approach as HomeView).
+const allProjects = (await getCollection('projects'))
+  .slice()
+  .sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0));
+
+// Filter bar: offer only the types actually declared by at least one project, and
+// only when ≥2 distinct types are present — a filter with a single option (or none)
+// is pointless. Counted from the explicit `type` field only: a project with no type
+// is always visible under "All" but isn't claimed by any specific filter button.
+type ProjectType = NonNullable<(typeof allProjects)[number]['data']['type']>;
+const typesPresent = Array.from(
+  new Set(allProjects.map((p) => p.data.type).filter((type): type is ProjectType => Boolean(type))),
+);
+const showFilter = typesPresent.length >= 2;
+---
+<section class="section wrap">
+  <h1>{t(lang, 'nav_projects')}</h1>
+
+  {showFilter && (
+    <div class="filters" hidden>
+      <button type="button" data-filter="all" class="active">{t(lang, 'projects_all')}</button>
+      {typesPresent.map((type) => (
+        <button type="button" data-filter={type}>{t(lang, `type_${type}`)}</button>
+      ))}
+    </div>
+  )}
+
+  <div class="grid-cards">
+    {allProjects.map((project) => (
+      <div data-type={project.data.type ?? 'other'}>
+        <ProjectCard project={project} lang={lang} />
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  const bar = document.querySelector('.filters') as HTMLElement | null;
+  if (bar) {
+    bar.hidden = false;
+    bar.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest('button');
+      if (!btn) return;
+      const f = btn.dataset.filter!;
+      bar.querySelectorAll('button').forEach((b) => b.classList.toggle('active', b === btn));
+      document.querySelectorAll<HTMLElement>('[data-type]').forEach((el) => {
+        el.hidden = f !== 'all' && el.dataset.type !== f;
+      });
+    });
+  }
+</script>
+
+<style>
+  h1 { margin-bottom: .5rem; }
+  .filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-block: 1rem 1.5rem; }
+  .filters[hidden] { display: none; }
+  .filters button {
+    font: inherit; cursor: pointer; border-radius: 999px; padding: .35rem .9rem;
+    background: var(--c-bg-alt); border: 1px solid var(--c-border); color: var(--c-text);
+  }
+  .filters button.active { background: var(--c-accent); border-color: var(--c-accent); color: var(--c-accent-contrast); }
+</style>
