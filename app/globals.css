@@ -1016,11 +1016,20 @@ html.force-mobile main {
 /* Awards are secondary to project work: a tighter grid of smaller, uniform
    cards (keeps its own columns so it stays multi-column on phones too,
    rather than the single full-width column the project grid uses). */
+/* Centered flex so a small number of awards fill / center the row instead
+   of hugging the left with empty columns to the right; each card is capped
+   so 1–2 awards stay a sensible size rather than stretching huge. */
 .award-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
-  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: stretch;
+  gap: 1rem;
+}
+
+.award-card {
+  flex: 1 1 9.5rem;
+  max-width: 13rem;
 }
 
 .award-photo {
