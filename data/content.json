@@ -22,16 +22,16 @@
       "description": "ghj",
       "materials": [
         "water",
-        "venom"
+        "stone"
       ],
       "duration": "10 months",
       "teamSize": "2",
-      "ledBy": "eshwaranner",
+      "ledBy": "ankit v",
       "status": "Completed",
       "mapLink": "https://maps.google.com/?q=Kaup+Temple+Udupi",
       "videoLink": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "photos": [
-        "/uploads/1783601737475-x4iscs.jpg"
+        "/uploads/1783659040803-e5s1jc.png"
       ],
       "featured": true
     },
@@ -59,23 +59,24 @@
     {
       "id": "mrddebge-82dol7",
       "slug": "kaat-boggi",
-      "title": "kaat boggi",
+      "title": "a big temple",
       "type": "temple",
       "place": "permude",
       "year": 1998,
-      "builtFor": "owner:ankit",
-      "description": "built for boggi",
+      "builtFor": "work:ankit",
+      "description": "built for peace",
       "materials": [
         "water",
-        "venom"
+        "stone"
       ],
-      "duration": "28",
-      "teamSize": "2",
-      "ledBy": "eshwaranner",
+      "duration": "28 months",
+      "teamSize": "20",
+      "ledBy": "chaya",
       "status": "completed",
       "photos": [
         "/uploads/1783593618194-b7pf2y.jpg",
-        "/uploads/1783593618194-xgm0y4.jpg"
+        "/uploads/1783593618194-xgm0y4.jpg",
+        "/uploads/1783659169454-qabo7l.jpg"
       ],
       "featured": true,
       "beforeAfter": {
@@ -137,7 +138,8 @@
       "title": "Best Heritage Restoration",
       "givenBy": "Karnataka Temple Builders' Association",
       "year": 2022,
-      "note": "Recognised for the restoration of Sri Venkataramana Temple, Kaup."
+      "note": "Recognised for the restoration of Sri Venkataramana Temple, Kaup.",
+      "photo": "/uploads/1783659187808-o71p4g.jpg"
     }
   ],
   "testimonials": [
