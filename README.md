@@ -19,10 +19,10 @@ content shown on the site.
 
 Two settings are read from **environment variables** (see `.env.example`):
 
-| Variable         | What it is                                        |
-| ---------------- | ------------------------------------------------- |
-| `ADMIN_PASSWORD` | The password to log in to `/admin`.               |
-| `SESSION_SECRET` | Any long random string — keeps the login secure.  |
+| Variable         | What it is                                       |
+| ---------------- | ------------------------------------------------ |
+| `ADMIN_PASSWORD` | The password to log in to `/admin`.              |
+| `SESSION_SECRET` | Any long random string — keeps the login secure. |
 
 ---
 
@@ -104,7 +104,7 @@ Stop/remove it later with `docker rm -f temple-site`.
 
 - **Add/edit projects, awards, testimonials, about text, and site info:** log in at
   `/admin` and use the forms. Photos upload straight from the form.
-- **Change the business name, phone, WhatsApp, region:** `/admin` → *Site info*.
+- **Change the business name, phone, WhatsApp, region:** `/admin` → _Site info_.
 - **Change the admin password:** edit `ADMIN_PASSWORD` (in `.env`, or the compose file /
   `docker run -e`) and restart the app.
 
@@ -127,3 +127,5 @@ this app needs a host with a **persistent, writable disk** — a normal VPS, or 
 container/platform with a mounted volume (Render, Railway, Fly.io, etc.). It will **not**
 work on static-export or ephemeral serverless hosting (e.g. Vercel's default), where
 uploads and edits would be lost.
+
+NOTE: unzip public.zip and make it public/uploads before generating static assets
