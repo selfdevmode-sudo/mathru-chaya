@@ -6,6 +6,7 @@ import { localizeSite } from "@/lib/localize";
 import { localizedHref } from "@/lib/paths";
 import ViewToggle from "@/components/ViewToggle";
 import LanguageLinks from "@/components/LanguageLinks";
+import NavAutoClose from "@/components/NavAutoClose";
 
 export const dynamic = "force-dynamic";
 
@@ -88,6 +89,7 @@ export default async function SiteLayout({
               />
             </div>
           </details>
+          <NavAutoClose />
         </div>
       </header>
 
