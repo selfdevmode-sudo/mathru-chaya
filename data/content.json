@@ -82,6 +82,14 @@
       "beforeAfter": {
         "before": "/uploads/1783593618195-3pze6v.png",
         "after": "/uploads/1783593618196-wy11ob.jpg"
+      },
+      "i18n": {
+        "kn": {
+          "title": "ಒಂದು ದೊಡ್ಡ ದೇವಾಲಯ"
+        },
+        "hi": {
+          "title": "एक बड़ा मंदिर"
+        }
       }
     },
     {

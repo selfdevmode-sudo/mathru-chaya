@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { Lang } from "@/lib/i18n";
 
@@ -9,6 +8,14 @@ import type { Lang } from "@/lib/i18n";
 //   English -> /...        Kannada -> /kn/...        Hindi -> /hi/...
 // (The admin keeps the cookie-based LanguageSwitcher, since the admin is
 // only ever run locally and is never part of the static build.)
+//
+// Plain <a>, deliberately — NOT next/link. /kn/… and /hi/… are middleware
+// rewrites onto the same underlying route, so Next answers their RSC requests
+// with `x-nextjs-rewritten-path: /`. The client router therefore files all
+// three languages under ONE cache key: the URL changes, the cached English (or
+// Kannada, or Hindi) tree stays on screen, and only a manual refresh fixes it.
+// A plain anchor is a document request — the server picks the language off the
+// path every time. See lib/paths.ts, which says the same for every other link.
 
 const FULL_LABELS: Record<Lang, string> = {
   en: "English",
@@ -54,7 +61,7 @@ export default function LanguageLinks({
       aria-label="Choose language"
     >
       {LANGS.map((code) => (
-        <Link
+        <a
           key={code}
           href={hrefFor(code, base)}
           className={`lang-switch__btn${lang === code ? " is-active" : ""}`}
@@ -63,7 +70,7 @@ export default function LanguageLinks({
           title={FULL_LABELS[code]}
         >
           {SHORT_LABELS[code]}
-        </Link>
+        </a>
       ))}
     </div>
   );

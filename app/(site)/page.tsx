@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { readContent } from "@/lib/db";
 import { projectMetaLine } from "@/lib/format";
 import { getLang, t } from "@/lib/i18n";
@@ -39,12 +38,12 @@ export default async function HomePage() {
             <p className="tagline">{site.tagline}</p>
             <p className="hero__line">{t(lang, "hero_line")}</p>
             <div className="btn-row">
-              <Link href={localizedHref(lang, "/projects")} className="btn">
+              <a href={localizedHref(lang, "/projects")} className="btn">
                 {t(lang, "cta_view_work")}
-              </Link>
-              <Link href={localizedHref(lang, "/contact")} className="btn btn-secondary">
+              </a>
+              <a href={localizedHref(lang, "/contact")} className="btn btn-secondary">
                 {t(lang, "nav_contact")}
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -81,7 +80,7 @@ export default async function HomePage() {
           </div>
           <div className="grid">
             {showcase.map((project) => (
-              <Link
+              <a
                 key={project.id}
                 href={localizedHref(lang, `/projects/${project.slug}`)}
                 className="card"
@@ -99,7 +98,7 @@ export default async function HomePage() {
                     <p className="card__meta">{projectMetaLine(project, lang)}</p>
                   ) : null}
                 </div>
-              </Link>
+              </a>
             ))}
           </div>
         </section>
@@ -111,7 +110,7 @@ export default async function HomePage() {
           <section className="section wrap">
             <h2>{t(lang, "section_about_us")}</h2>
             <p>{about.body.split("\n").filter(Boolean)[0]}</p>
-            <Link href={localizedHref(lang, "/about")}>{t(lang, "read_more_about")}</Link>
+            <a href={localizedHref(lang, "/about")}>{t(lang, "read_more_about")}</a>
           </section>
         </>
       ) : null}
@@ -143,9 +142,9 @@ export default async function HomePage() {
               ))}
             </div>
             <div className="btn-row">
-              <Link href={localizedHref(lang, "/awards")} className="btn btn-secondary">
+              <a href={localizedHref(lang, "/awards")} className="btn btn-secondary">
                 {t(lang, "all_awards")}
-              </Link>
+              </a>
             </div>
           </section>
         </>
@@ -180,9 +179,9 @@ export default async function HomePage() {
           {site.owners.length ? ` · ${site.owners.join(", ")}` : ""}
         </p>
         <div className="btn-row">
-          <Link href={localizedHref(lang, "/contact")} className="btn">
+          <a href={localizedHref(lang, "/contact")} className="btn">
             {t(lang, "contact_us_btn")}
-          </Link>
+          </a>
         </div>
       </section>
     </>

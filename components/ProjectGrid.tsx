@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import type { Project } from "@/lib/types";
 import type { Lang } from "@/lib/i18n";
 import { projectMetaLine, typeLabel } from "@/lib/format";
@@ -50,7 +49,7 @@ export default function ProjectGrid({
 
       <div className="grid">
         {visible.map((project) => (
-          <Link
+          <a
             key={project.id}
             href={localizedHref(lang, `/projects/${project.slug}`)}
             className="card"
@@ -68,7 +67,7 @@ export default function ProjectGrid({
                 <p className="card__meta">{projectMetaLine(project, lang)}</p>
               ) : null}
             </div>
-          </Link>
+          </a>
         ))}
       </div>
     </>
