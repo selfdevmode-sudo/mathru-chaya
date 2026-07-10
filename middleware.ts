@@ -13,7 +13,13 @@ export function middleware(request: NextRequest) {
   //    site these are real files (out/kn/..., out/hi/...), so middleware never
   //    runs there — this is purely for local dev + generation.
   const langMatch = pathname.match(/^\/(kn|hi)(\/.*)?$/);
-  if (langMatch) {
+  // The admin is NOT localized (it has its own cookie-based switcher). Never
+  // rewrite /kn/admin or /hi/admin onto the real /admin routes: that rewrite
+  // returns before the auth block below, and middleware doesn't re-run on an
+  // internal rewrite, so it would hand back the full admin with no session
+  // cookie. Let such paths fall through — there is no localized admin route,
+  // so they 404, which is the correct answer for a URL that doesn't exist.
+  if (langMatch && !(langMatch[2] ?? "").startsWith("/admin")) {
     const lang = langMatch[1];
     const rest = langMatch[2] || "/";
     const url = request.nextUrl.clone();
