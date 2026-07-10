@@ -1107,7 +1107,9 @@ html.force-mobile main {
 
 .not-found {
   text-align: center;
-  padding: 5rem 0;
+  /* padding-block, not `padding: 5rem 0` — the shorthand would zero out the
+     side gutter this element inherits from .wrap. Same trap as .section. */
+  padding-block: 5rem;
 }
 
 /* ================================================================

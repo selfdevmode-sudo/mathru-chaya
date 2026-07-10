@@ -377,7 +377,10 @@ export async function updateAbout(formData: FormData): Promise<void> {
   const heroPhoto = heroFile ? await saveUpload(heroFile) : content.about.heroPhoto;
 
   content.about = {
-    body: reqStr(formData, "body"),
+    // Keep the existing text if the field comes back empty, so an accidental
+    // empty submit can't wipe the About story — same guard the other required
+    // fields use (see updateSiteInfo, updateProject).
+    body: reqStr(formData, "body") || content.about.body,
     yearsExperience: num(formData, "yearsExperience"),
     heroPhoto,
     i18n: readTranslations<AboutTranslation>(formData, ABOUT_FIELDS),
