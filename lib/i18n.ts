@@ -130,6 +130,11 @@ const dict: Record<string, Record<Lang, string>> = {
   current_photo: { en: "Current photo", kn: "ಪ್ರಸ್ತುತ ಫೋಟೋ", hi: "वर्तमान तस्वीर" },
   photo_label: { en: "Photo", kn: "ಫೋಟೋ", hi: "तस्वीर" },
   replace_photo: { en: "Replace photo", kn: "ಫೋಟೋ ಬದಲಾಯಿಸಿ", hi: "तस्वीर बदलें" },
+  remove_photo: {
+    en: "Remove this photo",
+    kn: "ಈ ಫೋಟೋವನ್ನು ತೆಗೆದುಹಾಕಿ",
+    hi: "यह तस्वीर हटाएँ",
+  },
   note_label: { en: "Note", kn: "ಟಿಪ್ಪಣಿ", hi: "टिप्पणी" },
   name_label: { en: "Name", kn: "ಹೆಸರು", hi: "नाम" },
   quote_label: { en: "Quote", kn: "ಉಲ್ಲೇಖ", hi: "उद्धरण" },

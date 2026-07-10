@@ -54,6 +54,13 @@ export default function AwardForm({
         <input id="photo" name="photo" type="file" accept="image/*" />
       </div>
 
+      {award?.photo ? (
+        <div className="checkbox-field field">
+          <input type="checkbox" id="clearPhoto" name="clearPhoto" />
+          <label htmlFor="clearPhoto">{t(lang, "remove_photo")}</label>
+        </div>
+      ) : null}
+
       <div className="field">
         <label htmlFor="note">{t(lang, "note_label")}</label>
         <textarea id="note" name="note" defaultValue={award?.note} />

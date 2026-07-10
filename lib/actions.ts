@@ -220,8 +220,15 @@ export async function updateAward(
   if (idx === -1) redirect("/admin/awards");
   const existing = content.awards[idx];
 
+  // Uploading a new photo wins over the remove checkbox; otherwise the
+  // checkbox clears it, and doing neither keeps what's already there.
   const photoFile = oneFile(formData, "photo");
-  const photo = photoFile ? await saveUpload(photoFile) : existing.photo;
+  const clearPhoto = formData.get("clearPhoto") === "on";
+  const photo = photoFile
+    ? await saveUpload(photoFile)
+    : clearPhoto
+      ? undefined
+      : existing.photo;
 
   const updated: Award = {
     ...existing,
