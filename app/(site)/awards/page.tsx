@@ -1,5 +1,6 @@
 import { readContent } from "@/lib/db";
 import { getLang, t } from "@/lib/i18n";
+import { localizeAward } from "@/lib/localize";
 import KalyaniMark from "@/components/KalyaniMark";
 
 export const dynamic = "force-dynamic";
@@ -10,8 +11,8 @@ export const metadata = {
 
 export default async function AwardsPage() {
   const content = await readContent();
-  const { awards } = content;
   const lang = await getLang();
+  const awards = content.awards.map((a) => localizeAward(a, lang));
 
   return (
     <div className="wrap section">

@@ -3,7 +3,9 @@ import type { Project } from "@/lib/types";
 import { PROJECT_TYPES } from "@/lib/types";
 import { typeLabel } from "@/lib/format";
 import { t, type Lang } from "@/lib/i18n";
+import { PROJECT_FIELDS } from "@/lib/translatable";
 import ProjectPhotos from "@/components/admin/ProjectPhotos";
+import TranslationPanels from "@/components/admin/TranslationPanels";
 
 export default function ProjectForm({
   project,
@@ -174,6 +176,12 @@ export default function ProjectForm({
         />
         <label htmlFor="featured">{t(lang, "feature_on_home")}</label>
       </div>
+
+      <TranslationPanels
+        fields={PROJECT_FIELDS}
+        translations={project?.i18n}
+        lang={lang}
+      />
 
       <div className="btn-row">
         <button type="submit" className="btn">

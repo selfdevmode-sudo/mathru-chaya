@@ -12,8 +12,9 @@ import { cookies } from "next/headers";
  * same reason — it is imported by client components (ProjectGrid).
  *
  * This dictionary covers UI chrome only (menus, buttons, headings, labels,
- * table headers, messages) — never the owner's content data stored in
- * data/content.json (project titles/descriptions/etc. are rendered as-is).
+ * table headers, messages). The owner's CONTENT — project titles,
+ * descriptions, award notes — is translated separately, per record, via the
+ * `i18n` sidecar in data/content.json; see lib/localize.ts and ADR-0009.
  */
 export type Lang = "en" | "kn" | "hi";
 
@@ -134,6 +135,31 @@ const dict: Record<string, Record<Lang, string>> = {
     en: "Remove this photo",
     kn: "ಈ ಫೋಟೋವನ್ನು ತೆಗೆದುಹಾಕಿ",
     hi: "यह तस्वीर हटाएँ",
+  },
+
+  // ---------- content translation panels (ADR-0009) ----------
+  // These label the panels; they follow the ADMIN interface language. The
+  // content typed inside them is separate data.
+  translation_word: { en: "translation", kn: "ಅನುವಾದ", hi: "अनुवाद" },
+  translation_not_started: {
+    en: "Not started",
+    kn: "ಪ್ರಾರಂಭಿಸಿಲ್ಲ",
+    hi: "शुरू नहीं हुआ",
+  },
+  translation_fill_count: {
+    en: "{filled} of {total} filled",
+    kn: "{total} ರಲ್ಲಿ {filled} ಭರ್ತಿಯಾಗಿದೆ",
+    hi: "{total} में से {filled} भरे गए",
+  },
+  translation_all_filled: {
+    en: "All {total} filled",
+    kn: "ಎಲ್ಲಾ {total} ಭರ್ತಿಯಾಗಿದೆ",
+    hi: "सभी {total} भरे गए",
+  },
+  translation_hint: {
+    en: "Leave a field empty to show the English text.",
+    kn: "ಇಂಗ್ಲಿಷ್ ಪಠ್ಯ ತೋರಿಸಲು ಕ್ಷೇತ್ರವನ್ನು ಖಾಲಿ ಬಿಡಿ.",
+    hi: "अंग्रेज़ी पाठ दिखाने के लिए फ़ील्ड खाली छोड़ें।",
   },
   note_label: { en: "Note", kn: "ಟಿಪ್ಪಣಿ", hi: "टिप्पणी" },
   name_label: { en: "Name", kn: "ಹೆಸರು", hi: "नाम" },

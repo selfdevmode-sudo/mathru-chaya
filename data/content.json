@@ -113,7 +113,24 @@
         "before": "/uploads/seed-temple-before.svg",
         "after": "/uploads/seed-temple-after.svg"
       },
-      "featured": true
+      "featured": true,
+      "i18n": {
+        "kn": {
+          "title": "ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ",
+          "place": "ಬೆಳ್ಮಣ್, ಉಡುಪಿ",
+          "materials": [
+            "ಗ್ರಾನೈಟ್",
+            "ತೇಗದ ಮರ",
+            "ತಾಮ್ರದ ಛಾವಣಿ",
+            "ಲ್ಯಾಟರೈಟ್"
+          ],
+          "status": "ಪೂರ್ಣಗೊಂಡಿದೆ"
+        },
+        "hi": {
+          "title": "श्री वेंकटरमण मंदिर",
+          "place": "बेलमण, उडुपी"
+        }
+      }
     },
     {
       "id": "seed-pond",
@@ -139,7 +156,7 @@
       "givenBy": "Karnataka Temple Builders' Association",
       "year": 2022,
       "note": "Recognised for the restoration of Sri Venkataramana Temple, Kaup.",
-      "photo": "/uploads/1783659187808-o71p4g.jpg"
+      "photo": "/uploads/1783659578225-lt5psc.jpg"
     }
   ],
   "testimonials": [

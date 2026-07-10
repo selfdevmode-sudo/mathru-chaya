@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { readContent } from "@/lib/db";
 import { projectMetaLine } from "@/lib/format";
 import { getLang, t } from "@/lib/i18n";
+import { localizeProject } from "@/lib/localize";
 import Lightbox from "@/components/Lightbox";
 
 export const dynamic = "force-dynamic";
@@ -13,8 +14,9 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const content = await readContent();
+  const lang = await getLang();
   const project = content.projects.find((p) => p.slug === slug);
-  return { title: project ? project.title : "Project" };
+  return { title: project ? localizeProject(project, lang).title : "Project" };
 }
 
 export default async function ProjectDetailPage({
@@ -24,12 +26,15 @@ export default async function ProjectDetailPage({
 }) {
   const { slug } = await params;
   const content = await readContent();
-  const project = content.projects.find((p) => p.slug === slug);
   const lang = await getLang();
+  // Looked up by slug, which is never translated, then localized for display.
+  const raw = content.projects.find((p) => p.slug === slug);
 
-  if (!project) {
+  if (!raw) {
     notFound();
   }
+
+  const project = localizeProject(raw, lang);
 
   const facts: { label: string; value: string }[] = [];
   if (project.duration) facts.push({ label: t(lang, "duration"), value: project.duration });

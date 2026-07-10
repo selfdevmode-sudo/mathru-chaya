@@ -1,5 +1,6 @@
 import { readContent } from "@/lib/db";
 import { getLang, t } from "@/lib/i18n";
+import { localizeContent } from "@/lib/localize";
 
 export const dynamic = "force-dynamic";
 
@@ -8,9 +9,9 @@ export const metadata = {
 };
 
 export default async function AboutPage() {
-  const content = await readContent();
-  const { about, services, testimonials, site } = content;
   const lang = await getLang();
+  const content = localizeContent(await readContent(), lang);
+  const { about, services, testimonials, site } = content;
 
   const paragraphs = about.body.split("\n").filter((line) => line.trim() !== "");
 

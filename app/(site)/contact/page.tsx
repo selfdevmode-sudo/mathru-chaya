@@ -1,6 +1,7 @@
 import { readContent } from "@/lib/db";
 import { telLink, waLink } from "@/lib/format";
 import { getLang, t } from "@/lib/i18n";
+import { localizeSite } from "@/lib/localize";
 
 export const dynamic = "force-dynamic";
 
@@ -10,8 +11,8 @@ export const metadata = {
 
 export default async function ContactPage() {
   const content = await readContent();
-  const { site } = content;
   const lang = await getLang();
+  const site = localizeSite(content.site, lang);
 
   return (
     <div className="wrap section">

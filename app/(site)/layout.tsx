@@ -3,6 +3,7 @@ import Link from "next/link";
 import { readContent } from "@/lib/db";
 import { telLink, waLink } from "@/lib/format";
 import { getLang, t } from "@/lib/i18n";
+import { localizeSite } from "@/lib/localize";
 import { localizedHref } from "@/lib/paths";
 import ViewToggle from "@/components/ViewToggle";
 import LanguageLinks from "@/components/LanguageLinks";
@@ -26,8 +27,8 @@ export default async function SiteLayout({
   children: React.ReactNode;
 }) {
   const content = await readContent();
-  const { site } = content;
   const lang = await getLang();
+  const site = localizeSite(content.site, lang);
 
   const NAV_LINKS = [
     { href: "/", label: t(lang, "nav_home") },

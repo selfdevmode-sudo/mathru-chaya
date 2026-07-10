@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { Award } from "@/lib/types";
 import { t, type Lang } from "@/lib/i18n";
+import { AWARD_FIELDS } from "@/lib/translatable";
+import TranslationPanels from "@/components/admin/TranslationPanels";
 
 export default function AwardForm({
   award,
@@ -65,6 +67,8 @@ export default function AwardForm({
         <label htmlFor="note">{t(lang, "note_label")}</label>
         <textarea id="note" name="note" defaultValue={award?.note} />
       </div>
+
+      <TranslationPanels fields={AWARD_FIELDS} translations={award?.i18n} lang={lang} />
 
       <div className="btn-row">
         <button type="submit" className="btn">

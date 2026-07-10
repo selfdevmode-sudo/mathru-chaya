@@ -5,7 +5,27 @@ import path from "path";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { readContent, writeContent, generateId, uniqueSlug } from "./db";
-import type { Project, Award, Testimonial } from "./types";
+import type {
+  Project,
+  Award,
+  Testimonial,
+  Translations,
+  ProjectTranslation,
+  AwardTranslation,
+  TestimonialTranslation,
+  AboutTranslation,
+  SiteTranslation,
+} from "./types";
+import {
+  type TranslatableField,
+  TRANSLATION_LANGS,
+  PROJECT_FIELDS,
+  AWARD_FIELDS,
+  TESTIMONIAL_FIELDS,
+  ABOUT_FIELDS,
+  SITE_FIELDS,
+  fieldName,
+} from "./translatable";
 
 // ---------- form parsing helpers ----------
 
@@ -46,6 +66,39 @@ function files(formData: FormData, key: string): File[] {
 function oneFile(formData: FormData, key: string): File | undefined {
   const v = formData.get(key);
   return v instanceof File && v.size > 0 ? v : undefined;
+}
+
+// ---------- content translations (ADR-0009) ----------
+
+/**
+ * Collects the `kn.*` / `hi.*` inputs a translation panel submits into the
+ * `i18n` sidecar shape.
+ *
+ * Empty inputs are dropped, which is what makes CLEARING a box remove the
+ * translation and let the public site fall back to English — no separate
+ * "remove translation" control is needed. A language whose fields are all empty
+ * produces no key at all, and a record with no translations at all produces
+ * `undefined`, so `data/content.json` stays as clean as it was before.
+ */
+function readTranslations<T>(
+  formData: FormData,
+  fields: TranslatableField[],
+): Translations<T> | undefined {
+  const result: Record<string, Record<string, unknown>> = {};
+
+  for (const lang of TRANSLATION_LANGS) {
+    const values: Record<string, unknown> = {};
+    for (const field of fields) {
+      const key = fieldName(lang, field.name);
+      const value = field.kind === "list" ? list(formData, key) : str(formData, key);
+      if (value !== undefined) values[field.name] = value;
+    }
+    if (Object.keys(values).length > 0) result[lang] = values;
+  }
+
+  return Object.keys(result).length > 0
+    ? (result as Translations<T>)
+    : undefined;
 }
 
 // ---------- uploads ----------
@@ -115,6 +168,7 @@ export async function createProject(formData: FormData): Promise<void> {
     beforeAfter:
       beforeUrl && afterUrl ? { before: beforeUrl, after: afterUrl } : undefined,
     featured: formData.get("featured") === "on",
+    i18n: readTranslations<ProjectTranslation>(formData, PROJECT_FIELDS),
   };
 
   content.projects.unshift(project);
@@ -170,6 +224,7 @@ export async function updateProject(
         ? { before: beforeUrl, after: afterUrl }
         : undefined,
     featured: formData.get("featured") === "on",
+    i18n: readTranslations<ProjectTranslation>(formData, PROJECT_FIELDS),
   };
 
   content.projects[idx] = updated;
@@ -203,6 +258,7 @@ export async function createAward(formData: FormData): Promise<void> {
     year: num(formData, "year"),
     photo,
     note: str(formData, "note"),
+    i18n: readTranslations<AwardTranslation>(formData, AWARD_FIELDS),
   };
 
   content.awards.unshift(award);
@@ -237,6 +293,7 @@ export async function updateAward(
     year: num(formData, "year"),
     photo,
     note: str(formData, "note"),
+    i18n: readTranslations<AwardTranslation>(formData, AWARD_FIELDS),
   };
 
   content.awards[idx] = updated;
@@ -271,6 +328,7 @@ export async function createTestimonial(formData: FormData): Promise<void> {
     quote,
     place: str(formData, "place"),
     role: str(formData, "role"),
+    i18n: readTranslations<TestimonialTranslation>(formData, TESTIMONIAL_FIELDS),
   };
 
   content.testimonials.unshift(testimonial);
@@ -294,6 +352,7 @@ export async function updateTestimonial(
     quote: reqStr(formData, "quote") || existing.quote,
     place: str(formData, "place"),
     role: str(formData, "role"),
+    i18n: readTranslations<TestimonialTranslation>(formData, TESTIMONIAL_FIELDS),
   };
 
   content.testimonials[idx] = updated;
@@ -321,6 +380,7 @@ export async function updateAbout(formData: FormData): Promise<void> {
     body: reqStr(formData, "body"),
     yearsExperience: num(formData, "yearsExperience"),
     heroPhoto,
+    i18n: readTranslations<AboutTranslation>(formData, ABOUT_FIELDS),
   };
 
   await writeContent(content);
@@ -341,6 +401,7 @@ export async function updateSiteInfo(formData: FormData): Promise<void> {
     whatsapp: reqStr(formData, "whatsapp") || content.site.whatsapp,
     email: str(formData, "email"),
     region: reqStr(formData, "region") || content.site.region,
+    i18n: readTranslations<SiteTranslation>(formData, SITE_FIELDS),
   };
 
   await writeContent(content);

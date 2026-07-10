@@ -1418,6 +1418,126 @@ html.force-mobile main {
   margin-bottom: 0.3rem;
 }
 
+/* ---------------------------------------------------------------------------
+   Content translation panels (ADR-0009)
+
+   Collapsed <details> at the foot of each admin form. No JavaScript: the
+   open/closed state and the caret are driven entirely by [open].
+
+   Each panel leads with its language's own endonym, set in the matching Noto
+   Serif face via --font-head, so an owner locates their panel by recognising
+   the script rather than reading an English word. The left rail turns gold once
+   the language has at least one translated field — the form then shows, at a
+   glance, which languages are done.
+   --------------------------------------------------------------------------- */
+.translations {
+  margin-top: 1.75rem;
+  border-top: 1px solid var(--c-border);
+  padding-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.translation {
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  background: var(--c-bg-alt);
+  overflow: hidden;
+}
+
+.translation__summary {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 0.9rem;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+/* Hide the native disclosure triangle in every engine. */
+.translation__summary::-webkit-details-marker {
+  display: none;
+}
+.translation__summary::marker {
+  content: "";
+}
+
+.translation__summary:hover {
+  background: var(--c-bg);
+}
+
+.translation__summary:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: -2px;
+}
+
+/* State, not decoration: gold once this language has any translation. */
+.translation__rail {
+  flex: none;
+  width: 3px;
+  align-self: stretch;
+  margin: -0.75rem 0.2rem -0.75rem -0.9rem;
+  background: var(--c-border);
+}
+
+.translation__rail.is-filled {
+  background: var(--c-gold);
+}
+
+.translation__lang {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  line-height: 1.2;
+  color: var(--c-accent);
+}
+
+.translation__word {
+  color: var(--c-text-soft);
+  font-size: 0.9rem;
+}
+
+.translation__count {
+  margin-left: auto;
+  font-size: 0.78rem;
+  color: var(--c-text-soft);
+  white-space: nowrap;
+}
+
+.translation__caret {
+  flex: none;
+  color: var(--c-text-soft);
+  transition: transform 120ms ease;
+}
+
+.translation[open] .translation__caret {
+  transform: rotate(90deg);
+}
+
+.translation__body {
+  padding: 0.25rem 0.9rem 1rem;
+  border-top: 1px solid var(--c-border);
+}
+
+.translation__hint {
+  margin: 0.75rem 0 1rem;
+  font-size: 0.82rem;
+  color: var(--c-text-soft);
+}
+
+/* Inputs inside a panel sit on the panel's own background, not the card's. */
+.translation__body .field input[type="text"],
+.translation__body .field textarea {
+  background: var(--c-bg);
+}
+
+@media (max-width: 30rem) {
+  .translation__word {
+    display: none;
+  }
+}
+
 /* ---------- project photo manager (add/remove before Save) ---------- */
 
 .photo-manager {

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { Testimonial } from "@/lib/types";
 import { t, type Lang } from "@/lib/i18n";
+import { TESTIMONIAL_FIELDS } from "@/lib/translatable";
+import TranslationPanels from "@/components/admin/TranslationPanels";
 
 export default function TestimonialForm({
   testimonial,
@@ -47,6 +49,12 @@ export default function TestimonialForm({
           />
         </div>
       </div>
+
+      <TranslationPanels
+        fields={TESTIMONIAL_FIELDS}
+        translations={testimonial?.i18n}
+        lang={lang}
+      />
 
       <div className="btn-row">
         <button type="submit" className="btn">

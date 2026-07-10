@@ -1,6 +1,8 @@
 import { readContent } from "@/lib/db";
 import { updateAbout } from "@/lib/actions";
 import { getLang, t } from "@/lib/i18n";
+import { ABOUT_FIELDS } from "@/lib/translatable";
+import TranslationPanels from "@/components/admin/TranslationPanels";
 
 export const dynamic = "force-dynamic";
 
@@ -65,6 +67,12 @@ export default async function AdminAboutPage({
           </label>
           <input id="heroPhoto" name="heroPhoto" type="file" accept="image/*" />
         </div>
+
+        <TranslationPanels
+          fields={ABOUT_FIELDS}
+          translations={about.i18n}
+          lang={lang}
+        />
 
         <div className="btn-row">
           <button type="submit" className="btn">

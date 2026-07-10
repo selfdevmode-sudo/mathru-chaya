@@ -8,6 +8,7 @@
     "start": "next start",
     "generate": "next build && node scripts/snapshot.mjs",
     "preview": "node scripts/preview.mjs",
+    "test": "node --test lib/*.test.ts",
     "lint": "next lint"
   },
   "dependencies": {

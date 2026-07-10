@@ -2,6 +2,7 @@ import Link from "next/link";
 import { readContent } from "@/lib/db";
 import { projectMetaLine } from "@/lib/format";
 import { getLang, t } from "@/lib/i18n";
+import { localizeContent } from "@/lib/localize";
 import { localizedHref } from "@/lib/paths";
 import Divider from "@/components/Divider";
 import KalyaniMark from "@/components/KalyaniMark";
@@ -9,9 +10,9 @@ import KalyaniMark from "@/components/KalyaniMark";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const content = await readContent();
-  const { site, projects, awards, testimonials, about } = content;
   const lang = await getLang();
+  const content = localizeContent(await readContent(), lang);
+  const { site, projects, awards, testimonials, about } = content;
 
   const featured = projects.filter((p) => p.featured);
   const showcase = (featured.length > 0 ? featured : projects).slice(0, 3);
