@@ -33,6 +33,7 @@ export default async function SiteLayout({
   const NAV_LINKS = [
     { href: "/", label: t(lang, "nav_home") },
     { href: "/projects", label: t(lang, "nav_projects") },
+    { href: "/gallery", label: t(lang, "nav_gallery") },
     { href: "/about", label: t(lang, "nav_about") },
     { href: "/awards", label: t(lang, "nav_awards") },
     { href: "/contact", label: t(lang, "nav_contact") },

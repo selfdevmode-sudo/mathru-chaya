@@ -83,5 +83,7 @@ export function localizeContent(content: Content, lang: Lang): Content {
     testimonials: content.testimonials.map((t) => localizeTestimonial(t, lang)),
     services: content.services.map((s) => localizeService(s, lang)),
     about: localizeAbout(content.about, lang),
+    // Gallery photos carry no text, so there's nothing to localize.
+    gallery: content.gallery,
   };
 }

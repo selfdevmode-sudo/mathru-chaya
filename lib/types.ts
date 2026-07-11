@@ -116,6 +116,12 @@ export interface Content {
   testimonials: Testimonial[];
   services: Service[];
   about: About;
+  /**
+   * Standalone gallery photos — misc images not tied to any project or award
+   * (ADR-0007). Plain upload paths in display order; no captions, no ids
+   * (removal is by value, upload names are unique).
+   */
+  gallery: string[];
 }
 
 export const PROJECT_TYPES: NonNullable<Project["type"]>[] = [

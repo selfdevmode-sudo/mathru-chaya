@@ -411,3 +411,25 @@ export async function updateSiteInfo(formData: FormData): Promise<void> {
   revalidateEverything();
   redirect("/admin/settings?saved=1");
 }
+
+// ---------- gallery ----------
+
+export async function updateGallery(formData: FormData): Promise<void> {
+  const content = await readContent();
+
+  // Same photo logic as updateProject: keep existing minus removed, then append
+  // newly uploaded — the admin page reuses ProjectPhotos, which submits the
+  // same `photos` / `removePhotos` fields.
+  const newlyUploaded = await Promise.all(
+    files(formData, "photos").map(saveUpload),
+  );
+  const removeSet = new Set(formData.getAll("removePhotos").map(String));
+  content.gallery = [
+    ...content.gallery.filter((p) => !removeSet.has(p)),
+    ...newlyUploaded,
+  ];
+
+  await writeContent(content);
+  revalidateEverything();
+  redirect("/admin/gallery?saved=1");
+}

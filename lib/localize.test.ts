@@ -100,6 +100,7 @@ test("localizeContent walks every collection", () => {
     testimonials: [{ id: "t1", name: "Ram", quote: "Good", i18n: { kn: { quote: "ಒಳ್ಳೆಯದು" } } }],
     services: [{ id: "s1", name: "Temples", i18n: { kn: { name: "ದೇವಸ್ಥಾನಗಳು" } } }],
     about: { body: "Story", i18n: { kn: { body: "ಕಥೆ" } } },
+    gallery: ["/uploads/g1.jpg"],
   };
   const kn = localizeContent(content, "kn");
   assert.equal(kn.site.tagline, "ಟಿ");
@@ -110,4 +111,5 @@ test("localizeContent walks every collection", () => {
   assert.equal(kn.testimonials[0].name, "Ram", "a person's name is not translated");
   assert.equal(kn.services[0].name, "ದೇವಸ್ಥಾನಗಳು");
   assert.equal(kn.about.body, "ಕಥೆ");
+  assert.deepEqual(kn.gallery, ["/uploads/g1.jpg"], "gallery passes through untranslated");
 });

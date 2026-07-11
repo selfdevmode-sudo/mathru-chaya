@@ -33,6 +33,7 @@ const dict: Record<string, Record<Lang, string>> = {
   nav_about: { en: "About", kn: "ನಮ್ಮ ಬಗ್ಗೆ", hi: "हमारे बारे में" },
   nav_awards: { en: "Awards", kn: "ಪ್ರಶಸ್ತಿಗಳು", hi: "पुरस्कार" },
   nav_contact: { en: "Contact", kn: "ಸಂಪರ್ಕ", hi: "संपर्क" },
+  nav_gallery: { en: "Gallery", kn: "ಗ್ಯಾಲರಿ", hi: "गैलरी" },
   cta_view_work: { en: "View our work", kn: "ನಮ್ಮ ಕೆಲಸ ನೋಡಿ", hi: "हमारा काम देखें" },
   call: { en: "Call", kn: "ಕರೆ ಮಾಡಿ", hi: "कॉल करें" },
   whatsapp: { en: "WhatsApp", kn: "ವಾಟ್ಸ್‌ಆ್ಯಪ್", hi: "व्हाट्सएप" },
@@ -89,6 +90,7 @@ const dict: Record<string, Record<Lang, string>> = {
   // ---------- admin nav ----------
   admin_dashboard: { en: "Dashboard", kn: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್", hi: "डैशबोर्ड" },
   admin_projects: { en: "Our Work", kn: "ನಮ್ಮ ಕೆಲಸಗಳು", hi: "हमारा काम" },
+  admin_gallery: { en: "Gallery", kn: "ಗ್ಯಾಲರಿ", hi: "गैलरी" },
   admin_awards: { en: "Awards", kn: "ಪ್ರಶಸ್ತಿಗಳು", hi: "पुरस्कार" },
   admin_testimonials: { en: "Testimonials", kn: "ಅಭಿಪ್ರಾಯಗಳು", hi: "प्रशंसापत्र" },
   admin_about: { en: "About", kn: "ನಮ್ಮ ಬಗ್ಗೆ", hi: "हमारे बारे में" },
@@ -203,6 +205,15 @@ const dict: Record<string, Record<Lang, string>> = {
     hi: "परियोजनाएँ जल्द ही यहाँ दिखाई देंगी।",
   },
   filter_all: { en: "All", kn: "ಎಲ್ಲಾ", hi: "सभी" },
+
+  // ---------- gallery page ----------
+  gallery_heading: { en: "Gallery", kn: "ಗ್ಯಾಲರಿ", hi: "गैलरी" },
+  gallery_empty: {
+    en: "Photos will appear here soon.",
+    kn: "ಫೋಟೋಗಳು ಶೀಘ್ರದಲ್ಲೇ ಇಲ್ಲಿ ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತವೆ.",
+    hi: "तस्वीरें जल्द ही यहाँ दिखाई देंगी।",
+  },
+  rotate_photo: { en: "Rotate photo", kn: "ಫೋಟೋ ತಿರುಗಿಸಿ", hi: "तस्वीर घुमाएँ" },
 
   // ---------- awards page ----------
   awards_heading: {

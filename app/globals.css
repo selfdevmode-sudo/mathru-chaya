@@ -15,7 +15,9 @@
   --c-gold: #b0842f;
   --c-granite: #3b342c;
   --c-border: #d8cbb6;
-  --c-scrim: rgba(0, 0, 0, 0.9);
+  /* Near-opaque: the photo viewer must fully cover the page (incl. the sticky
+     header) rather than let it read through behind the image. */
+  --c-scrim: rgba(0, 0, 0, 0.96);
   --radius: 0.55rem;
 
   /* ---- typography ----
@@ -871,9 +873,17 @@ html.force-mobile main {
   border-radius: var(--radius);
 }
 
-.lightbox__close,
-.lightbox__nav {
+/* Rotate + close, grouped at the top-right corner. */
+.lightbox__toolbar {
   position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.lightbox__tool,
+.lightbox__nav {
   border: none;
   background: rgba(255, 255, 255, 0.12);
   color: #fff;
@@ -885,15 +895,14 @@ html.force-mobile main {
   line-height: 1;
 }
 
-.lightbox__close {
-  top: 1rem;
-  right: 1rem;
+.lightbox__tool {
   width: 2.75rem;
   height: 2.75rem;
   font-size: 1.2rem;
 }
 
 .lightbox__nav {
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
   width: 3rem;
@@ -909,9 +918,14 @@ html.force-mobile main {
   right: 0.75rem;
 }
 
-.lightbox__close:hover,
+.lightbox__tool:hover,
 .lightbox__nav:hover {
   background: rgba(255, 255, 255, 0.25);
+}
+
+/* The rotate transform must animate, so the turn reads as a rotation. */
+.lightbox__image {
+  transition: transform 150ms ease;
 }
 
 .lightbox__count {
@@ -933,7 +947,7 @@ html.force-mobile main {
     font-size: 1.4rem;
   }
 
-  .lightbox__close {
+  .lightbox__tool {
     width: 2.4rem;
     height: 2.4rem;
     font-size: 1.05rem;

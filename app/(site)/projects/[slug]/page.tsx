@@ -76,6 +76,7 @@ export default async function ProjectDetailPage({
           closePhotoViewer: t(lang, "close_photo_viewer"),
           previousPhoto: t(lang, "previous_photo"),
           nextPhoto: t(lang, "next_photo"),
+          rotatePhoto: t(lang, "rotate_photo"),
           photoAriaLabels: photoLabels,
           viewerAriaLabel: `${project.title} ${t(lang, "photo_viewer_suffix")}`,
         }}

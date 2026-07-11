@@ -44,6 +44,7 @@ async function publicPaths() {
   return [
     "/",
     "/projects/",
+    "/gallery/",
     "/awards/",
     "/about/",
     "/contact/",

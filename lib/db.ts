@@ -39,6 +39,7 @@ function normalizeContent(parsed: unknown): Content {
     awards: arr(c.awards),
     testimonials: arr(c.testimonials),
     services: arr(c.services),
+    gallery: arr<string>(c.gallery),
     about: {
       body: typeof about.body === "string" ? about.body : "",
       yearsExperience: about.yearsExperience,

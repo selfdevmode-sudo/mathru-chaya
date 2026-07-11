@@ -24,6 +24,7 @@ export default async function AdminDashboardLayout({
         <nav className="admin-nav">
           <Link href="/admin">{t(lang, "admin_dashboard")}</Link>
           <Link href="/admin/projects">{t(lang, "admin_projects")}</Link>
+          <Link href="/admin/gallery">{t(lang, "admin_gallery")}</Link>
           <Link href="/admin/awards">{t(lang, "admin_awards")}</Link>
           <Link href="/admin/testimonials">{t(lang, "admin_testimonials")}</Link>
           <Link href="/admin/about">{t(lang, "admin_about")}</Link>
