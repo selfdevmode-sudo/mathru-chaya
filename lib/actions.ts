@@ -26,6 +26,7 @@ import {
   SITE_FIELDS,
   fieldName,
 } from "./translatable";
+import { referencedUploads, deleteOrphanedUploads } from "./uploads";
 
 // ---------- form parsing helpers ----------
 
@@ -182,6 +183,7 @@ export async function updateProject(
   formData: FormData,
 ): Promise<void> {
   const content = await readContent();
+  const before = referencedUploads(content);
   const idx = content.projects.findIndex((p) => p.id === id);
   if (idx === -1) redirect("/admin/projects");
   const existing = content.projects[idx];
@@ -229,14 +231,17 @@ export async function updateProject(
 
   content.projects[idx] = updated;
   await writeContent(content);
+  await deleteOrphanedUploads(before, content);
   revalidateEverything();
   redirect("/admin/projects");
 }
 
 export async function deleteProject(id: string): Promise<void> {
   const content = await readContent();
+  const before = referencedUploads(content);
   content.projects = content.projects.filter((p) => p.id !== id);
   await writeContent(content);
+  await deleteOrphanedUploads(before, content);
   revalidateEverything();
   redirect("/admin/projects");
 }
@@ -272,6 +277,7 @@ export async function updateAward(
   formData: FormData,
 ): Promise<void> {
   const content = await readContent();
+  const before = referencedUploads(content);
   const idx = content.awards.findIndex((a) => a.id === id);
   if (idx === -1) redirect("/admin/awards");
   const existing = content.awards[idx];
@@ -298,14 +304,17 @@ export async function updateAward(
 
   content.awards[idx] = updated;
   await writeContent(content);
+  await deleteOrphanedUploads(before, content);
   revalidateEverything();
   redirect("/admin/awards");
 }
 
 export async function deleteAward(id: string): Promise<void> {
   const content = await readContent();
+  const before = referencedUploads(content);
   content.awards = content.awards.filter((a) => a.id !== id);
   await writeContent(content);
+  await deleteOrphanedUploads(before, content);
   revalidateEverything();
   redirect("/admin/awards");
 }
@@ -373,6 +382,7 @@ export async function deleteTestimonial(id: string): Promise<void> {
 
 export async function updateAbout(formData: FormData): Promise<void> {
   const content = await readContent();
+  const before = referencedUploads(content);
   const heroFile = oneFile(formData, "heroPhoto");
   const heroPhoto = heroFile ? await saveUpload(heroFile) : content.about.heroPhoto;
 
@@ -387,6 +397,7 @@ export async function updateAbout(formData: FormData): Promise<void> {
   };
 
   await writeContent(content);
+  await deleteOrphanedUploads(before, content);
   revalidateEverything();
   redirect("/admin/about?saved=1");
 }
@@ -416,6 +427,7 @@ export async function updateSiteInfo(formData: FormData): Promise<void> {
 
 export async function updateGallery(formData: FormData): Promise<void> {
   const content = await readContent();
+  const before = referencedUploads(content);
 
   // Same photo logic as updateProject: keep existing minus removed, then append
   // newly uploaded — the admin page reuses ProjectPhotos, which submits the
@@ -430,6 +442,7 @@ export async function updateGallery(formData: FormData): Promise<void> {
   ];
 
   await writeContent(content);
+  await deleteOrphanedUploads(before, content);
   revalidateEverything();
   redirect("/admin/gallery?saved=1");
 }
