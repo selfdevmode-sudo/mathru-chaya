@@ -19,30 +19,102 @@
       }
     }
   },
-  "projects": [],
+  "projects": [
+    {
+      "id": "mrgkzdwb-em4q40",
+      "slug": "mardala-shri-mahalingeshwara-temple",
+      "title": "Mardala Shri Mahalingeshwara Temple",
+      "type": "temple",
+      "place": "Mardala",
+      "ledBy": "Eshwara Chandra",
+      "status": "Ongoing",
+      "mapLink": "https://maps.app.goo.gl/T5x45kpFxwJDjAME6",
+      "photos": [
+        "/uploads/1783787670627-8xyl7n.jpeg"
+      ],
+      "featured": true,
+      "i18n": {
+        "kn": {
+          "title": "ಮರ್ದಾಳ ಶ್ರೀ ಮಹಾಲಿಂಗೇಶ್ವರ ದೇವಸ್ಥಾನ",
+          "place": "ಮರ್ದಾಳ"
+        },
+        "hi": {
+          "title": "मर्दाला श्री महालिंगेश्वर मंदिर",
+          "place": "मर्दाल"
+        }
+      }
+    }
+  ],
   "awards": [],
   "testimonials": [],
   "services": [
     {
       "id": "svc-1",
       "name": "Temple Construction",
-      "blurb": "New temple construction following agama shastra, from foundation to kalasha."
+      "blurb": "Building New Temples and Reviving Existing Ones.",
+      "i18n": {
+        "kn": {
+          "name": "ದೇವಾಲಯಗಳ ನಿರ್ಮಾಣ",
+          "blurb": "ಹೊಸ ದೇವಾಲಯಗಳ ನಿರ್ಮಾಣ ಮತ್ತು ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ದೇವಾಲಯಗಳ ಜೀರ್ಣೋದ್ಧಾರ."
+        },
+        "hi": {
+          "name": "मंदिरों का निर्माण।",
+          "blurb": "नए मंदिरों का निर्माण और मौजूदा मंदिरों का जीर्णोद्धार।"
+        }
+      }
     },
     {
       "id": "svc-2",
-      "name": "Pond & Pushkarini Building",
-      "blurb": "Stepped temple ponds built with traditional stonework and proper water flow."
-    },
-    {
-      "id": "svc-3",
-      "name": "Renovation & Restoration",
-      "blurb": "Careful restoration of old temples, preserving original design wherever possible."
+      "name": "Pond/Pushkarini Building",
+      "blurb": "Stepped temple ponds built with traditional stonework and proper water flow.",
+      "i18n": {
+        "kn": {
+          "name": "ಸಾಂಪ್ರದಾಯಿಕ ಪುಷ್ಕರಣಿ ನಿರ್ಮಾಣ",
+          "blurb": "ಸಾಂಪ್ರದಾಯಿಕ ಪುಷ್ಕರಣಿ ನಿರ್ಮಾಣ ಮತ್ತು ದೀರ್ಘಕಾಲ ಬಾಳಿಕೆ ಬರುವ ಕಲ್ಲಿನ ಶಿಲ್ಪಕಲೆ."
+        },
+        "hi": {
+          "name": "पारंपरिक पुष्करणी निर्माण।",
+          "blurb": "पारंपरिक पुष्करणी निर्माण तथा टिकाऊ पत्थर शिल्पकला।"
+        }
+      }
     }
   ],
-  "gallery": [],
+  "gallery": [
+    "/uploads/1783749838571-2f890k.jpeg",
+    "/uploads/1783749838961-nwhqgb.jpeg",
+    "/uploads/1783749838707-f8y9df.jpeg",
+    "/uploads/1783749838709-dhke5l.jpeg",
+    "/uploads/1783749838878-j3am8v.jpeg",
+    "/uploads/1783749838727-vrcx1l.jpeg",
+    "/uploads/1783749838740-xix1g5.jpeg",
+    "/uploads/1783749838997-sbwlls.jpeg",
+    "/uploads/1783749838762-a6sler.jpeg",
+    "/uploads/1783749838555-c2ijqe.jpeg",
+    "/uploads/1783749838584-3b8r17.jpeg",
+    "/uploads/1783749838588-rfzfgl.jpeg",
+    "/uploads/1783749838785-7m0cn2.jpeg",
+    "/uploads/1783749839014-utkg2i.jpeg",
+    "/uploads/1783749838577-oqywxt.jpeg",
+    "/uploads/1783749839117-ad3roa.jpeg",
+    "/uploads/1783749839005-zdm1so.jpeg",
+    "/uploads/1783749838611-r9lzkj.jpeg",
+    "/uploads/1783749838605-7n19ej.jpeg",
+    "/uploads/1783749839321-w226fw.jpeg",
+    "/uploads/1783749839199-chwnti.jpeg",
+    "/uploads/1783749839184-13np57.jpeg",
+    "/uploads/1783749839259-mflq54.jpeg",
+    "/uploads/1783749838847-30vlan.jpeg",
+    "/uploads/1783749839076-xkdgh4.jpeg",
+    "/uploads/1783749839298-w3gf2g.jpeg",
+    "/uploads/1783749839242-zl9bku.jpeg",
+    "/uploads/1783749838843-li1fez.jpeg",
+    "/uploads/1783749839125-qpej0w.jpeg",
+    "/uploads/1783749838610-f4ek3f.jpeg",
+    "/uploads/1783749839123-ea89m6.jpeg"
+  ],
   "about": {
     "body": "Mathru Chaya Constructions specializes in traditional temple construction and stone craftsmanship. We follow the Vernacular architectural style of Tulunadu (Dakshina Kannada & Udupi) and Kasaragod, a traditional style of construction that uses local materials, time-tested building techniques, and designs suited to the region's climate and culture.\r\n\r\nWe undertake the construction of temples, Garbhagudis (sanctums), Kalyanis (temple ponds), Naga Sthanas, Daiva Sthanas, and other sacred structures with precision and devotion.\r\n\r\nWe work with two types of natural stone:\r\n• Kempu Kallu (Red Laterite Stone) – Widely used for houses, compound walls, traditional buildings, and other construction works.\r\n• Kappu Kallu (Black Stone) – Mainly used for Garbhagudis, temple carvings, stone pillars, Mantapas, and other sacred stone works.\r\n\r\nOur skilled artisans also create handcrafted stone sculptures, including Bootha Kallu, Daiva platforms, Moorthies (deity idols), Naga idols, stone pillars, Mantapas, and custom carvings. Every piece is carefully crafted with attention to detail and respect for tradition.\r\n\r\nWith generations of experience and a commitment to quality, we have successfully completed projects across Dakshina Kannada, Udupi, Bengaluru, Kasaragod, and Mumbai. Every project reflects our dedication to traditional craftsmanship, durability, and customer satisfaction.",
-    "yearsExperience": "30",
+    "yearsExperience": "30+",
     "heroPhoto": "/uploads/seed-about-hero.svg",
     "i18n": {
       "kn": {
