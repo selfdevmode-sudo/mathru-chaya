@@ -45,8 +45,9 @@ export default async function AdminAboutPage({
           <input
             id="yearsExperience"
             name="yearsExperience"
-            type="number"
+            type="text"
             defaultValue={about.yearsExperience}
+            placeholder="e.g. 35+ or thirty five"
           />
         </div>
 

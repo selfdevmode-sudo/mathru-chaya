@@ -102,7 +102,11 @@ export type ServiceTranslation = Partial<Pick<Service, "name" | "blurb">>;
 
 export interface About {
   body: string;
-  yearsExperience?: number;
+  /**
+   * Free text, not a number, so the owner can write "35+", "thirty five", or
+   * "three generations" — an approximate label, rendered as-is.
+   */
+  yearsExperience?: string;
   heroPhoto?: string;
   i18n?: Translations<AboutTranslation>;
 }

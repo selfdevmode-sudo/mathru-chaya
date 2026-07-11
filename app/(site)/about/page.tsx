@@ -23,7 +23,7 @@ export default async function AboutPage() {
         </h1>
         {about.yearsExperience ? (
           <p className="card__meta">
-            {about.yearsExperience}+ {t(lang, "years_experience_suffix")}
+            {about.yearsExperience} {t(lang, "years_experience_suffix")}
           </p>
         ) : null}
       </div>

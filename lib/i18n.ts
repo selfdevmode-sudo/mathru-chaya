@@ -240,6 +240,18 @@ const dict: Record<string, Record<Lang, string>> = {
     hi: "हमारे बारे में और जानकारी जल्द ही।",
   },
   section_what_we_do: { en: "What We Do", kn: "ನಾವು ಏನು ಮಾಡುತ್ತೇವೆ", hi: "हम क्या करते हैं" },
+  service_name: { en: "Service", kn: "ಸೇವೆ", hi: "सेवा" },
+  service_blurb: {
+    en: "Short description",
+    kn: "ಸಂಕ್ಷಿಪ್ತ ವಿವರಣೆ",
+    hi: "संक्षिप्त विवरण",
+  },
+  services_hint: {
+    en: "Fill a row to add a service. Clear its name to remove it.",
+    kn: "ಸೇವೆ ಸೇರಿಸಲು ಸಾಲನ್ನು ಭರ್ತಿ ಮಾಡಿ. ತೆಗೆದುಹಾಕಲು ಅದರ ಹೆಸರನ್ನು ಅಳಿಸಿ.",
+    hi: "सेवा जोड़ने के लिए पंक्ति भरें। हटाने के लिए उसका नाम मिटाएँ।",
+  },
+  service_number: { en: "Service {n}", kn: "ಸೇವೆ {n}", hi: "सेवा {n}" },
 
   // ---------- contact page ----------
   contact_heading: { en: "Contact Us", kn: "ಸಂಪರ್ಕಿಸಿ", hi: "संपर्क करें" },

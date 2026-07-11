@@ -56,7 +56,31 @@ export const SITE_FIELDS: TranslatableField[] = [
   { name: "region", kind: "text", labelKey: "region_label" },
 ];
 
+/**
+ * Services are an editable list, so their fields are indexed per row. English
+ * name + blurb, each translatable, encoded as `service.<i>.name`,
+ * `service.<i>.blurb`, and `service.<i>.<lang>.<field>`.
+ */
+export const SERVICE_FIELDS: TranslatableField[] = [
+  { name: "name", kind: "text", labelKey: "service_name" },
+  { name: "blurb", kind: "textarea", labelKey: "service_blurb" },
+];
+
 /** Form input name for a translated field, e.g. "kn.title". */
 export function fieldName(lang: TranslationLang, field: string): string {
   return `${lang}.${field}`;
+}
+
+/** English field of service row `i`, e.g. "service.0.name". */
+export function serviceField(i: number, field: string): string {
+  return `service.${i}.${field}`;
+}
+
+/** Translated field of service row `i`, e.g. "service.0.kn.name". */
+export function serviceTranslationField(
+  i: number,
+  lang: TranslationLang,
+  field: string,
+): string {
+  return `service.${i}.${lang}.${field}`;
 }

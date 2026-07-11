@@ -27,6 +27,7 @@ import {
   fieldName,
 } from "./translatable";
 import { referencedUploads, deleteOrphanedUploads } from "./uploads";
+import { parseServices } from "./services";
 
 // ---------- form parsing helpers ----------
 
@@ -391,7 +392,7 @@ export async function updateAbout(formData: FormData): Promise<void> {
     // empty submit can't wipe the About story — same guard the other required
     // fields use (see updateSiteInfo, updateProject).
     body: reqStr(formData, "body") || content.about.body,
-    yearsExperience: num(formData, "yearsExperience"),
+    yearsExperience: str(formData, "yearsExperience"),
     heroPhoto,
     i18n: readTranslations<AboutTranslation>(formData, ABOUT_FIELDS),
   };
@@ -417,6 +418,7 @@ export async function updateSiteInfo(formData: FormData): Promise<void> {
     region: reqStr(formData, "region") || content.site.region,
     i18n: readTranslations<SiteTranslation>(formData, SITE_FIELDS),
   };
+  content.services = parseServices(formData, content.services, generateId);
 
   await writeContent(content);
   revalidateEverything();

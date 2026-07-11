@@ -3,6 +3,7 @@ import { updateSiteInfo } from "@/lib/actions";
 import { getLang, t } from "@/lib/i18n";
 import { SITE_FIELDS } from "@/lib/translatable";
 import TranslationPanels from "@/components/admin/TranslationPanels";
+import ServicesEditor from "@/components/admin/ServicesEditor";
 
 export const dynamic = "force-dynamic";
 
@@ -93,6 +94,8 @@ export default async function AdminSettingsPage({
         </div>
 
         <TranslationPanels fields={SITE_FIELDS} translations={site.i18n} lang={lang} />
+
+        <ServicesEditor services={content.services} lang={lang} />
 
         <div className="btn-row">
           <button type="submit" className="btn">

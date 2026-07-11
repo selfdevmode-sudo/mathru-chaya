@@ -42,7 +42,10 @@ function normalizeContent(parsed: unknown): Content {
     gallery: arr<string>(c.gallery),
     about: {
       body: typeof about.body === "string" ? about.body : "",
-      yearsExperience: about.yearsExperience,
+      // Was a number in older content; coerce so existing files keep working
+      // now that it's free text.
+      yearsExperience:
+        about.yearsExperience == null ? undefined : String(about.yearsExperience),
       heroPhoto: about.heroPhoto,
       i18n: about.i18n,
     },
