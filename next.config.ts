@@ -8,6 +8,17 @@ const nextConfig: NextConfig = {
   //
   // (The full server + Docker version lives on `main`, tag `server-version`.)
   trailingSlash: true,
+
+  experimental: {
+    serverActions: {
+      // Photo uploads go through server actions, which default to a 1 MB body
+      // limit — far too small for phone photos (several MB each), so real
+      // uploads failed with a 413 "Body exceeded 1 MB limit". This only ever
+      // runs in the local admin (`npm start`); the deployed site is static and
+      // never executes server actions, so a generous limit costs nothing.
+      bodySizeLimit: "50mb",
+    },
+  },
 };
 
 export default nextConfig;
