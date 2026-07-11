@@ -12,12 +12,13 @@ export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await readContent();
+  const { name, tagline } = content.site;
   return {
     title: {
-      default: `${content.site.name} — ${content.site.tagline}`,
-      template: `%s — ${content.site.name}`,
+      default: tagline ? `${name} — ${tagline}` : name,
+      template: `%s — ${name}`,
     },
-    description: content.site.tagline,
+    description: tagline,
   };
 }
 
@@ -45,7 +46,9 @@ export default async function SiteLayout({
         <div className="wrap site-header__bar">
           <a href={localizedHref(lang, "/")} className="site-header__brand">
             <span className="site-header__brand-name">{site.name}</span>
-            <span className="site-header__brand-tagline">{site.tagline}</span>
+            {site.tagline ? (
+              <span className="site-header__brand-tagline">{site.tagline}</span>
+            ) : null}
           </a>
 
           {/* No-JS disclosure: on wide screens the panel below is forced

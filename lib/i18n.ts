@@ -541,6 +541,21 @@ const dict: Record<string, Record<Lang, string>> = {
     hi: 'व्यवसाय का नाम',
   },
   tagline_label: { en: 'Tagline', kn: 'ಟ್ಯಾಗ್‌ಲೈನ್', hi: 'टैगलाइन' },
+  hero_line_label: {
+    en: 'Hero line',
+    kn: 'ಮುಖಪುಟ ಸಾಲು',
+    hi: 'हीरो पंक्ति',
+  },
+  hero_photo_label: {
+    en: 'Hero photo',
+    kn: 'ಮುಖಪುಟ ಫೋಟೋ',
+    hi: 'हीरो तस्वीर',
+  },
+  hero_photo_hint: {
+    en: 'Optional. If left blank, a featured project photo is shown.',
+    kn: 'ಐಚ್ಛಿಕ. ಖಾಲಿ ಬಿಟ್ಟರೆ, ವೈಶಿಷ್ಟ್ಯಗೊಳಿಸಿದ ಯೋಜನೆಯ ಫೋಟೋ ತೋರಿಸಲಾಗುತ್ತದೆ.',
+    hi: 'वैकल्पिक. खाली छोड़ने पर एक विशेष परियोजना की तस्वीर दिखाई जाती है.',
+  },
   owners_label: { en: 'Owners', kn: 'ಮಾಲೀಕರು', hi: 'मालिक' },
   phone_label: { en: 'Phone', kn: 'ಫೋನ್', hi: 'फ़ोन' },
   whatsapp_number_label: {

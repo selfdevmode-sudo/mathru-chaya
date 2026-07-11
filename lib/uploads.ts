@@ -25,6 +25,7 @@ export function referencedUploads(content: Content): Set<string> {
   for (const award of content.awards) add(award.photo);
   content.gallery.forEach(add);
   add(content.about.heroPhoto);
+  add(content.site.heroPhoto);
 
   return set;
 }

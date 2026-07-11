@@ -17,16 +17,29 @@ export type Translations<T> = Partial<Record<TranslationLang, T>>;
 
 export interface SiteInfo {
   name: string;
-  tagline: string;
+  /** Short slogan under the business name. Optional — the hero omits it if blank. */
+  tagline?: string;
   owners: string[];
   phone: string;
   whatsapp: string;
   email?: string;
   region: string;
+  /**
+   * Editable hero sentence under the tagline on the home page. If blank, the
+   * built-in default (i18n `hero_line`) is shown instead.
+   */
+  heroLine?: string;
+  /**
+   * Editable hero image on the home page. If blank, the home page falls back to
+   * the featured (or first) project's cover photo.
+   */
+  heroPhoto?: string;
   i18n?: Translations<SiteTranslation>;
 }
 
-export type SiteTranslation = Partial<Pick<SiteInfo, "tagline" | "region">>;
+export type SiteTranslation = Partial<
+  Pick<SiteInfo, "tagline" | "region" | "heroLine">
+>;
 
 export interface Project {
   id: string;

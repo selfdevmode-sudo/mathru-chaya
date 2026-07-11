@@ -27,12 +27,14 @@ function normalizeContent(parsed: unknown): Content {
   return {
     site: {
       name: site.name ?? "",
-      tagline: site.tagline ?? "",
+      tagline: site.tagline,
       owners: arr<string>(site.owners),
       phone: site.phone ?? "",
       whatsapp: site.whatsapp ?? "",
       email: site.email,
       region: site.region ?? "",
+      heroLine: site.heroLine,
+      heroPhoto: site.heroPhoto,
       i18n: site.i18n,
     },
     projects: arr(c.projects),

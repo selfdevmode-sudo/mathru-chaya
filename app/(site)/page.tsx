@@ -16,14 +16,19 @@ export default async function HomePage() {
   const featured = projects.filter((p) => p.featured);
   const showcase = (featured.length > 0 ? featured : projects).slice(0, 3);
 
-  // Hero visual: the featured project's cover photo, falling back to the
-  // first project, falling back to nothing (renders a calm placeholder
-  // panel instead of a broken image — see .hero-frame--fallback below).
+  // Hero visual: an explicit photo set in Site Info wins; otherwise fall back
+  // to the featured project's cover photo, then the first project's, then
+  // nothing (renders a calm placeholder panel instead of a broken image — see
+  // .hero-frame--fallback below).
   const heroProject = projects.find((p) => p.featured) ?? projects[0];
-  const heroPhoto = heroProject?.photos[0];
-  const heroCaption = heroProject
-    ? [heroProject.title, heroProject.place].filter(Boolean).join(", ")
-    : "";
+  const heroPhoto = site.heroPhoto || heroProject?.photos[0];
+  // A caption only makes sense for the auto-picked project photo — a custom
+  // hero image isn't tied to any project, so it stays uncaptioned.
+  const heroCaption =
+    !site.heroPhoto && heroProject
+      ? [heroProject.title, heroProject.place].filter(Boolean).join(", ")
+      : "";
+  const heroAlt = site.heroPhoto ? site.name : (heroProject?.title ?? "");
 
   return (
     <>
@@ -35,8 +40,8 @@ export default async function HomePage() {
               {site.region}
             </p>
             <h1>{site.name}</h1>
-            <p className="tagline">{site.tagline}</p>
-            <p className="hero__line">{t(lang, "hero_line")}</p>
+            {site.tagline ? <p className="tagline">{site.tagline}</p> : null}
+            <p className="hero__line">{site.heroLine || t(lang, "hero_line")}</p>
             <div className="btn-row">
               <a href={localizedHref(lang, "/projects")} className="btn">
                 {t(lang, "cta_view_work")}
@@ -48,10 +53,10 @@ export default async function HomePage() {
           </div>
 
           <div className="hero__col hero__col--visual">
-            {heroPhoto && heroProject ? (
+            {heroPhoto ? (
               <figure className="hero-frame">
                 <div className="hero-frame__image">
-                  <img src={heroPhoto} alt={heroProject.title} />
+                  <img src={heroPhoto} alt={heroAlt} />
                 </div>
                 <div className="hero-frame__steps" aria-hidden="true">
                   <span className="hero-frame__step hero-frame__step--1" />
@@ -66,7 +71,7 @@ export default async function HomePage() {
             ) : (
               <div className="hero-frame hero-frame--fallback">
                 <KalyaniMark size={72} />
-                <p>{site.tagline}</p>
+                {site.tagline ? <p>{site.tagline}</p> : null}
               </div>
             )}
           </div>

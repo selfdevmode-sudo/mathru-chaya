@@ -53,6 +53,7 @@ export const ABOUT_FIELDS: TranslatableField[] = [
 
 export const SITE_FIELDS: TranslatableField[] = [
   { name: "tagline", kind: "text", labelKey: "tagline_label" },
+  { name: "heroLine", kind: "text", labelKey: "hero_line_label" },
   { name: "region", kind: "text", labelKey: "region_label" },
 ];
 

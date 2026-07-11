@@ -437,20 +437,36 @@ export async function updateAbout(formData: FormData): Promise<void> {
 
 export async function updateSiteInfo(formData: FormData): Promise<void> {
   const content = await readContent();
+  const before = referencedUploads(content);
+
+  // Uploading a new hero photo wins over the remove checkbox; otherwise the
+  // checkbox clears it (reverting to the auto project-photo fallback), and
+  // doing neither keeps what's already there.
+  const heroFile = oneFile(formData, "heroPhoto");
+  const clearHeroPhoto = formData.get("clearHeroPhoto") === "on";
+  const heroPhoto = heroFile
+    ? await saveUpload(heroFile)
+    : clearHeroPhoto
+      ? undefined
+      : content.site.heroPhoto;
 
   content.site = {
     name: reqStr(formData, "name") || content.site.name,
-    tagline: reqStr(formData, "tagline") || content.site.tagline,
+    // Optional — `str` returns undefined for an empty box, so clearing it works.
+    tagline: str(formData, "tagline"),
     owners: list(formData, "owners") || content.site.owners,
     phone: reqStr(formData, "phone") || content.site.phone,
     whatsapp: reqStr(formData, "whatsapp") || content.site.whatsapp,
     email: str(formData, "email"),
     region: reqStr(formData, "region") || content.site.region,
+    heroLine: str(formData, "heroLine"),
+    heroPhoto,
     i18n: readTranslations<SiteTranslation>(formData, SITE_FIELDS),
   };
   content.services = parseServices(formData, content.services, generateId);
 
   await writeContent(content);
+  await deleteOrphanedUploads(before, content);
   revalidateEverything();
   redirect("/admin/settings?saved=1");
 }

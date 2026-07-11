@@ -27,20 +27,34 @@ export default async function AdminSettingsPage({
 
       {params.saved ? <div className="success-banner">{t(lang, "saved")}</div> : null}
 
-      <form action={updateSiteInfo} className="form-card">
+      <form
+        action={updateSiteInfo}
+        className="form-card"
+        encType="multipart/form-data"
+      >
         <div className="field">
           <label htmlFor="name">{t(lang, "business_name")} *</label>
           <input id="name" name="name" type="text" required defaultValue={site.name} />
         </div>
 
         <div className="field">
-          <label htmlFor="tagline">{t(lang, "tagline_label")} *</label>
+          <label htmlFor="tagline">{t(lang, "tagline_label")}</label>
           <input
             id="tagline"
             name="tagline"
             type="text"
-            required
             defaultValue={site.tagline}
+          />
+        </div>
+
+        <div className="field">
+          <label htmlFor="heroLine">{t(lang, "hero_line_label")}</label>
+          <input
+            id="heroLine"
+            name="heroLine"
+            type="text"
+            defaultValue={site.heroLine}
+            placeholder={t(lang, "hero_line")}
           />
         </div>
 
@@ -91,6 +105,34 @@ export default async function AdminSettingsPage({
             defaultValue={site.region}
             placeholder="e.g. Udupi, Karnataka"
           />
+        </div>
+
+        {site.heroPhoto ? (
+          <div className="field">
+            <label>{t(lang, "current_photo")}</label>
+            <div className="existing-photos">
+              <div className="existing-photo">
+                <img src={site.heroPhoto} alt="" />
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        {site.heroPhoto ? (
+          <div className="checkbox-field field">
+            <input type="checkbox" id="clearHeroPhoto" name="clearHeroPhoto" />
+            <label htmlFor="clearHeroPhoto">{t(lang, "remove_photo")}</label>
+          </div>
+        ) : null}
+
+        <div className="field">
+          <label htmlFor="heroPhoto">
+            {site.heroPhoto
+              ? t(lang, "replace_photo")
+              : t(lang, "hero_photo_label")}
+          </label>
+          <input id="heroPhoto" name="heroPhoto" type="file" accept="image/*" />
+          <p className="hint">{t(lang, "hero_photo_hint")}</p>
         </div>
 
         <TranslationPanels fields={SITE_FIELDS} translations={site.i18n} lang={lang} />
