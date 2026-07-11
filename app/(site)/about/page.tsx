@@ -16,6 +16,7 @@ export default async function AboutPage() {
   const { about, services, testimonials, site } = content;
 
   const paragraphs = about.body.split("\n").filter((line) => line.trim() !== "");
+  const aside = Boolean(about.heroPhoto || about.yearsExperience);
 
   return (
     <div className="wrap section about">
@@ -27,41 +28,47 @@ export default async function AboutPage() {
           </p>
         ) : null}
         <h1>{t(lang, "about_us")}</h1>
-        {about.yearsExperience ? (
-          <p className="about-years">
-            <span className="about-years__num">{about.yearsExperience}</span>
-            <span className="about-years__label">
-              {t(lang, "years_experience_suffix")}
-            </span>
-          </p>
-        ) : null}
       </header>
 
-      {about.heroPhoto ? (
-        <figure className="hero-frame about-figure">
-          <div className="hero-frame__image">
-            <img src={about.heroPhoto} alt="" loading="lazy" />
-          </div>
-          <div className="hero-frame__steps" aria-hidden="true">
-            <span className="hero-frame__step hero-frame__step--1" />
-            <span className="hero-frame__step hero-frame__step--2" />
-            <span className="hero-frame__step hero-frame__step--3" />
-            <KalyaniMark size={16} className="hero-frame__mark" />
-          </div>
-        </figure>
-      ) : null}
+      <div className={aside ? "about-grid" : undefined}>
+        {aside ? (
+          <aside className="about-aside">
+            {about.heroPhoto ? (
+              <figure className="hero-frame about-figure">
+                <div className="hero-frame__image">
+                  <img src={about.heroPhoto} alt="" loading="lazy" />
+                </div>
+                <div className="hero-frame__steps" aria-hidden="true">
+                  <span className="hero-frame__step hero-frame__step--1" />
+                  <span className="hero-frame__step hero-frame__step--2" />
+                  <span className="hero-frame__step hero-frame__step--3" />
+                  <KalyaniMark size={16} className="hero-frame__mark" />
+                </div>
+              </figure>
+            ) : null}
+            {about.yearsExperience ? (
+              <p className="about-years">
+                <span className="about-years__num">{about.yearsExperience}</span>
+                <span className="about-years__label">
+                  {t(lang, "years_experience_suffix")}
+                </span>
+              </p>
+            ) : null}
+          </aside>
+        ) : null}
 
-      {paragraphs.length > 0 ? (
-        <div className="about-body">
-          {paragraphs.map((para, i) => (
-            <p key={i} className={i === 0 ? "about-body__lead" : undefined}>
-              {para}
-            </p>
-          ))}
-        </div>
-      ) : (
-        <p className="about-body">{t(lang, "about_empty")}</p>
-      )}
+        {paragraphs.length > 0 ? (
+          <div className="about-body">
+            {paragraphs.map((para, i) => (
+              <p key={i} className={i === 0 ? "about-body__lead" : undefined}>
+                {para}
+              </p>
+            ))}
+          </div>
+        ) : (
+          <p className="about-body">{t(lang, "about_empty")}</p>
+        )}
+      </div>
 
       {services.length > 0 ? (
         <>

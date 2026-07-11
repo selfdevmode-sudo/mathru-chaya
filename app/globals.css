@@ -1130,11 +1130,31 @@ html.force-mobile main {
   margin: 0;
 }
 
+/* Two-column body: a photo/stat sidebar on the left, the story filling the
+   rest, so the page uses the full width instead of hugging the left edge.
+   Desktop default; collapses to one column below 48rem and under
+   html.force-mobile. */
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(17rem, 21rem) 1fr;
+  gap: 1.75rem 2.75rem;
+  align-items: start;
+}
+
+.about-aside {
+  position: sticky;
+  top: 5.5rem;
+}
+
+.about-figure {
+  margin: 0;
+}
+
 .about-years {
   display: flex;
   align-items: baseline;
   gap: 0.5rem;
-  margin: 0.6rem 0 0;
+  margin: 1.1rem 0 0;
 }
 
 .about-years__num {
@@ -1150,18 +1170,6 @@ html.force-mobile main {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--c-text-soft);
-}
-
-/* The heritage photo, framed like the home hero, held to a calm size instead
-   of a raw full-bleed image. */
-.about-figure {
-  max-width: 34rem;
-  margin: 0 0 2rem;
-}
-
-/* Comfortable reading measure — long-form prose shouldn't run the full width. */
-.about-body {
-  max-width: 42rem;
 }
 
 .about-body p {
@@ -1186,22 +1194,16 @@ html.force-mobile main {
   margin-bottom: 1.1rem;
 }
 
-@media (max-width: 48rem) {
-  .about-figure {
-    max-width: 100%;
-  }
-
-  .about-years__num {
-    font-size: 1.7rem;
-  }
+html.force-mobile .about-grid {
+  grid-template-columns: 1fr;
 }
 
-html.force-mobile .about-figure {
-  max-width: 100%;
+html.force-mobile .about-aside {
+  position: static;
 }
 
-html.force-web .about-figure {
-  max-width: 34rem;
+html.force-web .about-grid {
+  grid-template-columns: minmax(17rem, 21rem) 1fr;
 }
 
 /* ---------- 404 ---------- */
@@ -1834,6 +1836,14 @@ html.force-web .about-figure {
 
   .hero__col--text {
     order: 1;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-aside {
+    position: static;
   }
 
   .nav-disclosure > summary {
