@@ -229,6 +229,7 @@ const dict: Record<string, Record<Lang, string>> = {
 
   // ---------- about page ----------
   about: { en: "About", kn: "ನಮ್ಮ ಬಗ್ಗೆ", hi: "हमारे बारे में" },
+  about_us: { en: "About Us", kn: "ನಮ್ಮ ಬಗ್ಗೆ", hi: "हमारे बारे में" },
   years_experience_suffix: {
     en: "years of experience",
     kn: "ವರ್ಷಗಳ ಅನುಭವ",

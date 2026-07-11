@@ -1117,6 +1117,93 @@ html.force-mobile main {
   margin-top: 0.75rem;
 }
 
+/* ---------- about page ----------
+   Editorial article layout on the site's own design language: kalyani-step
+   eyebrow, "About Us" heading (no business name), years as a quiet stat, the
+   heritage photo in the signature stepped frame, a lead paragraph, and a
+   readable text measure. */
+.about-head {
+  margin-bottom: 1.75rem;
+}
+
+.about-head h1 {
+  margin: 0;
+}
+
+.about-years {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0.6rem 0 0;
+}
+
+.about-years__num {
+  font-family: var(--font-head);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--c-accent);
+}
+
+.about-years__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--c-text-soft);
+}
+
+/* The heritage photo, framed like the home hero, held to a calm size instead
+   of a raw full-bleed image. */
+.about-figure {
+  max-width: 34rem;
+  margin: 0 0 2rem;
+}
+
+/* Comfortable reading measure — long-form prose shouldn't run the full width. */
+.about-body {
+  max-width: 42rem;
+}
+
+.about-body p {
+  margin: 0 0 1.1rem;
+}
+
+.about-body p:last-child {
+  margin-bottom: 0;
+}
+
+.about-body__lead {
+  font-size: 1.12rem;
+  line-height: 1.7;
+  color: var(--c-text);
+}
+
+.about-section {
+  margin-top: 0.5rem;
+}
+
+.about-section h2 {
+  margin-bottom: 1.1rem;
+}
+
+@media (max-width: 48rem) {
+  .about-figure {
+    max-width: 100%;
+  }
+
+  .about-years__num {
+    font-size: 1.7rem;
+  }
+}
+
+html.force-mobile .about-figure {
+  max-width: 100%;
+}
+
+html.force-web .about-figure {
+  max-width: 34rem;
+}
+
 /* ---------- 404 ---------- */
 
 .not-found {
