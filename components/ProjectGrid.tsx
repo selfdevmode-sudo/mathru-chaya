@@ -56,7 +56,7 @@ export default function ProjectGrid({
           >
             <div className={`card__photo${project.photos[0] ? "" : " placeholder"}`}>
               {project.photos[0] ? (
-                <img src={project.photos[0]} alt={project.title} />
+                <img src={project.photos[0]} alt={project.title} loading="lazy" />
               ) : (
                 <KalyaniMark size={44} />
               )}

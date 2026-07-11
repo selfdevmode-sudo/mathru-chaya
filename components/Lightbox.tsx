@@ -135,7 +135,7 @@ export default function Lightbox({
             onClick={(e) => open(i, e.currentTarget)}
             aria-label={labels.photoAriaLabels[i] ?? `${title} photo ${i + 1}`}
           >
-            <img src={photo} alt={`${title} photo ${i + 1}`} />
+            <img src={photo} alt={`${title} photo ${i + 1}`} loading="lazy" />
           </button>
         ))}
       </div>

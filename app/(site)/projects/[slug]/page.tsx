@@ -113,11 +113,11 @@ export default async function ProjectDetailPage({
           <h3>{t(lang, "before_after")}</h3>
           <div className="before-after">
             <figure>
-              <img src={project.beforeAfter.before} alt={`${project.title} before`} />
+              <img src={project.beforeAfter.before} alt={`${project.title} before`} loading="lazy" />
               <figcaption>{t(lang, "before")}</figcaption>
             </figure>
             <figure>
-              <img src={project.beforeAfter.after} alt={`${project.title} after`} />
+              <img src={project.beforeAfter.after} alt={`${project.title} after`} loading="lazy" />
               <figcaption>{t(lang, "after")}</figcaption>
             </figure>
           </div>

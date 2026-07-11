@@ -26,7 +26,7 @@ export default async function AwardsPage() {
             <div key={award.id} className="card award-card">
               <div className={`card__photo award-photo${award.photo ? "" : " placeholder"}`}>
                 {award.photo ? (
-                  <img src={award.photo} alt={award.title} />
+                  <img src={award.photo} alt={award.title} loading="lazy" />
                 ) : (
                   <KalyaniMark size={44} />
                 )}

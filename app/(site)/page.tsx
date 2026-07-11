@@ -87,7 +87,7 @@ export default async function HomePage() {
               >
                 <div className={`card__photo${project.photos[0] ? "" : " placeholder"}`}>
                   {project.photos[0] ? (
-                    <img src={project.photos[0]} alt={project.title} />
+                    <img src={project.photos[0]} alt={project.title} loading="lazy" />
                   ) : (
                     <KalyaniMark size={44} />
                   )}
@@ -125,7 +125,7 @@ export default async function HomePage() {
                 <div key={award.id} className="card award-card">
                   <div className={`card__photo award-photo${award.photo ? "" : " placeholder"}`}>
                     {award.photo ? (
-                      <img src={award.photo} alt={award.title} />
+                      <img src={award.photo} alt={award.title} loading="lazy" />
                     ) : (
                       <KalyaniMark size={44} />
                     )}

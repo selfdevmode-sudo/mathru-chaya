@@ -32,6 +32,7 @@ export default async function AboutPage() {
         <img
           src={about.heroPhoto}
           alt={site.name}
+          loading="lazy"
           style={{
             borderRadius: "var(--radius)",
             border: "1px solid var(--c-border)",
