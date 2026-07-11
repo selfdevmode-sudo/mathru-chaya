@@ -108,14 +108,44 @@ function readTranslations<T>(
 const ALLOWED_EXT = /^\.(jpg|jpeg|png|gif|webp|svg)$/;
 
 /**
+ * Downscales and re-encodes a raster photo so stored/served images are
+ * web-sized instead of multi-megabyte phone originals. Caps the long edge at
+ * 2000px (plenty for full-width display, even on retina), re-encodes at high
+ * quality, and `.rotate()` bakes in EXIF orientation so sideways phone photos
+ * come out upright.
+ *
+ * SVGs (and anything sharp can't process) are left untouched — rasterizing the
+ * seed icon SVGs would ruin them. On any failure the original bytes are used,
+ * so a compression problem never loses an upload.
+ */
+async function compressImage(bytes: Buffer, ext: string): Promise<Buffer> {
+  if (ext === ".svg" || ext === ".gif") return bytes; // vector / animated — leave as-is
+  try {
+    const sharp = (await import("sharp")).default;
+    const pipeline = sharp(bytes)
+      .rotate()
+      .resize(2000, 2000, { fit: "inside", withoutEnlargement: true });
+    if (ext === ".png") return await pipeline.png({ compressionLevel: 9 }).toBuffer();
+    if (ext === ".webp") return await pipeline.webp({ quality: 82 }).toBuffer();
+    return await pipeline.jpeg({ quality: 82, mozjpeg: true }).toBuffer();
+  } catch {
+    return bytes; // unreadable/odd image — store the original rather than fail
+  }
+}
+
+/**
  * Saves an uploaded image file to public/uploads/ and returns its public
  * URL path (e.g. "/uploads/1720000000-ab12cd.jpg"). Extension is sanitized
- * against an allow-list to avoid writing arbitrary file types.
+ * against an allow-list to avoid writing arbitrary file types, and raster
+ * photos are compressed on the way in (see compressImage).
  */
 export async function saveUpload(file: File): Promise<string> {
-  const bytes = Buffer.from(await file.arrayBuffer());
   const rawExt = path.extname(file.name || "").toLowerCase();
   const ext = ALLOWED_EXT.test(rawExt) ? rawExt : ".jpg";
+  const bytes = await compressImage(
+    Buffer.from(await file.arrayBuffer()),
+    ext,
+  );
   const name = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}${ext}`;
   const uploadDir = path.join(process.cwd(), "public", "uploads");
   await fs.mkdir(uploadDir, { recursive: true });

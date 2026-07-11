@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
   // (The full server + Docker version lives on `main`, tag `server-version`.)
   trailingSlash: true,
 
+  // sharp (used by saveUpload to compress photos) is a native module — keep it
+  // external so Next doesn't try to bundle its binary into the server build.
+  serverExternalPackages: ["sharp"],
+
   experimental: {
     serverActions: {
       // Photo uploads go through server actions, which default to a 1 MB body
