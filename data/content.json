@@ -1,180 +1,27 @@
 {
   "site": {
     "name": "Mathru chaya constructions",
-    "tagline": "Traditional temple & pond construction",
+    "tagline": "Temple, Pond & Building Construction",
     "owners": [
-      "Eshwara panduranga nayak"
+      "Eshwara Chandra"
     ],
-    "phone": "+919800000000",
-    "whatsapp": "919800000000",
-    "email": "akapanther@yopmail.com",
-    "region": "Sankala Kariya, Udupi, Karnataka"
+    "phone": "+919740273063",
+    "whatsapp": "919740273063",
+    "region": "Sankala Kariya, Udupi, Karnataka",
+    "i18n": {
+      "kn": {
+        "tagline": "ದೇವಾಲಯ, ಕೊಳ ಮತ್ತು ಕಟ್ಟಡ ನಿರ್ಮಾಣ",
+        "region": "ಸಂಕಲ ಕರಿಯ, ಉಡುಪಿ, ಕರ್ನಾಟಕ"
+      },
+      "hi": {
+        "tagline": "मंदिरों, तालाबों और इमारतों का निर्माण",
+        "region": "सांकला करिया, उडुपी, कर्नाटक"
+      }
+    }
   },
-  "projects": [
-    {
-      "id": "mrdif8jo-60x53l",
-      "slug": "sdfgh",
-      "title": "sdfgh",
-      "type": "pond",
-      "place": "Belman, Udupi",
-      "year": 2022,
-      "builtFor": "dfghj",
-      "description": "ghj",
-      "materials": [
-        "water",
-        "stone"
-      ],
-      "duration": "10 months",
-      "teamSize": "2",
-      "ledBy": "ankit v",
-      "status": "Completed",
-      "mapLink": "https://maps.google.com/?q=Kaup+Temple+Udupi",
-      "videoLink": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "photos": [
-        "/uploads/1783659040803-e5s1jc.png"
-      ],
-      "featured": true
-    },
-    {
-      "id": "mrdenc3j-jre38j",
-      "slug": "testt-tmepleme",
-      "title": "testt tmepleme",
-      "type": "renovation",
-      "place": "permude",
-      "year": 2022,
-      "builtFor": "owner:ankit",
-      "description": "testt tmepleme",
-      "materials": [
-        "testt tmepleme"
-      ],
-      "duration": "10 months",
-      "teamSize": "14 craftsmen",
-      "ledBy": "eshwaranner",
-      "status": "Completed",
-      "photos": [
-        "/uploads/1783595396862-ligvkn.jpg"
-      ],
-      "featured": false
-    },
-    {
-      "id": "mrddebge-82dol7",
-      "slug": "kaat-boggi",
-      "title": "a big temple",
-      "type": "temple",
-      "place": "permude",
-      "year": 1998,
-      "builtFor": "work:ankit",
-      "description": "built for peace",
-      "materials": [
-        "water",
-        "stone"
-      ],
-      "duration": "28 months",
-      "teamSize": "20",
-      "ledBy": "chaya",
-      "status": "completed",
-      "photos": [
-        "/uploads/1783593618194-b7pf2y.jpg",
-        "/uploads/1783593618194-xgm0y4.jpg",
-        "/uploads/1783659169454-qabo7l.jpg"
-      ],
-      "featured": true,
-      "beforeAfter": {
-        "before": "/uploads/1783593618195-3pze6v.png",
-        "after": "/uploads/1783593618196-wy11ob.jpg"
-      },
-      "i18n": {
-        "kn": {
-          "title": "ಒಂದು ದೊಡ್ಡ ದೇವಾಲಯ"
-        },
-        "hi": {
-          "title": "एक बड़ा मंदिर"
-        }
-      }
-    },
-    {
-      "id": "seed-temple",
-      "slug": "sri-venkataramana-temple",
-      "title": "Sri Venkataramana Temple",
-      "type": "temple",
-      "place": "Belman, Udupi",
-      "year": 2021,
-      "builtFor": "Kaup Temple Committee",
-      "description": "A complete reconstruction of the main sanctum and outer prakara in traditional Kerala-Tulunadu style, using hand-cut granite and a copper-clad roof over the garbhagriha. The work included fresh consecration (punah prathishta) on completion.",
-      "materials": [
-        "Granite",
-        "Teak wood",
-        "Copper roofing",
-        "Laterite"
-      ],
-      "duration": "10 months",
-      "teamSize": "14 craftsmen",
-      "ledBy": "Ramanna Acharya",
-      "status": "Completed",
-      "mapLink": "https://maps.google.com/?q=Kaup+Temple+Udupi",
-      "videoLink": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "photos": [
-        "/uploads/1783595280548-mgzh7v.jpg",
-        "/uploads/1783595280548-khp4j8.jpg"
-      ],
-      "beforeAfter": {
-        "before": "/uploads/seed-temple-before.svg",
-        "after": "/uploads/seed-temple-after.svg"
-      },
-      "featured": true,
-      "i18n": {
-        "kn": {
-          "title": "ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ",
-          "place": "ಬೆಳ್ಮಣ್, ಉಡುಪಿ",
-          "materials": [
-            "ಗ್ರಾನೈಟ್",
-            "ತೇಗದ ಮರ",
-            "ತಾಮ್ರದ ಛಾವಣಿ",
-            "ಲ್ಯಾಟರೈಟ್"
-          ],
-          "status": "ಪೂರ್ಣಗೊಂಡಿದೆ"
-        },
-        "hi": {
-          "title": "श्री वेंकटरमण मंदिर",
-          "place": "बेलमण, उडुपी"
-        }
-      }
-    },
-    {
-      "id": "seed-pond",
-      "slug": "temple-pushkarini",
-      "title": "Temple Pushkarini",
-      "type": "pond",
-      "photos": [
-        "/uploads/seed-pond-1.svg"
-      ]
-    }
-  ],
-  "awards": [
-    {
-      "id": "mrddev9w-acfm6c",
-      "title": "bow bow",
-      "givenBy": "ankit",
-      "year": 2026,
-      "photo": "/uploads/1783593322195-vjg0fw.jpg"
-    },
-    {
-      "id": "seed-award-1",
-      "title": "Best Heritage Restoration",
-      "givenBy": "Karnataka Temple Builders' Association",
-      "year": 2022,
-      "note": "Recognised for the restoration of Sri Venkataramana Temple, Kaup.",
-      "photo": "/uploads/1783659578225-lt5psc.jpg"
-    }
-  ],
-  "testimonials": [
-    {
-      "id": "seed-testimonial-1",
-      "name": "Suresh Kamath",
-      "quote": "Ramanna Acharya and his team rebuilt our village temple with so much care and devotion. The craftsmanship reminded elders of temples from a hundred years ago.",
-      "place": "Kaup"
-    }
-  ],
+  "projects": [],
+  "awards": [],
+  "testimonials": [],
   "services": [
     {
       "id": "svc-1",
@@ -192,9 +39,18 @@
       "blurb": "Careful restoration of old temples, preserving original design wherever possible."
     }
   ],
+  "gallery": [],
   "about": {
-    "body": "Shri Builders has been building and restoring temples and ponds across coastal Karnataka for three generations.\nWe specialise in traditional agama-shastra-compliant temple construction, gopura towers, and stepped pushkarinis, using hand-cut stone and time-tested methods passed down through our family.\nEvery project is carried out with the involvement of local priests and committees, from bhoomi puja to final consecration.",
-    "yearsExperience": 32,
-    "heroPhoto": "/uploads/seed-about-hero.svg"
+    "body": "Mathru Chaya Constructions specializes in traditional temple construction and stone craftsmanship. We follow the Vernacular architectural style of Tulunadu (Dakshina Kannada & Udupi) and Kasaragod, a traditional style of construction that uses local materials, time-tested building techniques, and designs suited to the region's climate and culture.\r\n\r\nWe undertake the construction of temples, Garbhagudis (sanctums), Kalyanis (temple ponds), Naga Sthanas, Daiva Sthanas, and other sacred structures with precision and devotion.\r\n\r\nWe work with two types of natural stone:\r\n• Kempu Kallu (Red Laterite Stone) – Widely used for houses, compound walls, traditional buildings, and other construction works.\r\n• Kappu Kallu (Black Stone) – Mainly used for Garbhagudis, temple carvings, stone pillars, Mantapas, and other sacred stone works.\r\n\r\nOur skilled artisans also create handcrafted stone sculptures, including Bootha Kallu, Daiva platforms, Moorthies (deity idols), Naga idols, stone pillars, Mantapas, and custom carvings. Every piece is carefully crafted with attention to detail and respect for tradition.\r\n\r\nWith generations of experience and a commitment to quality, we have successfully completed projects across Dakshina Kannada, Udupi, Bengaluru, Kasaragod, and Mumbai. Every project reflects our dedication to traditional craftsmanship, durability, and customer satisfaction.",
+    "yearsExperience": "30",
+    "heroPhoto": "/uploads/seed-about-hero.svg",
+    "i18n": {
+      "kn": {
+        "body": "ಮಾತೃ ಛಾಯಾ ಕನ್‌ಸ್ಟ್ರಕ್ಷನ್ಸ್ ಸಾಂಪ್ರದಾಯಿಕ ದೇವಾಲಯ ನಿರ್ಮಾಣ ಹಾಗೂ ಕಲ್ಲಿನ ಶಿಲ್ಪಕಲೆಯಲ್ಲಿ ಹಲವು ವರ್ಷಗಳ ಅನುಭವ ಹೊಂದಿದೆ. ನಾವು ತುಳುನಾಡು (ದಕ್ಷಿಣ ಕನ್ನಡ ಮತ್ತು ಉಡುಪಿ) ಹಾಗೂ ಕಾಸರಗೋಡು ಪ್ರದೇಶದ ವರ್ನಾಕ್ಯುಲರ್ (Vernacular) ವಾಸ್ತುಶೈಲಿಯನ್ನು ಅನುಸರಿಸಿ ನಿರ್ಮಾಣ ಕಾರ್ಯಗಳನ್ನು ಕೈಗೊಳ್ಳುತ್ತೇವೆ. ಈ ವಾಸ್ತುಶೈಲಿಯು ಸ್ಥಳೀಯ ಕಲ್ಲು, ಸ್ಥಳೀಯ ಹವಾಮಾನಕ್ಕೆ ಹೊಂದುವ ನಿರ್ಮಾಣ ವಿಧಾನಗಳು ಹಾಗೂ ತಲೆಮಾರುಗಳಿಂದ ಬಂದಿರುವ ಸಾಂಪ್ರದಾಯಿಕ ತಂತ್ರಜ್ಞಾನವನ್ನು ಆಧರಿಸಿದೆ.\r\n\r\nನಾವು ದೇವಾಲಯಗಳು, ಗರ್ಭಗುಡಿಗಳು, ಕಲ್ಯಾಣಿಗಳು (ದೇವಾಲಯದ ಕೆರೆಗಳು), ನಾಗಸ್ಥಾನಗಳು, ದೈವಸ್ಥಾನಗಳು ಹಾಗೂ ಇತರ ಪವಿತ್ರ ಕಟ್ಟಡಗಳ ನಿರ್ಮಾಣದಲ್ಲಿ ಪರಿಣತಿ ಹೊಂದಿದ್ದೇವೆ.\r\n\r\nನಾವು ಮುಖ್ಯವಾಗಿ ಎರಡು ವಿಧದ ನೈಸರ್ಗಿಕ ಕಲ್ಲುಗಳನ್ನು ಬಳಸುತ್ತೇವೆ:\r\n• ಕೆಂಪು ಕಲ್ಲು (Kempu Kallu / Laterite Stone) – ಮನೆಗಳು, ಕಾಂಪೌಂಡ್ ಗೋಡೆಗಳು, ಸಾಂಪ್ರದಾಯಿಕ ಕಟ್ಟಡಗಳು ಹಾಗೂ ಇತರ ನಿರ್ಮಾಣ ಕಾರ್ಯಗಳಿಗೆ ಬಳಸಲಾಗುತ್ತದೆ.\r\n• ಕಪ್ಪು ಕಲ್ಲು (Kappu Kallu / Black Stone) – ಗರ್ಭಗುಡಿಗಳು, ದೇವಾಲಯದ ಕೆತ್ತನೆಗಳು, ಕಲ್ಲಿನ ಕಂಬಗಳು, ಮಂಟಪಗಳು ಹಾಗೂ ಇತರ ಪವಿತ್ರ ಶಿಲ್ಪಕಲೆಗಳಿಗೆ ಬಳಸಲಾಗುತ್ತದೆ.\r\n\r\nನಮ್ಮ ಅನುಭವಿ ಶಿಲ್ಪಿಗಳು ಭೂತ ಕಲ್ಲು, ದೈವ ಪೀಠಗಳು, ದೇವರ ಮೂರ್ತಿಗಳು, ನಾಗ ಮೂರ್ತಿಗಳು, ಕಲ್ಲಿನ ಕಂಬಗಳು, ಮಂಟಪಗಳು ಹಾಗೂ ವಿವಿಧ ಕಸ್ಟಮ್ ಶಿಲ್ಪಗಳನ್ನು ಅತ್ಯಂತ ನಿಖರವಾಗಿ ಕೈಯಾರೆ ಕೆತ್ತಿ ನಿರ್ಮಿಸುತ್ತಾರೆ.\r\n\r\nತಲೆಮಾರುಗಳಿಂದ ಬಂದಿರುವ ಅನುಭವ ಹಾಗೂ ಗುಣಮಟ್ಟದ ಮೇಲಿನ ಬದ್ಧತೆಯೊಂದಿಗೆ, ನಾವು ದಕ್ಷಿಣ ಕನ್ನಡ, ಉಡುಪಿ, ಬೆಂಗಳೂರು, ಕಾಸರಗೋಡು ಹಾಗೂ ಮುಂಬೈ ಸೇರಿದಂತೆ ಹಲವು ಪ್ರದೇಶಗಳಲ್ಲಿ ಯಶಸ್ವಿಯಾಗಿ ಅನೇಕ ಯೋಜನೆಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸಿದ್ದೇವೆ. ನಮ್ಮ ಪ್ರತಿಯೊಂದು ಕೆಲಸವೂ ಸಂಪ್ರದಾಯ, ಗುಣಮಟ್ಟ, ಬಾಳಿಕೆ ಮತ್ತು ಗ್ರಾಹಕರ ವಿಶ್ವಾಸವನ್ನು ಪ್ರತಿಬಿಂಬಿಸುತ್ತದೆ."
+      },
+      "hi": {
+        "body": "मातृ छाया कंस्ट्रक्शन्स पारंपरिक मंदिर निर्माण और पत्थर की कारीगरी में माहिर है। हम तुलुनाडू (दक्षिण कन्नड़ और उडुपी) और कासरगोड की पारंपरिक वास्तुकला शैली (वर्नाक्युलर स्टाइल) को अपनाते हैं। इस शैली में स्थानीय सामग्री, समय-परखी निर्माण तकनीकों और उस क्षेत्र की जलवायु व संस्कृति के अनुकूल डिज़ाइनों का इस्तेमाल किया जाता है।\r\n\r\nहम पूरी सटीकता और श्रद्धा के साथ मंदिरों, गर्भगृहों, कल्याणियों (मंदिर के तालाबों), नाग स्थानों, दैव स्थानों और अन्य पवित्र संरचनाओं का निर्माण करते हैं।\r\n\r\nहम दो तरह के प्राकृतिक पत्थरों का इस्तेमाल करते हैं:\r\n• केम्पू कल्लू (लाल लैटेराइट पत्थर) – इसका इस्तेमाल घरों, कंपाउंड की दीवारों, पारंपरिक इमारतों और निर्माण के अन्य कामों में बड़े पैमाने पर किया जाता है।\r\n• कप्पू कल्लू (काला पत्थर) – इसका इस्तेमाल मुख्य रूप से गर्भगृहों, मंदिर की नक्काशी, पत्थर के खंभों, मंडपों और पत्थर से जुड़े अन्य पवित्र कामों में किया जाता है।\r\n\r\nहमारे कुशल कारीगर हाथ से पत्थर की मूर्तियां और कलाकृतियां भी बनाते हैं, जिनमें भूथा कल्लू, दैव प्लेटफॉर्म, मूर्तियां (देवताओं की प्रतिमाएं), नाग प्रतिमाएं, पत्थर के खंभे, मंडप और खास नक्काशी शामिल हैं। हर कलाकृति को बारीकियों पर ध्यान देते हुए और परंपरा का सम्मान करते हुए बड़ी सावधानी से बनाया जाता है।\r\n\r\nपीढ़ियों के अनुभव और गुणवत्ता के प्रति अपनी प्रतिबद्धता के साथ, हमने दक्षिण कन्नड़, उडुपी, बेंगलुरु, कासरगोड और मुंबई में कई प्रोजेक्ट सफलतापूर्वक पूरे किए हैं। हमारा हर प्रोजेक्ट पारंपरिक कारीगरी, मजबूती और ग्राहकों की संतुष्टि के प्रति हमारे समर्पण को दर्शाता है।"
+      }
+    }
   }
 }
