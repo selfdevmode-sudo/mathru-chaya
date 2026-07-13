@@ -5,9 +5,9 @@ import KalyaniMark from "@/components/KalyaniMark";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = {
-  title: "Awards & Recognition",
-};
+export async function generateMetadata() {
+  return { title: t(await getLang(), "nav_awards") };
+}
 
 export default async function AwardsPage() {
   const content = await readContent();

@@ -6,9 +6,9 @@ import KalyaniMark from "@/components/KalyaniMark";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = {
-  title: "About Us",
-};
+export async function generateMetadata() {
+  return { title: t(await getLang(), "section_about_us") };
+}
 
 export default async function AboutPage() {
   const lang = await getLang();

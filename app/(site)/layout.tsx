@@ -1,24 +1,69 @@
 import type { Metadata } from "next";
 import { readContent } from "@/lib/db";
 import { telLink, waLink } from "@/lib/format";
-import { getLang, t } from "@/lib/i18n";
+import { getLang, t, type Lang } from "@/lib/i18n";
 import { localizeSite } from "@/lib/localize";
 import { localizedHref } from "@/lib/paths";
+import { SITE_URL } from "@/lib/site-url";
 import ViewToggle from "@/components/ViewToggle";
 import LanguageLinks from "@/components/LanguageLinks";
 import NavAutoClose from "@/components/NavAutoClose";
 
 export const dynamic = "force-dynamic";
 
+/** og:locale wants a full locale tag, not the bare language code we store. */
+const OG_LOCALES: Record<Lang, string> = {
+  en: "en_IN",
+  kn: "kn_IN",
+  hi: "hi_IN",
+};
+
 export async function generateMetadata(): Promise<Metadata> {
   const content = await readContent();
-  const { name, tagline } = content.site;
+  const lang = await getLang();
+  const site = localizeSite(content.site, lang);
+  const { name, tagline } = site;
+  const title = tagline ? `${name} — ${tagline}` : name;
+
+  // The sentence a search result or share card shows under the title: the
+  // tagline if set, else the owner's hero line, else the built-in default —
+  // and undefined rather than "" if all three are blank, so we don't emit an
+  // empty <meta description>.
+  const description = tagline || site.heroLine || t(lang, "hero_line") || undefined;
+
+  // The picture that shows up when the owner sends the link on WhatsApp — by
+  // far how most customers will first see this site. Prefer the chosen hero,
+  // then the featured project's cover, then anything at all; a share card with
+  // no photo reads as a dead link.
+  const shareImage =
+    content.site.heroPhoto ||
+    content.projects.find((p) => p.featured)?.photos[0] ||
+    content.projects[0]?.photos[0] ||
+    content.gallery[0];
+
   return {
+    // Resolves the relative image path below (and any other relative metadata
+    // URL) against the real origin — WhatsApp/Facebook ignore relative og:image.
+    metadataBase: new URL(SITE_URL),
     title: {
-      default: tagline ? `${name} — ${tagline}` : name,
+      default: title,
       template: `%s — ${name}`,
     },
-    description: tagline,
+    description,
+    openGraph: {
+      type: "website",
+      siteName: name,
+      title,
+      description,
+      locale: OG_LOCALES[lang],
+      images: shareImage ? [shareImage] : undefined,
+    },
+    twitter: {
+      card: shareImage ? "summary_large_image" : "summary",
+      title,
+      description,
+      images: shareImage ? [shareImage] : undefined,
+    },
   };
 }
 

@@ -4,9 +4,9 @@ import Lightbox from "@/components/Lightbox";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = {
-  title: "Gallery",
-};
+export async function generateMetadata() {
+  return { title: t(await getLang(), "nav_gallery") };
+}
 
 export default async function GalleryPage() {
   const content = await readContent();

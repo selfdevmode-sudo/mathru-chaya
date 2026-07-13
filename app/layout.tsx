@@ -7,14 +7,20 @@ import {
   Noto_Serif_Kannada,
   Noto_Serif_Devanagari,
 } from "next/font/google";
+import { readContent } from "@/lib/db";
+import { getLang } from "@/lib/i18n";
 import "./globals.css";
 
 // Root layout is intentionally minimal — the public site chrome (header/nav/
 // footer) lives in app/(site)/layout.tsx and the admin chrome lives in
 // app/admin/(dashboard)/layout.tsx, so each area can look distinct.
-export const metadata: Metadata = {
-  title: "Shri Builders",
-};
+//
+// The business name comes from content, never a literal (ADR-0005). The public
+// site overrides this in app/(site)/layout.tsx; this is what the admin gets.
+export async function generateMetadata(): Promise<Metadata> {
+  const content = await readContent();
+  return { title: content.site.name };
+}
 
 // ---------------------------------------------------------------------------
 // Typography (self-hosted at build time via next/font/google — no CDN calls
@@ -86,13 +92,19 @@ const FONT_VARS = [
 // Mirrors what ViewToggle.tsx writes to localStorage.
 const VIEW_MODE_SCRIPT = `(function(){try{var m=localStorage.getItem("viewMode");var r=document.documentElement;if(m==="web"){r.classList.add("force-web");}else if(m==="mobile"){r.classList.add("force-mobile");}}catch(e){}})();`;
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // The language lives in a cookie, not the URL (the /kn and /hi prefixes are
+  // middleware rewrites), so <html lang> has to be resolved the same way every
+  // page resolves its strings. Getting this right matters for screen-reader
+  // pronunciation and for Google indexing the Kannada/Hindi pages as such.
+  const lang = await getLang();
+
   return (
-    <html lang="en" className={FONT_VARS}>
+    <html lang={lang} className={FONT_VARS}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: VIEW_MODE_SCRIPT }} />
       </head>

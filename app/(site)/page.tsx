@@ -78,44 +78,46 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {showcase.length > 0 ? (
+      {about?.body ? (
         <section className="section wrap">
-          <div className="section-head">
-            <h2>{t(lang, "section_our_work")}</h2>
-          </div>
-          <div className="grid">
-            {showcase.map((project) => (
-              <a
-                key={project.id}
-                href={localizedHref(lang, `/projects/${project.slug}`)}
-                className="card"
-              >
-                <div className={`card__photo${project.photos[0] ? "" : " placeholder"}`}>
-                  {project.photos[0] ? (
-                    <img src={project.photos[0]} alt={project.title} loading="lazy" />
-                  ) : (
-                    <KalyaniMark size={44} />
-                  )}
-                </div>
-                <div className="card__body">
-                  <h3>{project.title}</h3>
-                  {projectMetaLine(project, lang) ? (
-                    <p className="card__meta">{projectMetaLine(project, lang)}</p>
-                  ) : null}
-                </div>
-              </a>
-            ))}
-          </div>
+          <h2>{t(lang, "section_about_us")}</h2>
+          <p>{about.body.split("\n").filter(Boolean)[0]}</p>
+          <a href={localizedHref(lang, "/about")}>{t(lang, "read_more_about")}</a>
         </section>
       ) : null}
 
-      {about?.body ? (
+      {showcase.length > 0 ? (
         <>
-          <Divider />
+          {/* Only separate from About — with no About block this section sits
+              directly under the hero, which needs no divider. */}
+          {about?.body ? <Divider /> : null}
           <section className="section wrap">
-            <h2>{t(lang, "section_about_us")}</h2>
-            <p>{about.body.split("\n").filter(Boolean)[0]}</p>
-            <a href={localizedHref(lang, "/about")}>{t(lang, "read_more_about")}</a>
+            <div className="section-head">
+              <h2>{t(lang, "section_our_work")}</h2>
+            </div>
+            <div className="grid">
+              {showcase.map((project) => (
+                <a
+                  key={project.id}
+                  href={localizedHref(lang, `/projects/${project.slug}`)}
+                  className="card"
+                >
+                  <div className={`card__photo${project.photos[0] ? "" : " placeholder"}`}>
+                    {project.photos[0] ? (
+                      <img src={project.photos[0]} alt={project.title} loading="lazy" />
+                    ) : (
+                      <KalyaniMark size={44} />
+                    )}
+                  </div>
+                  <div className="card__body">
+                    <h3>{project.title}</h3>
+                    {projectMetaLine(project, lang) ? (
+                      <p className="card__meta">{projectMetaLine(project, lang)}</p>
+                    ) : null}
+                  </div>
+                </a>
+              ))}
+            </div>
           </section>
         </>
       ) : null}

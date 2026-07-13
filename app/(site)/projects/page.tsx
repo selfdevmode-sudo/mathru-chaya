@@ -6,9 +6,9 @@ import ProjectGrid from "@/components/ProjectGrid";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = {
-  title: "Our Work",
-};
+export async function generateMetadata() {
+  return { title: t(await getLang(), "section_our_work") };
+}
 
 export default async function ProjectsPage() {
   const content = await readContent();

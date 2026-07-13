@@ -80,6 +80,39 @@ async function crawl() {
   log(`wrote ${count} pages (${paths.length} paths × ${LANGS.length} languages) + 404`);
 }
 
+// robots.txt + sitemap.xml. Written here rather than as Next routes because the
+// static output is produced by crawling HTML pages — a /sitemap.xml route would
+// never be visited by the crawl, so it would simply not exist in out/.
+async function writeSeoFiles() {
+  const siteUrl = (process.env.SITE_URL || "").replace(/\/+$/, "");
+  if (!siteUrl) {
+    log(
+      "WARNING: SITE_URL is not set — skipping sitemap.xml and robots.txt, and " +
+        "share previews (WhatsApp/Facebook) will have no image. Set SITE_URL in " +
+        ".env to the real address of the site (e.g. https://example.pages.dev) " +
+        "and run this again.",
+    );
+    return;
+  }
+
+  const paths = await publicPaths();
+  const urls = LANGS.flatMap((lang) =>
+    paths.map((p) => `${siteUrl}${lang === "en" ? "" : `/${lang}`}${p}`),
+  );
+
+  const sitemap =
+    `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    urls.map((u) => `  <url><loc>${u}</loc></url>`).join("\n") +
+    `\n</urlset>\n`;
+  await writeFile(path.join(OUT, "sitemap.xml"), sitemap, "utf8");
+
+  const robots = `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml\n`;
+  await writeFile(path.join(OUT, "robots.txt"), robots, "utf8");
+
+  log(`wrote sitemap.xml (${urls.length} urls) and robots.txt for ${siteUrl}`);
+}
+
 async function copyAssets() {
   // client JS / CSS / fonts
   await cp(".next/static", path.join(OUT, "_next", "static"), {
@@ -106,6 +139,8 @@ async function main() {
     log("server up — crawling pages ...");
     await crawl();
     await copyAssets();
+    // After copyAssets, so nothing in public/ can shadow these.
+    await writeSeoFiles();
     log(`done. Static site is in ./${OUT}  — upload that folder to Cloudflare Pages.`);
   } finally {
     server.kill("SIGTERM");

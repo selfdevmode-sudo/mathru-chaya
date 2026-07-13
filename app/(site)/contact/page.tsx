@@ -5,9 +5,9 @@ import { localizeSite } from "@/lib/localize";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = {
-  title: "Contact Us",
-};
+export async function generateMetadata() {
+  return { title: t(await getLang(), "nav_contact") };
+}
 
 export default async function ContactPage() {
   const content = await readContent();
