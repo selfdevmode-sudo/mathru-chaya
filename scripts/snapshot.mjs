@@ -14,6 +14,15 @@ import { spawn } from "node:child_process";
 import { mkdir, writeFile, cp, rm, readFile } from "node:fs/promises";
 import path from "node:path";
 
+// Next loads .env for the app itself, but this script runs under plain node,
+// which does not — so without this, SITE_URL set in .env would be invisible
+// here and the sitemap/robots step would silently skip.
+try {
+  process.loadEnvFile(".env");
+} catch {
+  /* no .env file — env vars may still come from the shell */
+}
+
 const PORT = 4399;
 const ORIGIN = `http://127.0.0.1:${PORT}`;
 const OUT = "out";
