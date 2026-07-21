@@ -29,6 +29,9 @@ export default async function HomePage() {
       ? [heroProject.title, heroProject.place].filter(Boolean).join(", ")
       : "";
   const heroAlt = site.heroPhoto ? site.name : (heroProject?.title ?? "");
+  // Both the owner's line and the built-in default can be blank — in which case
+  // the paragraph is omitted rather than shipped empty (it has a bottom margin).
+  const heroLine = site.heroLine || t(lang, "hero_line");
 
   return (
     <>
@@ -41,7 +44,7 @@ export default async function HomePage() {
             </p>
             <h1>{site.name}</h1>
             {site.tagline ? <p className="tagline">{site.tagline}</p> : null}
-            <p className="hero__line">{site.heroLine || t(lang, "hero_line")}</p>
+            {heroLine ? <p className="hero__line">{heroLine}</p> : null}
             <div className="btn-row">
               <a href={localizedHref(lang, "/projects")} className="btn">
                 {t(lang, "cta_view_work")}

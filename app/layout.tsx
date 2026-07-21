@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import {
   Marcellus,
   Inter,
@@ -7,6 +7,7 @@ import {
   Noto_Serif_Kannada,
   Noto_Serif_Devanagari,
 } from "next/font/google";
+import { BRAND_BG } from "@/lib/brand";
 import { readContent } from "@/lib/db";
 import { getLang } from "@/lib/i18n";
 import "./globals.css";
@@ -19,8 +20,31 @@ import "./globals.css";
 // site overrides this in app/(site)/layout.tsx; this is what the admin gets.
 export async function generateMetadata(): Promise<Metadata> {
   const content = await readContent();
-  return { title: content.site.name };
+  return {
+    title: content.site.name,
+    // Built from the Kalyani mark by `npm run icons` (scripts/make-icons.mjs).
+    // Declared here rather than via Next's app/icon.* file convention because
+    // those become server routes, and the static site is produced by crawling
+    // HTML pages — a route nothing links to would never land in out/.
+    icons: {
+      icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    },
+    // Written at generate time by scripts/snapshot.mjs, for the same reason.
+    manifest: "/site.webmanifest",
+  };
 }
+
+export const viewport: Viewport = {
+  // Colours the phone browser's address bar to match the page instead of
+  // leaving it default grey.
+  themeColor: BRAND_BG,
+  // Lets the page paint into the area around the iPhone notch/home indicator,
+  // which is also what makes env(safe-area-inset-*) non-zero — globals.css
+  // uses those insets to keep the sticky call bar and the side gutters clear
+  // of the home indicator and the rounded corners.
+  viewportFit: "cover",
+};
 
 // ---------------------------------------------------------------------------
 // Typography (self-hosted at build time via next/font/google — no CDN calls

@@ -27,6 +27,8 @@ const PORT = 4399;
 const ORIGIN = `http://127.0.0.1:${PORT}`;
 const OUT = "out";
 const LANGS = ["en", "kn", "hi"];
+// --c-bg. Mirrors lib/brand.ts, which this plain-node script cannot import.
+const BRAND_BG = "#f3ece1";
 
 function log(msg) {
   console.log(`[generate] ${msg}`);
@@ -89,11 +91,59 @@ async function crawl() {
   log(`wrote ${count} pages (${paths.length} paths × ${LANGS.length} languages) + 404`);
 }
 
+// The web manifest — what a phone reads when the site (or the admin) is added
+// to the home screen. The business name comes from content, never a literal
+// (ADR-0005), so it is generated rather than a static file in public/. Same
+// reason as the sitemap below: it can't be a Next route, because the static
+// output is a crawl of linked HTML pages.
+async function writeManifest() {
+  const content = JSON.parse(await readFile("data/content.json", "utf8"));
+  const name = content.site?.name || "";
+
+  const manifest = {
+    name,
+    short_name: name,
+    start_url: "/",
+    display: "standalone",
+    background_color: BRAND_BG,
+    theme_color: BRAND_BG,
+    icons: [
+      { src: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { src: "/icon-512.png", sizes: "512x512", type: "image/png" },
+      {
+        src: "/icon-maskable.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "maskable",
+      },
+    ],
+  };
+
+  await writeFile(
+    path.join(OUT, "site.webmanifest"),
+    JSON.stringify(manifest, null, 2) + "\n",
+    "utf8",
+  );
+  log("wrote site.webmanifest");
+}
+
 // robots.txt + sitemap.xml. Written here rather than as Next routes because the
 // static output is produced by crawling HTML pages — a /sitemap.xml route would
 // never be visited by the crawl, so it would simply not exist in out/.
 async function writeSeoFiles() {
-  const siteUrl = (process.env.SITE_URL || "").replace(/\/+$/, "");
+  const siteUrl = (process.env.SITE_URL || "").trim().replace(/\/+$/, "");
+  if (siteUrl) {
+    // A bare domain with no scheme is the easiest thing to get wrong, and it
+    // would otherwise produce a sitemap full of unusable <loc>s.
+    try {
+      new URL(siteUrl);
+    } catch {
+      throw new Error(
+        `SITE_URL is not a valid URL: ${JSON.stringify(siteUrl)} — it needs ` +
+          `the scheme, e.g. https://example.pages.dev`,
+      );
+    }
+  }
   if (!siteUrl) {
     log(
       "WARNING: SITE_URL is not set — skipping sitemap.xml and robots.txt, and " +
@@ -149,6 +199,7 @@ async function main() {
     await crawl();
     await copyAssets();
     // After copyAssets, so nothing in public/ can shadow these.
+    await writeManifest();
     await writeSeoFiles();
     log(`done. Static site is in ./${OUT}  — upload that folder to Cloudflare Pages.`);
   } finally {

@@ -203,9 +203,9 @@ const dict: Record<string, Record<Lang, string>> = {
 
   // ---------- home page ----------
   hero_line: {
-    en: 'Temples, ponds and gopuras — built and restored in the traditional way.',
-    kn: 'ದೇವಸ್ಥಾನಗಳು, ಕೊಳಗಳು ಮತ್ತು ಗೋಪುರಗಳು — ಸಾಂಪ್ರದಾಯಿಕ ರೀತಿಯಲ್ಲಿ ನಿರ್ಮಿಸಿ ಜೀರ್ಣೋದ್ಧಾರಗೊಳಿಸಲಾಗುತ್ತದೆ.',
-    hi: 'मंदिर, तालाब और गोपुर — पारंपरिक तरीके से निर्मित और जीर्णोद्धारित।',
+    en: '',
+    kn: '',
+    hi: '',
   },
   section_our_work: { en: 'Our Work', kn: 'ನಮ್ಮ ಕೆಲಸ', hi: 'हमारा काम' },
   section_about_us: { en: 'About Us', kn: 'ನಮ್ಮ ಬಗ್ಗೆ', hi: 'हमारे बारे में' },
@@ -351,6 +351,11 @@ const dict: Record<string, Record<Lang, string>> = {
     en: 'Incorrect password. Please try again.',
     kn: 'ತಪ್ಪಾದ ಪಾಸ್‌ವರ್ಡ್. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.',
     hi: 'गलत पासवर्ड। कृपया फिर से प्रयास करें।',
+  },
+  login_not_configured: {
+    en: 'The server is missing SESSION_SECRET, so login cannot work. Ask Ankit to set it in .env.',
+    kn: 'ಸರ್ವರ್‌ನಲ್ಲಿ SESSION_SECRET ಇಲ್ಲ, ಆದ್ದರಿಂದ ಲಾಗಿನ್ ಕೆಲಸ ಮಾಡುವುದಿಲ್ಲ. ಅದನ್ನು .env ನಲ್ಲಿ ಹೊಂದಿಸಲು ಅಂಕಿತ್ ಅವರನ್ನು ಕೇಳಿ.',
+    hi: 'सर्वर में SESSION_SECRET नहीं है, इसलिए लॉगिन काम नहीं करेगा। इसे .env में सेट करने के लिए अंकित से कहें।',
   },
 
   // ---------- admin dashboard ----------

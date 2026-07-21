@@ -45,7 +45,7 @@
      html.force-mobile, where it clamps the whole page to a phone-width
      column so the mobile layout can be genuinely previewed on desktop. */
   --content-max: 64rem;
-  --grid-cols: repeat(auto-fit, minmax(15.5rem, 1fr));
+  --grid-cols: repeat(auto-fill, minmax(15.5rem, 1fr));
   --frame-max: none;
   --cta-display: none;
 }
@@ -147,10 +147,14 @@ ol {
 
 /* ---------- layout shell ---------- */
 
+/* The gutter never drops below 1.25rem, but on a notched phone held sideways
+   it grows to clear the rounded corner / camera cutout. The insets are only
+   non-zero because app/layout.tsx sets viewport-fit=cover. */
 .wrap {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: 0 1.25rem;
+  padding-left: max(1.25rem, env(safe-area-inset-left));
+  padding-right: max(1.25rem, env(safe-area-inset-right));
 }
 
 .site-header {
@@ -385,10 +389,14 @@ main {
   box-shadow: 0 -2px 10px rgba(61, 53, 41, 0.08);
 }
 
+/* The two buttons' colour runs all the way to the bottom edge, but their text
+   is lifted above the iPhone home-indicator strip by padding rather than
+   sitting under it. On phones with no inset (Android, older iPhones) the extra
+   padding is 0 and the bar looks exactly as before. */
 .mobile-cta-bar a {
   flex: 1;
   text-align: center;
-  padding: 0.85rem 0.5rem;
+  padding: 0.85rem 0.5rem calc(0.85rem + env(safe-area-inset-bottom, 0px));
   text-decoration: none;
   font-size: 0.95rem;
 }
@@ -404,18 +412,20 @@ main {
   border-left: 1px solid var(--c-border);
 }
 
+/* Clears the fixed bar above, whose own height now grows by the home-indicator
+   inset — so the last section of a page can't hide behind it. */
 @media (max-width: 640px) {
   :root {
     --cta-display: flex;
   }
 
   main {
-    padding-bottom: 5.5rem;
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
   }
 }
 
 html.force-mobile main {
-  padding-bottom: 5.5rem;
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
 }
 
 /* ---------- divider ---------- */
@@ -689,13 +699,23 @@ html.force-mobile main {
   transition: transform 0.3s ease;
 }
 
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(36, 31, 25, 0.1);
+/* Hover only where a pointer can actually hover. On a touchscreen the browser
+   applies :hover on tap and leaves it applied — so without this gate the card
+   stayed lifted and its photo stayed zoomed after the visitor came back from
+   the project page. Touch gets a pressed state instead (see :active below). */
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(36, 31, 25, 0.1);
+  }
+
+  .card:hover .card__photo img {
+    transform: scale(1.04);
+  }
 }
 
-.card:hover .card__photo img {
-  transform: scale(1.04);
+.card:active {
+  transform: scale(0.99);
 }
 
 .card__photo.placeholder {
@@ -817,7 +837,7 @@ html.force-mobile main {
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
   gap: 0.75rem;
   margin-bottom: 1.5rem;
 }
@@ -956,7 +976,7 @@ html.force-mobile main {
 
 .facts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
   gap: 1rem;
   border-top: 1px solid var(--c-border);
   border-bottom: 1px solid var(--c-border);
@@ -1102,7 +1122,7 @@ html.force-mobile main {
 .contact-grid {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
   margin: 1.5rem 0 2rem;
 }
 
@@ -1952,7 +1972,7 @@ html.force-mobile body {
 /* forced desktop preview — wins over the real viewport / force-mobile */
 html.force-web {
   --content-max: 64rem;
-  --grid-cols: repeat(auto-fit, minmax(15.5rem, 1fr));
+  --grid-cols: repeat(auto-fill, minmax(15.5rem, 1fr));
   --cta-display: none;
   --frame-max: none;
 }
@@ -2051,4 +2071,199 @@ figcaption,
 .site-nav,
 .mobile-cta-bar > * {
   min-width: 0;
+}
+
+/* ==========================================================================
+   PUBLIC POLISH
+   Added after the responsive section on purpose: these rules are either new
+   components (.section-empty) or deliberate overrides of the base styles
+   above (touch states, script-specific typography), and they must win.
+   ========================================================================== */
+
+/* ---------- empty sections ----------
+   The public pages used to reuse the admin's .empty-state — a white box with a
+   dashed grey border — which reads as an unfinished CMS rather than a page of
+   the site. This is the same message dressed in the site's own materials.
+   These pages are unlinked from the nav while empty (app/(site)/layout.tsx), so
+   this is only reached from a direct or stale link — it still has to look
+   deliberate. */
+.section-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  color: var(--c-text-soft);
+}
+
+.section-empty__mark {
+  color: var(--c-gold);
+}
+
+.section-empty p {
+  margin: 0;
+  max-width: 28rem;
+}
+
+/* ---------- a grid holding a single item ----------
+   auto-fill (see --grid-cols) already stops one card from stretching across the
+   whole 64rem, but a lone card marooned at the left edge of an empty row reads
+   as a layout accident. Centre it and hold it to a card-like width. Only fires
+   when there is exactly one child, so it never touches a populated grid. */
+.grid:has(> :only-child),
+.award-grid:has(> :only-child) {
+  grid-template-columns: minmax(0, 24rem);
+  justify-content: center;
+}
+
+/* ---------- touch + focus states ----------
+   There was no :active anywhere in this file, so every button, filter, nav link
+   and card gave a phone visitor no feedback that their tap had registered — the
+   one thing touch UI has to do. And :focus-visible existed on two selectors, so
+   keyboard users mostly got the UA default ring, which is near-invisible on
+   this beige. */
+.btn:active,
+.filter-btn:active,
+.lang-switch__btn:active,
+.view-toggle__btn:active,
+.site-nav a:active,
+.contact-card:active {
+  transform: translateY(1px);
+}
+
+.btn:active {
+  background: var(--c-accent-deep);
+}
+
+@media (hover: hover) {
+  .filter-btn:hover {
+    border-color: var(--c-accent);
+  }
+}
+
+.btn:focus-visible,
+.btn-block:focus-visible,
+.filter-btn:focus-visible,
+.lang-switch__btn:focus-visible,
+.view-toggle__btn:focus-visible,
+.card:focus-visible,
+.site-nav a:focus-visible,
+.site-header__brand:focus-visible,
+.nav-disclosure > summary:focus-visible,
+.section-empty a:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+/* ---------- Kannada / Hindi typography ----------
+   The base heading and label styles are tuned for Latin and actively damage
+   these scripts: negative tracking pulls Devanagari conjuncts and the shirorekha
+   into each other; a 1.12 line-height is too tight for matras that sit well
+   above and below the Latin em box (at that height the lines touch); and
+   `text-transform: uppercase` does nothing to Kannada/Hindi except let the
+   0.16em tracking detach matras from their consonants. So the Latin-only
+   treatments are scoped to English, and kn/hi get room to breathe.
+
+   `hyphens: auto` is dropped for the same reason — no hyphenation dictionary
+   exists for these scripts — and `overflow-wrap: anywhere` becomes break-word,
+   so a long word breaks at a sensible point rather than mid-syllable. */
+html[lang="kn"] h1,
+html[lang="hi"] h1,
+html[lang="kn"] h2,
+html[lang="hi"] h2,
+html[lang="kn"] h3,
+html[lang="hi"] h3,
+html[lang="kn"] h4,
+html[lang="hi"] h4 {
+  letter-spacing: normal;
+  line-height: 1.45;
+  overflow-wrap: break-word;
+  hyphens: manual;
+}
+
+html[lang="kn"] h1,
+html[lang="hi"] h1 {
+  line-height: 1.35;
+}
+
+html[lang="kn"] .eyebrow,
+html[lang="hi"] .eyebrow,
+html[lang="kn"] .badge,
+html[lang="hi"] .badge,
+html[lang="kn"] .facts dt,
+html[lang="hi"] .facts dt,
+html[lang="kn"] .about-years__label,
+html[lang="hi"] .about-years__label,
+html[lang="kn"] .site-header__brand-tagline,
+html[lang="hi"] .site-header__brand-tagline {
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* The 2-line clamp on card titles cuts to the line box, which slices the bottom
+   vowel signs off the second line in these scripts. A looser line-height inside
+   the clamped box keeps the descenders inside it. */
+html[lang="kn"] .card h3,
+html[lang="hi"] .card h3 {
+  line-height: 1.5;
+}
+
+/* ---------- controls that shouldn't reach a phone visitor ----------
+   The web/mobile view toggle is a preview control for building the site: on a
+   real phone, tapping the monitor icon forces html.force-web — a 64rem desktop
+   layout with no call bar, on a 360px screen — and the visitor has no idea what
+   they did or how to undo it. Show it only where there's a real pointer. */
+.view-toggle {
+  display: none;
+}
+
+@media (pointer: fine) {
+  .view-toggle {
+    display: flex;
+  }
+}
+
+/* The language pills are the only white thing on a beige header (they hardcoded
+   #fff, which ADR-0006 bans anyway), and at ~24px tall they were well under a
+   comfortable thumb target inside the mobile nav panel. */
+.lang-switch__btn {
+  background: var(--c-bg);
+}
+
+@media (pointer: coarse) {
+  .lang-switch__btn,
+  .site-nav a {
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* Separate the language switcher from the nav links it sits under in the mobile
+   dropdown — they were three flex children with nothing between them. Only in
+   the collapsed panel: on desktop the same panel is a single inline row, where
+   a rule above the language pills would make no sense. */
+@media (max-width: 48rem) {
+  .nav-disclosure__panel .lang-switch {
+    border-top: 1px solid var(--c-border);
+    padding-top: 0.85rem;
+    width: 100%;
+  }
+}
+
+html.force-mobile .nav-disclosure__panel .lang-switch {
+  border-top: 1px solid var(--c-border);
+  padding-top: 0.85rem;
+  width: 100%;
+}
+
+html.force-web .nav-disclosure__panel .lang-switch {
+  border-top: none;
+  padding-top: 0;
+  width: auto;
 }

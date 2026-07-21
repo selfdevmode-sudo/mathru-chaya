@@ -2,6 +2,8 @@ import { readContent } from "@/lib/db";
 import { PROJECT_TYPES } from "@/lib/types";
 import { getLang, t } from "@/lib/i18n";
 import { localizeProject } from "@/lib/localize";
+import { localizedHref } from "@/lib/paths";
+import EmptyState from "@/components/EmptyState";
 import ProjectGrid from "@/components/ProjectGrid";
 
 export const dynamic = "force-dynamic";
@@ -25,7 +27,11 @@ export default async function ProjectsPage() {
     <div className="wrap section">
       <div className="section-head">
         <h1>{t(lang, "projects_heading")}</h1>
-        <p>{t(lang, "projects_subheading")}</p>
+        {/* The subheading is blank by default — render nothing rather than an
+            empty <p>, which would still take up its margin. */}
+        {t(lang, "projects_subheading") ? (
+          <p>{t(lang, "projects_subheading")}</p>
+        ) : null}
       </div>
 
       {projects.length > 0 ? (
@@ -36,7 +42,11 @@ export default async function ProjectsPage() {
           allLabel={t(lang, "filter_all")}
         />
       ) : (
-        <div className="empty-state">{t(lang, "projects_empty")}</div>
+        <EmptyState
+          message={t(lang, "projects_empty")}
+          actionHref={localizedHref(lang, "/contact")}
+          actionLabel={t(lang, "nav_contact")}
+        />
       )}
     </div>
   );

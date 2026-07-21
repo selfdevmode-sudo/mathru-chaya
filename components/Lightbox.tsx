@@ -13,6 +13,9 @@ export interface LightboxLabels {
   viewerAriaLabel: string;
 }
 
+/** How far a touch must travel horizontally to count as a swipe, not a tap. */
+const SWIPE_MIN_PX = 45;
+
 const DEFAULT_LABELS: LightboxLabels = {
   closePhotoViewer: "Close photo viewer",
   previousPhoto: "Previous photo",
@@ -78,6 +81,51 @@ export default function Lightbox({
   }, [photos.length]);
 
   const rotate = useCallback(() => setRotation((r) => (r + 90) % 360), []);
+
+  // Swipe left/right to move between photos — what everyone tries first on a
+  // phone, where the prev/next buttons are small targets. A gesture only counts
+  // if it travelled far enough to be deliberate and was more horizontal than
+  // vertical, so a scroll or a stray thumb doesn't skip a photo.
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  // A swipe that ends on the backdrop still produces a click, which would close
+  // the viewer the moment you changed photo. This suppresses that one click.
+  const justSwiped = useRef(false);
+
+  const onTouchStart = useCallback((e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    touchStart.current = { x: touch.clientX, y: touch.clientY };
+    // Cleared here, not only when consumed: a swipe that starts on the image
+    // has its click stopped by the image itself, so the flag would otherwise
+    // survive and swallow the next genuine tap-to-close.
+    justSwiped.current = false;
+  }, []);
+
+  const onTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      const start = touchStart.current;
+      touchStart.current = null;
+      if (!start || photos.length < 2) return;
+
+      const touch = e.changedTouches[0];
+      const dx = touch.clientX - start.x;
+      const dy = touch.clientY - start.y;
+      if (Math.abs(dx) < SWIPE_MIN_PX || Math.abs(dx) <= Math.abs(dy)) return;
+
+      justSwiped.current = true;
+      // Swiping left pulls the next photo in from the right, like a camera roll.
+      if (dx < 0) next();
+      else prev();
+    },
+    [photos.length, next, prev],
+  );
+
+  const onBackdropClick = useCallback(() => {
+    if (justSwiped.current) {
+      justSwiped.current = false;
+      return;
+    }
+    close();
+  }, [close]);
 
   // Keyboard: Escape closes, arrows navigate, and Tab is trapped inside the
   // dialog so focus can't wander to the page behind the modal overlay.
@@ -147,7 +195,9 @@ export default function Lightbox({
           role="dialog"
           aria-modal="true"
           aria-label={labels.viewerAriaLabel}
-          onClick={close}
+          onClick={onBackdropClick}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
         >
           <div className="lightbox__toolbar">
             <button

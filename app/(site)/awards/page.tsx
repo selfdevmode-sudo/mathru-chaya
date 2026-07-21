@@ -1,6 +1,8 @@
 import { readContent } from "@/lib/db";
 import { getLang, t } from "@/lib/i18n";
 import { localizeAward } from "@/lib/localize";
+import { localizedHref } from "@/lib/paths";
+import EmptyState from "@/components/EmptyState";
 import KalyaniMark from "@/components/KalyaniMark";
 
 export const dynamic = "force-dynamic";
@@ -45,7 +47,11 @@ export default async function AwardsPage() {
           ))}
         </div>
       ) : (
-        <div className="empty-state">{t(lang, "awards_empty")}</div>
+        <EmptyState
+          message={t(lang, "awards_empty")}
+          actionHref={localizedHref(lang, "/contact")}
+          actionLabel={t(lang, "nav_contact")}
+        />
       )}
     </div>
   );

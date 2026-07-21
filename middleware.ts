@@ -42,13 +42,23 @@ export function middleware(request: NextRequest) {
 
   // 2. Admin auth — only for /admin/*.
   if (pathname.startsWith("/admin")) {
-    if (pathname === "/admin/login") {
+    // Compare without the trailing slash. next.config.ts sets
+    // `trailingSlash: true`, and Next's canonicalizing 308 runs BEFORE
+    // middleware — so the login page actually arrives here as
+    // "/admin/login/". An exact match on "/admin/login" therefore never fired:
+    // the login page fell through to the auth check below, was redirected to
+    // "/admin/login", 308'd back to "/admin/login/", and looped until the
+    // browser gave up. Any logged-out visit (expired cookie, logout, new
+    // browser) bricked the admin.
+    if (pathname.replace(/\/$/, "") === "/admin/login") {
       return NextResponse.next();
     }
     const cookie = request.cookies.get(SESSION_COOKIE_NAME)?.value;
     const secret = process.env.SESSION_SECRET;
     if (!secret || cookie !== secret) {
-      return NextResponse.redirect(new URL("/admin/login", request.url));
+      // Trailing slash to match trailingSlash:true — otherwise every guarded
+      // request costs an extra 308 hop.
+      return NextResponse.redirect(new URL("/admin/login/", request.url));
     }
   }
 

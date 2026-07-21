@@ -76,14 +76,37 @@ export default async function SiteLayout({
   const lang = await getLang();
   const site = localizeSite(content.site, lang);
 
+  // A link to a section the owner hasn't filled in yet is worse than no link:
+  // the visitor taps "Awards", lands on an empty page, and reads the whole site
+  // as unfinished. So each content-backed link is shown only once it has
+  // something to show — and reappears on its own the moment the owner adds the
+  // first award/project/photo. Home and Contact always work, so they're
+  // unconditional. The pages themselves still exist and still render (with a
+  // proper empty state) for anyone arriving on a direct or stale link.
   const NAV_LINKS = [
-    { href: "/", label: t(lang, "nav_home") },
-    { href: "/projects", label: t(lang, "nav_projects") },
-    { href: "/gallery", label: t(lang, "nav_gallery") },
-    { href: "/about", label: t(lang, "nav_about") },
-    { href: "/awards", label: t(lang, "nav_awards") },
-    { href: "/contact", label: t(lang, "nav_contact") },
-  ];
+    { href: "/", label: t(lang, "nav_home"), show: true },
+    {
+      href: "/projects",
+      label: t(lang, "nav_projects"),
+      show: content.projects.length > 0,
+    },
+    {
+      href: "/gallery",
+      label: t(lang, "nav_gallery"),
+      show: content.gallery.length > 0,
+    },
+    {
+      href: "/about",
+      label: t(lang, "nav_about"),
+      show: Boolean(content.about.body.trim()),
+    },
+    {
+      href: "/awards",
+      label: t(lang, "nav_awards"),
+      show: content.awards.length > 0,
+    },
+    { href: "/contact", label: t(lang, "nav_contact"), show: true },
+  ].filter((link) => link.show);
 
   return (
     <>

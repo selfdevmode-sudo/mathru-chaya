@@ -1,5 +1,7 @@
 import { readContent } from "@/lib/db";
 import { getLang, t } from "@/lib/i18n";
+import { localizedHref } from "@/lib/paths";
+import EmptyState from "@/components/EmptyState";
 import Lightbox from "@/components/Lightbox";
 
 export const dynamic = "force-dynamic";
@@ -38,7 +40,11 @@ export default async function GalleryPage() {
           }}
         />
       ) : (
-        <div className="empty-state">{t(lang, "gallery_empty")}</div>
+        <EmptyState
+          message={t(lang, "gallery_empty")}
+          actionHref={localizedHref(lang, "/contact")}
+          actionLabel={t(lang, "nav_contact")}
+        />
       )}
     </div>
   );

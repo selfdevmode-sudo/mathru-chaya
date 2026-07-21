@@ -12,6 +12,9 @@ export default async function AdminLoginPage({
 }) {
   const params = await searchParams;
   const hasError = params.error === "1";
+  // A misconfigured server (no SESSION_SECRET) would otherwise look identical
+  // to a wrong password — see lib/auth.ts.
+  const hasConfigError = params.error === "config";
   const lang = await getLang();
 
   return (
@@ -22,6 +25,10 @@ export default async function AdminLoginPage({
 
         {hasError ? (
           <div className="error-banner">{t(lang, "incorrect_password")}</div>
+        ) : null}
+
+        {hasConfigError ? (
+          <div className="error-banner">{t(lang, "login_not_configured")}</div>
         ) : null}
 
         <form action={login}>
