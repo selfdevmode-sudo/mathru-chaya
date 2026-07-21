@@ -24,6 +24,39 @@
   },
   "projects": [
     {
+      "id": "mrup2cap-ok682t",
+      "slug": "sri-panchalingeshwara-temple-edamangala",
+      "title": "Sri Panchalingeshwara Temple – Edamangala",
+      "type": "temple",
+      "place": "Edamangala",
+      "year": 2018,
+      "description": "The construction work of this temple commenced in 2012, and the Brahmakalashotsava (grand consecration ceremony) was celebrated in March 2018.\r\n\r\nThe Garbhagriha (sanctum sanctorum) here is built in the Gajaprishta (elephant-backed/apsidal) architectural style, and features an Edanala (inner passageway) and a Navaranga (nine-bayed central hall). In front of the sanctum sanctorum, there is a Namaskara Mandapa (pavilion for prostration), which is surrounded by a Suttupouli (outer circumambulatory courtyard) and a Dhwajastambha (sacred flagstaff).\r\n\r\nThe sanctum sanctorum, the Namaskara Mandapa, and the pedestal of the flagstaff here have been crafted using granite stone from Doddaballapura, finished to a high degree of precision (four-thread smoothness). \r\n\r\nLord Sri Panchalingeshwara reigns supreme in this sacred place (Kshetra), and the Sri Durgaparameshwari Temple is located nearby.",
+      "ledBy": "Eshwara Chandra",
+      "status": "Completed",
+      "mapLink": "https://maps.app.goo.gl/kzdYcNh3ocUYzZ788",
+      "photos": [
+        "/uploads/1784641066264-dvlzoo.jpeg",
+        "/uploads/1784641066385-h02qgi.jpeg",
+        "/uploads/1784641066375-xip47s.jpeg",
+        "/uploads/1784641066368-b8dh6s.jpeg",
+        "/uploads/1784641066667-keg05x.jpeg"
+      ],
+      "featured": true,
+      "i18n": {
+        "kn": {
+          "title": "ಶ್ರೀ ಪಂಚಲಿಂಗೇಶ್ವರ ದೇವಸ್ಥಾನ – ಎಡಮಂಗಲ",
+          "place": "ಎಡಮಂಗಲ",
+          "description": "ಈ ದೇವಸ್ಥಾನದ ನಿರ್ಮಾಣ ಕಾರ್ಯವು 2012ರಲ್ಲಿ ಪ್ರಾರಂಭವಾಗಿ, 2018ನೇ ಮಾರ್ಚ್ ತಿಂಗಳಲ್ಲಿ ಬ್ರಹ್ಮಕಲಶೋತ್ಸವ ನೆರವೇರಿತು.\r\n\r\nಇಲ್ಲಿಯ ಗರ್ಭಗೃಹವು ಗಜಪೃಷ್ಠಾಕೃತಿಯಲ್ಲಿದ್ದು, ಎಡನಾಳ ಹಾಗೂ ನವರಂಗವನ್ನು ಹೊಂದಿದೆ. ಗರ್ಭಗೃಹದ ಎದುರು ನಮಸ್ಕಾರ ಮಂಟಪವಿದ್ದು, ಸುತ್ತುಪೌಳಿ ಹಾಗೂ ಧ್ವಜಸ್ತಂಭವನ್ನು ಹೊಂದಿದೆ.\r\n\r\nಇಲ್ಲಿನ ಗರ್ಭಗೃಹ, ನಮಸ್ಕಾರ ಮಂಟಪ ಹಾಗೂ ಧ್ವಜಸ್ತಂಭದ ಪೀಠವನ್ನು ದೊಡ್ಡಬಳ್ಳಾಪುರದ ಶಿಲಾಕಲ್ಲಿನಲ್ಲಿ ನಾಲ್ಕು ನೂಲು ನಯಗೊಳಿಸಿ ನಿರ್ಮಿಸಲಾಗಿದೆ.\r\n\r\nಈ ಕ್ಷೇತ್ರದಲ್ಲಿ ಶ್ರೀ ಪಂಚಲಿಂಗೇಶ್ವರ ದೇವರು ವಿರಾಜಮಾನರಾಗಿದ್ದು, ಸನಿಹದಲ್ಲಿಯೇ ಶ್ರೀ ದುರ್ಗಾಪರಮೇಶ್ವರಿ ದೇವಸ್ಥಾನವಿದೆ.",
+          "status": "ಪೂರ್ಣಗೊಂಡಿದೆ"
+        },
+        "hi": {
+          "title": "श्री पंचलिंगेश्वर मंदिर - एडमंगला",
+          "place": "एडमंगला",
+          "description": "इस मंदिर का निर्माण 2012 में शुरू हुआ था और ब्रह्म कलाशोत्सव मार्च 2018 में आयोजित किया गया था।\r\n\r\nयहाँ का गर्भगृह वर्गाकार है, जिसमें बाईं ओर नाभि और नवरंग हैं। गर्भगृह के सामने नमस्कार मंडप है, जिसमें सुत्तुपौली और ध्वज स्तंभ है।\r\n\r\nयहाँ का गर्भगृह, नमस्कार मंडप और ध्वज स्तंभ का आधार डोड्डाबल्लापुरा से प्राप्त पॉलिश किए हुए पत्थरों की चार परतों से बना है।\r\n\r\nइस क्षेत्र के देवता भगवान पंचलिंगेश्वर हैं और श्री दुर्गापरमेश्वरी मंदिर पास में ही स्थित है।"
+        }
+      }
+    },
+    {
       "id": "mrgkzdwb-em4q40",
       "slug": "mardala-shri-mahalingeshwara-temple",
       "title": "Mardala Shri Mahalingeshwara Temple",
@@ -80,17 +113,33 @@
           "blurb": "पारंपरिक पुष्करणी निर्माण तथा टिकाऊ पत्थर शिल्पकला।"
         }
       }
+    },
+    {
+      "id": "mruq8xj6-dhj0nh",
+      "name": "Naga Bana Construction",
+      "blurb": "Creating and restoring sacred serpent groves with traditional layouts and deep reverence for the unique rituals of Dakshina Kannada and Udupi districts.",
+      "i18n": {
+        "kn": {
+          "name": "ನಾಗಬನ ನಿರ್ಮಾಣ",
+          "blurb": "ದಕ್ಷಿಣ ಕನ್ನಡ ಮತ್ತು ಉಡುಪಿ ಜಿಲ್ಲೆಗಳ ವಿಶಿಷ್ಟ ಧಾರ್ಮಿಕ ವಿಧಿವಿಧಾನಗಳಿಗೆ ಅನುಗುಣವಾಗಿ, ಸಾಂಪ್ರದಾಯಿಕ ಶೈಲಿಯಲ್ಲಿ ನಾಗಬನಗಳ ನೂತನ ನಿರ್ಮಾಣ ಮತ್ತು ಜೀರ್ಣೋದ್ಧಾರ."
+        }
+      }
+    },
+    {
+      "id": "mruq8xj6-0ke3d5",
+      "name": "Daiva Sana, Gudis & Katte",
+      "blurb": "Designing authentic shrines for regional deities, Building traditional small stone shrines (Gudis) and sacred raised stone platforms (Kattes) for daily community worship and rest.",
+      "i18n": {
+        "kn": {
+          "name": "ದೈವಸ್ಥಾನ, ಗುಡಿ ಮತ್ತು ಕಟ್ಟೆಗಳು",
+          "blurb": "ಕರಾವಳಿಯ ಆರಾಧ್ಯ ದೈವಗಳ ಭವ್ಯ ದೈವಸ್ಥಾನಗಳ ವಿನ್ಯಾಸ ಹಾಗೂ ದೈನಂದಿನ ಆರಾಧನೆಗಾಗಿ ಮತ್ತು ಭಕ್ತರ ವಿಶ್ರಾಂತಿಗಾಗಿ ಸಾಂಪ್ರದಾಯಿಕ ಕಲ್ಲಿನ ಕಟ್ಟೆಗಳು ಮತ್ತು ಕಲಾತ್ಮಕ ಸಣ್ಣ ಗುಡಿಗಳ ಸುಂದರ ನಿರ್ಮಾಣ."
+        }
+      }
     }
   ],
   "gallery": [
-    "/uploads/1783749838571-2f890k.jpeg",
-    "/uploads/1783749838961-nwhqgb.jpeg",
     "/uploads/1783749838707-f8y9df.jpeg",
     "/uploads/1783749838709-dhke5l.jpeg",
-    "/uploads/1783749838878-j3am8v.jpeg",
-    "/uploads/1783749838727-vrcx1l.jpeg",
-    "/uploads/1783749838740-xix1g5.jpeg",
-    "/uploads/1783749838997-sbwlls.jpeg",
     "/uploads/1783749838762-a6sler.jpeg",
     "/uploads/1783749838555-c2ijqe.jpeg",
     "/uploads/1783749838584-3b8r17.jpeg",
@@ -100,20 +149,23 @@
     "/uploads/1783749838577-oqywxt.jpeg",
     "/uploads/1783749839117-ad3roa.jpeg",
     "/uploads/1783749839005-zdm1so.jpeg",
-    "/uploads/1783749838611-r9lzkj.jpeg",
-    "/uploads/1783749838605-7n19ej.jpeg",
-    "/uploads/1783749839321-w226fw.jpeg",
-    "/uploads/1783749839199-chwnti.jpeg",
-    "/uploads/1783749839184-13np57.jpeg",
-    "/uploads/1783749839259-mflq54.jpeg",
     "/uploads/1783749838847-30vlan.jpeg",
-    "/uploads/1783749839076-xkdgh4.jpeg",
     "/uploads/1783749839298-w3gf2g.jpeg",
     "/uploads/1783749839242-zl9bku.jpeg",
-    "/uploads/1783749838843-li1fez.jpeg",
     "/uploads/1783749839125-qpej0w.jpeg",
-    "/uploads/1783749838610-f4ek3f.jpeg",
-    "/uploads/1783749839123-ea89m6.jpeg"
+    "/uploads/1784639884736-xkl5e2.jpeg",
+    "/uploads/1784639884434-e5o37n.jpeg",
+    "/uploads/1784639884339-i7rbvd.jpeg",
+    "/uploads/1784639884495-rt77ib.jpeg",
+    "/uploads/1784639884505-fjey9x.jpeg",
+    "/uploads/1784639884734-bgu795.jpeg",
+    "/uploads/1784639884285-yuvb9n.jpeg",
+    "/uploads/1784639884943-9ei6vq.jpeg",
+    "/uploads/1784639884738-s8i2xz.jpeg",
+    "/uploads/1784639885284-8yz0er.jpeg",
+    "/uploads/1784639884253-tsb64w.jpeg",
+    "/uploads/1784639885249-uucsfd.jpeg",
+    "/uploads/1784639885044-f53c5j.jpeg"
   ],
   "about": {
     "body": "Mathru Chaya Constructions specializes in traditional temple construction and stone craftsmanship. We follow the Vernacular architectural style of Tulunadu (Dakshina Kannada & Udupi) and Kasaragod, a traditional style of construction that uses local materials, time-tested building techniques, and designs suited to the region's climate and culture.\r\n\r\nWe undertake the construction of temples, Garbhagudis (sanctums), Kalyanis (temple ponds), Naga Sthanas, Daiva Sthanas, and other sacred structures with precision and devotion.\r\n\r\nWe work with two types of natural stone:\r\n• Kempu Kallu (Red Laterite Stone) – Widely used for houses, compound walls, traditional buildings, and other construction works.\r\n• Kappu Kallu (Black Stone) – Mainly used for Garbhagudis, temple carvings, stone pillars, Mantapas, and other sacred stone works.\r\n\r\nOur skilled artisans also create handcrafted stone sculptures, including Bootha Kallu, Daiva platforms, Moorthies (deity idols), Naga idols, stone pillars, Mantapas, and custom carvings. Every piece is carefully crafted with attention to detail and respect for tradition.\r\n\r\nWith generations of experience and a commitment to quality, we have successfully completed projects across Dakshina Kannada, Udupi, Bengaluru, Kasaragod, and Mumbai. Every project reflects our dedication to traditional craftsmanship, durability, and customer satisfaction.",
