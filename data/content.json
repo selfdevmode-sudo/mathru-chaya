@@ -24,6 +24,77 @@
   },
   "projects": [
     {
+      "id": "mrx1umv4-27psj2",
+      "slug": "shree-veerabhadreshwara-temple-indavara-chikkamagaluru",
+      "title": "Shree Veerabhadreshwara Temple – Indavara, Chikkamagaluru.",
+      "type": "temple",
+      "place": "Indavara",
+      "description": "This temple is constructed entirely out of rock stone, and its construction work was completed within two years.\r\n\r\nIt features a Garbhagriha (sanctum sanctorum), a Sabhamantapa (assembly hall), and a Mukhamantapa (entrance porch). The Panchanga (basement) includes a row of carved elephants, intricate filigree work on the Kumuda (molding), wall pilasters on the walls, and stone lattices at the main entrance. Similarly, beautifully sculpted Vyali pillars adorn the Mukhamantapa.",
+      "materials": [
+        "Rock-stone"
+      ],
+      "duration": "2 years",
+      "ledBy": "Eshwara Chandra",
+      "status": "Completed",
+      "photos": [
+        "/uploads/1784783225915-olmwyu.jpeg",
+        "/uploads/1784783326769-dokmx7.jpeg",
+        "/uploads/1784783326746-zjxhds.jpeg"
+      ],
+      "featured": false,
+      "i18n": {
+        "kn": {
+          "title": "ಶ್ರೀ ವೀರಭದ್ರೇಶ್ವರ ದೇವಸ್ಥಾನ – ಇಂದಾವರ, ಚಿಕ್ಕಮಗಳೂರು.",
+          "place": "ಇಂದಾವರ",
+          "description": "ಈ ದೇವಸ್ಥಾನವು ಸಂಪೂರ್ಣವಾಗಿ ಶಿಲಾಕಲ್ಲಿನಿಂದ ನಿರ್ಮಾಣವಾಗಿದ್ದು, ಇದರ ನಿರ್ಮಾಣ ಕಾರ್ಯವು ಎರಡು ವರ್ಷಗಳಲ್ಲಿ ಪೂರ್ಣಗೊಂಡಿದೆ.\r\n\r\nಇದು ಗರ್ಭಗೃಹ, ಸಭಾಮಂಟಪ ಹಾಗೂ ಮುಖಮಂಟಪವನ್ನು ಹೊಂದಿದೆ. ಪಂಚಾಂಗದಲ್ಲಿ ಆನೆಯ ಸಾಲು, ಕುಮುದದಲ್ಲಿ ಕುಸುರಿ ಕೆಲಸ, ಗೋಡೆಗಳಲ್ಲಿ ಭಿತ್ತಿಸ್ತಂಭ ಹಾಗೂ ಗಣದ್ವಾರದ ಜಾಲಂಧ್ರಗಳನ್ನು ಒಳಗೊಂಡಿದೆ. ಹಾಗೆಯೇ ಮುಖಮಂಟಪದಲ್ಲಿ ವ್ಯಾಳಿ ಕಂಬಗಳು ಸೊಗಸಾಗಿ ಮೂಡಿಬಂದಿವೆ.",
+          "materials": [
+            "ಶಿಲಾಕಲ್ಲು"
+          ],
+          "duration": "2 years",
+          "ledBy": "ಈಶ್ವರ ಚಂದ್ರ",
+          "status": "ಪೂರ್ಣಗೊಂಡಿದೆ"
+        }
+      }
+    },
+    {
+      "id": "mrx19wxg-r0zatt",
+      "slug": "shiva-temple-diwale-gaon-navi-mumbai",
+      "title": "Shiva Temple – Diwale Gaon, Navi Mumbai",
+      "type": "temple",
+      "place": "Navi Mumbai",
+      "year": 2010,
+      "description": "Built using unique stone sourced from near Badami, this temple features high-end intricate carvings, elegant stone pillars, and a magnificent stone spire (Gopura). This beautiful temple was constructed in the year 2010.\r\n\r\nThe completely air-conditioned sanctum sanctorum (Garbhagriha) stands as an excellent example of our traditional sculpture and architecture. Within a very short span of time, the masterful craftsmanship of numerous skilled artisans has brought out these detailed carvings and artworks with absolute precision and elegance.",
+      "materials": [
+        "Rock-stone"
+      ],
+      "duration": "2 years",
+      "teamSize": "60",
+      "ledBy": "Eshwara Chandra",
+      "status": "Completed",
+      "mapLink": "https://maps.app.goo.gl/p5aQW15cYNVkZGd2A",
+      "photos": [
+        "/uploads/1784782259182-9cvlhs.jpeg",
+        "/uploads/1784782259085-umunvh.jpeg",
+        "/uploads/1784782259138-hfnz11.jpeg",
+        "/uploads/1784782259115-dkq6q8.jpeg"
+      ],
+      "featured": false,
+      "i18n": {
+        "kn": {
+          "title": "ಶಿವ ದೇವಸ್ಥಾನ – ದಿವಾಳೆಗಾಂವ್, ನವಿ ಮುಂಬೈ",
+          "place": "ನವಿ ಮುಂಬೈ",
+          "description": "ಬಾದಾಮಿ ಬಳಿಯ ವಿಶಿಷ್ಟ ಶಿಲಾಕಲ್ಲಿನಿಂದ ನಿರ್ಮಿತವಾಗಿರುವ ಈ ದೇವಸ್ಥಾನವು, ಅತ್ಯಂತ ಉನ್ನತ ಮಟ್ಟದ ಸೂಕ್ಷ್ಮ ಕುಸುರಿ ಕೆತ್ತನೆಗಳು, ಸೊಗಸಾದ ಶಿಲಾ ಕಂಬಗಳು ಹಾಗೂ ಭವ್ಯವಾದ ಶಿಲಾ ಗೋಪುರವನ್ನು ಒಳಗೊಂಡಿದೆ. ಈ ಸುಂದರ ದೇವಾಲಯವನ್ನು 2010ರಲ್ಲಿ ನಿರ್ಮಿಸಲಾಯಿತು.\r\n\r\nಸಂಪೂರ್ಣ ಹವಾನಿಯಂತ್ರಿತ (Air-conditioned) ಸೌಲಭ್ಯವನ್ನು ಹೊಂದಿರುವ ಇಲ್ಲಿನ ಗರ್ಭಗೃಹವು, ನಮ್ಮ ಸಾಂಪ್ರದಾಯಿಕ ಶಿಲ್ಪಕಲೆಗೆ ಅತ್ಯುತ್ತಮ ಉದಾಹರಣೆಯಾಗಿದೆ. ಅತ್ಯಂತ ಕಡಿಮೆ ಅವಧಿಯಲ್ಲಿ, ಹಲವಾರು ನುರಿತ ಶಿಲ್ಪಿಗಳ ಕುಶಲ ಕೈಚಳಕದಿಂದ ಮೂಡಿಬಂದಿರುವ ಇಲ್ಲಿನ ಕಲಾಕೃತಿಗಳು ಹಾಗೂ ಕುಸುರಿ ಕೆಲಸಗಳು ಅತ್ಯಂತ ಅಚ್ಚುಕಟ್ಟಾಗಿ ಮತ್ತು ಸೊಗಸಾಗಿ ಮೂಡಿಬಂದಿವೆ.",
+          "materials": [
+            "ಶಿಲಾಕಲ್ಲು"
+          ],
+          "duration": "2 years",
+          "teamSize": "60",
+          "ledBy": "ಈಶ್ವರ ಚಂದ್ರ",
+          "status": "ಪೂರ್ಣಗೊಂಡಿದೆ"
+        }
+      }
+    },
+    {
       "id": "mrup2cap-ok682t",
       "slug": "sri-panchalingeshwara-temple-edamangala",
       "title": "Sri Panchalingeshwara Temple – Edamangala",
@@ -35,7 +106,6 @@
       "status": "Completed",
       "mapLink": "https://maps.app.goo.gl/kzdYcNh3ocUYzZ788",
       "photos": [
-        "/uploads/1784641066264-dvlzoo.jpeg",
         "/uploads/1784641066385-h02qgi.jpeg",
         "/uploads/1784641066375-xip47s.jpeg",
         "/uploads/1784641066368-b8dh6s.jpeg",
@@ -47,36 +117,13 @@
           "title": "ಶ್ರೀ ಪಂಚಲಿಂಗೇಶ್ವರ ದೇವಸ್ಥಾನ – ಎಡಮಂಗಲ",
           "place": "ಎಡಮಂಗಲ",
           "description": "ಈ ದೇವಸ್ಥಾನದ ನಿರ್ಮಾಣ ಕಾರ್ಯವು 2012ರಲ್ಲಿ ಪ್ರಾರಂಭವಾಗಿ, 2018ನೇ ಮಾರ್ಚ್ ತಿಂಗಳಲ್ಲಿ ಬ್ರಹ್ಮಕಲಶೋತ್ಸವ ನೆರವೇರಿತು.\r\n\r\nಇಲ್ಲಿಯ ಗರ್ಭಗೃಹವು ಗಜಪೃಷ್ಠಾಕೃತಿಯಲ್ಲಿದ್ದು, ಎಡನಾಳ ಹಾಗೂ ನವರಂಗವನ್ನು ಹೊಂದಿದೆ. ಗರ್ಭಗೃಹದ ಎದುರು ನಮಸ್ಕಾರ ಮಂಟಪವಿದ್ದು, ಸುತ್ತುಪೌಳಿ ಹಾಗೂ ಧ್ವಜಸ್ತಂಭವನ್ನು ಹೊಂದಿದೆ.\r\n\r\nಇಲ್ಲಿನ ಗರ್ಭಗೃಹ, ನಮಸ್ಕಾರ ಮಂಟಪ ಹಾಗೂ ಧ್ವಜಸ್ತಂಭದ ಪೀಠವನ್ನು ದೊಡ್ಡಬಳ್ಳಾಪುರದ ಶಿಲಾಕಲ್ಲಿನಲ್ಲಿ ನಾಲ್ಕು ನೂಲು ನಯಗೊಳಿಸಿ ನಿರ್ಮಿಸಲಾಗಿದೆ.\r\n\r\nಈ ಕ್ಷೇತ್ರದಲ್ಲಿ ಶ್ರೀ ಪಂಚಲಿಂಗೇಶ್ವರ ದೇವರು ವಿರಾಜಮಾನರಾಗಿದ್ದು, ಸನಿಹದಲ್ಲಿಯೇ ಶ್ರೀ ದುರ್ಗಾಪರಮೇಶ್ವರಿ ದೇವಸ್ಥಾನವಿದೆ.",
+          "ledBy": "ಈಶ್ವರ ಚಂದ್ರ",
           "status": "ಪೂರ್ಣಗೊಂಡಿದೆ"
         },
         "hi": {
           "title": "श्री पंचलिंगेश्वर मंदिर - एडमंगला",
           "place": "एडमंगला",
           "description": "इस मंदिर का निर्माण 2012 में शुरू हुआ था और ब्रह्म कलाशोत्सव मार्च 2018 में आयोजित किया गया था।\r\n\r\nयहाँ का गर्भगृह वर्गाकार है, जिसमें बाईं ओर नाभि और नवरंग हैं। गर्भगृह के सामने नमस्कार मंडप है, जिसमें सुत्तुपौली और ध्वज स्तंभ है।\r\n\r\nयहाँ का गर्भगृह, नमस्कार मंडप और ध्वज स्तंभ का आधार डोड्डाबल्लापुरा से प्राप्त पॉलिश किए हुए पत्थरों की चार परतों से बना है।\r\n\r\nइस क्षेत्र के देवता भगवान पंचलिंगेश्वर हैं और श्री दुर्गापरमेश्वरी मंदिर पास में ही स्थित है।"
-        }
-      }
-    },
-    {
-      "id": "mrgkzdwb-em4q40",
-      "slug": "mardala-shri-mahalingeshwara-temple",
-      "title": "Mardala Shri Mahalingeshwara Temple",
-      "type": "temple",
-      "place": "Mardala",
-      "ledBy": "Eshwara Chandra",
-      "status": "Ongoing",
-      "mapLink": "https://maps.app.goo.gl/T5x45kpFxwJDjAME6",
-      "photos": [
-        "/uploads/1783787670627-8xyl7n.jpeg"
-      ],
-      "featured": true,
-      "i18n": {
-        "kn": {
-          "title": "ಮರ್ದಾಳ ಶ್ರೀ ಮಹಾಲಿಂಗೇಶ್ವರ ದೇವಸ್ಥಾನ",
-          "place": "ಮರ್ದಾಳ"
-        },
-        "hi": {
-          "title": "मर्दाला श्री महालिंगेश्वर मंदिर",
-          "place": "मर्दाल"
         }
       }
     }

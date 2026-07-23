@@ -1,4 +1,4 @@
-import type { TranslationLang } from "./types";
+import type { TranslationLang } from './types'
 
 /**
  * The single source of truth for WHICH content fields are translatable and how
@@ -12,50 +12,51 @@ import type { TranslationLang } from "./types";
  * it English keeps URLs ASCII and stable).
  */
 
-export type FieldKind = "text" | "textarea" | "list";
+export type FieldKind = 'text' | 'textarea' | 'list'
 
 export interface TranslatableField {
   /** Matches the English field name on the record and in the English form. */
-  name: string;
-  kind: FieldKind;
+  name: string
+  kind: FieldKind
   /** Key into lib/i18n.ts's dictionary — panel labels follow the ADMIN's language. */
-  labelKey: string;
+  labelKey: string
 }
 
-export const TRANSLATION_LANGS: TranslationLang[] = ["kn", "hi"];
+export const TRANSLATION_LANGS: TranslationLang[] = ['kn', 'hi']
 
 export const PROJECT_FIELDS: TranslatableField[] = [
-  { name: "title", kind: "text", labelKey: "title" },
-  { name: "place", kind: "text", labelKey: "place" },
-  { name: "builtFor", kind: "text", labelKey: "built_for" },
-  { name: "description", kind: "textarea", labelKey: "description" },
-  { name: "materials", kind: "list", labelKey: "materials" },
-  { name: "duration", kind: "text", labelKey: "duration" },
-  { name: "teamSize", kind: "text", labelKey: "team_size" },
-  { name: "status", kind: "text", labelKey: "status" },
-];
+  { name: 'title', kind: 'text', labelKey: 'title' },
+  { name: 'place', kind: 'text', labelKey: 'place' },
+  { name: 'builtFor', kind: 'text', labelKey: 'built_for' },
+  { name: 'description', kind: 'textarea', labelKey: 'description' },
+  { name: 'materials', kind: 'list', labelKey: 'materials' },
+  { name: 'duration', kind: 'text', labelKey: 'duration' },
+  { name: 'teamSize', kind: 'text', labelKey: 'team_size' },
+  { name: 'ledBy', kind: 'text', labelKey: 'led_by' },
+  { name: 'status', kind: 'text', labelKey: 'status' },
+]
 
 export const AWARD_FIELDS: TranslatableField[] = [
-  { name: "title", kind: "text", labelKey: "title" },
-  { name: "givenBy", kind: "text", labelKey: "given_by" },
-  { name: "note", kind: "textarea", labelKey: "note_label" },
-];
+  { name: 'title', kind: 'text', labelKey: 'title' },
+  { name: 'givenBy', kind: 'text', labelKey: 'given_by' },
+  { name: 'note', kind: 'textarea', labelKey: 'note_label' },
+]
 
 export const TESTIMONIAL_FIELDS: TranslatableField[] = [
-  { name: "quote", kind: "textarea", labelKey: "quote_label" },
-  { name: "role", kind: "text", labelKey: "role_label" },
-  { name: "place", kind: "text", labelKey: "place" },
-];
+  { name: 'quote', kind: 'textarea', labelKey: 'quote_label' },
+  { name: 'role', kind: 'text', labelKey: 'role_label' },
+  { name: 'place', kind: 'text', labelKey: 'place' },
+]
 
 export const ABOUT_FIELDS: TranslatableField[] = [
-  { name: "body", kind: "textarea", labelKey: "about_text_label" },
-];
+  { name: 'body', kind: 'textarea', labelKey: 'about_text_label' },
+]
 
 export const SITE_FIELDS: TranslatableField[] = [
-  { name: "tagline", kind: "text", labelKey: "tagline_label" },
-  { name: "heroLine", kind: "text", labelKey: "hero_line_label" },
-  { name: "region", kind: "text", labelKey: "region_label" },
-];
+  { name: 'tagline', kind: 'text', labelKey: 'tagline_label' },
+  { name: 'heroLine', kind: 'text', labelKey: 'hero_line_label' },
+  { name: 'region', kind: 'text', labelKey: 'region_label' },
+]
 
 /**
  * Services are an editable list, so their fields are indexed per row. English
@@ -63,18 +64,18 @@ export const SITE_FIELDS: TranslatableField[] = [
  * `service.<i>.blurb`, and `service.<i>.<lang>.<field>`.
  */
 export const SERVICE_FIELDS: TranslatableField[] = [
-  { name: "name", kind: "text", labelKey: "service_name" },
-  { name: "blurb", kind: "textarea", labelKey: "service_blurb" },
-];
+  { name: 'name', kind: 'text', labelKey: 'service_name' },
+  { name: 'blurb', kind: 'textarea', labelKey: 'service_blurb' },
+]
 
 /** Form input name for a translated field, e.g. "kn.title". */
 export function fieldName(lang: TranslationLang, field: string): string {
-  return `${lang}.${field}`;
+  return `${lang}.${field}`
 }
 
 /** English field of service row `i`, e.g. "service.0.name". */
 export function serviceField(i: number, field: string): string {
-  return `service.${i}.${field}`;
+  return `service.${i}.${field}`
 }
 
 /** Translated field of service row `i`, e.g. "service.0.kn.name". */
@@ -83,5 +84,5 @@ export function serviceTranslationField(
   lang: TranslationLang,
   field: string,
 ): string {
-  return `service.${i}.${lang}.${field}`;
+  return `service.${i}.${lang}.${field}`
 }
