@@ -2,20 +2,20 @@
   "site": {
     "name": "Mathru chaya constructions",
     "tagline": "Temple, Pond & Building Construction",
-    "owners": [
-      "Eshwara Chandra"
-    ],
+    "owners": ["Eshwara Chandra"],
     "phone": "+919740273063",
     "whatsapp": "919740273063",
     "region": "Sankala Kariya, Udupi, Karnataka",
     "heroLine": "35+ Years Of Experience",
     "i18n": {
       "kn": {
+        "name": "ಮಾತೃ ಛಾಯಾ ಕನ್ಸ್ಟ್ರಕ್ಷನ್ಸ್",
         "tagline": "ದೇವಾಲಯ, ಕೊಳ ಮತ್ತು ಕಟ್ಟಡ ನಿರ್ಮಾಣ",
         "heroLine": "35+ ವರ್ಷಗಳ ಅನುಭವ",
         "region": "ಸಂಕಲ ಕರಿಯ, ಉಡುಪಿ, ಕರ್ನಾಟಕ"
       },
       "hi": {
+        "name": "मातृ छाया कंस्ट्रक्शंस",
         "tagline": "मंदिरों, तालाबों और इमारतों का निर्माण",
         "heroLine": "35+ वर्षों का अनुभव",
         "region": "सांकला करिया, उडुपी, कर्नाटक"
@@ -24,15 +24,45 @@
   },
   "projects": [
     {
+      "id": "mryki7bf-eustal",
+      "slug": "sri-mahalingeshwara-temple-mardhala-kadaba",
+      "title": "Sri Mahalingeshwara Temple – Mardhala, Kadaba.",
+      "type": "temple",
+      "place": "Mardhala",
+      "description": "This temple features a magnificent sanctum sanctorum (Garbhagriha), constructed entirely out of rock stone. The construction of the sanctum sanctorum is now complete.\r\n\r\nPlans are currently underway to construct the Namaskara Mantapa, Sri Mahaganapathi shrine, Mahabali Peetha, and Vasanta Mantapa completely out of rock stone.\r\n\r\nThe sanctum sanctorum is built in the Gajaprishta architectural style, featuring a very high jagathi (platform) that makes it look highly majestic.",
+      "materials": ["Rock-stone"],
+      "ledBy": "Eshwara Chandra",
+      "status": "Ongoing",
+      "mapLink": "https://maps.app.goo.gl/8T6Cu3AkEimSQJnc6",
+      "photos": [
+        "/uploads/1784875024760-phwi75.jpeg",
+        "/uploads/1784875024776-2k8s9f.jpeg",
+        "/uploads/1784875024254-sp4ax6.jpeg",
+        "/uploads/1784875024262-agbtyj.jpeg",
+        "/uploads/1784875024206-vb12o0.jpeg",
+        "/uploads/1784875024554-ixg2ex.jpeg",
+        "/uploads/1784875024265-faman0.jpeg"
+      ],
+      "featured": false,
+      "i18n": {
+        "kn": {
+          "title": "ಶ್ರೀ ಮಹಾಲಿಂಗೇಶ್ವರ ದೇವಸ್ಥಾನ – ಮರ್ದಾಳ, ಕಡಬ.",
+          "place": "ಮರ್ದಾಳ",
+          "description": "ಈ ದೇವಸ್ಥಾನವು ಭವ್ಯವಾದ ಗರ್ಭಗೃಹವನ್ನು ಹೊಂದಿದ್ದು, ಸಂಪೂರ್ಣ ಶಿಲಾಮಯವಾಗಿ ನಿರ್ಮಿಸಲಾಗಿದೆ. ಇದೀಗ ಗರ್ಭಗೃಹದ ಕಾರ್ಯ ಮುಗಿದಿದ್ದು, ಇನ್ನು ಇಲ್ಲಿ ನಮಸ್ಕಾರ ಮಂಟಪ, ಶ್ರೀ ಮಹಾಗಣಪತಿ ಗುಡಿ, ಮಹಾಬಲಿ ಪೀಠ, ವಸಂತ ಮಂಟಪ ಇತ್ಯಾದಿ ಕಾಮಗಾರಿಗಳನ್ನು ಸಂಪೂರ್ಣ ಶಿಲಾಮಯವಾಗಿ ನಿರ್ಮಾಣ ಮಾಡಲು ಕಾರ್ಯ ರೂಪಿಸಲಾಗಿದೆ.\r\n\r\nಈ ಗರ್ಭಗೃಹವು ಗಜಪೃಷ್ಠಾಕೃತಿಯಲ್ಲಿದ್ದು, ಅತಿ ಎತ್ತರವಾದ ವೇದಿಕೆಯನ್ನು ಹೊಂದಿದ್ದು ಬಹಳ ಭವ್ಯವಾಗಿದೆ.",
+          "materials": ["ಶಿಲಾಕಲ್ಲು"],
+          "ledBy": "ಈಶ್ವರ ಚಂದ್ರ",
+          "status": "ಪ್ರಗತಿಯಲ್ಲಿದೆ"
+        }
+      }
+    },
+    {
       "id": "mrx1umv4-27psj2",
       "slug": "shree-veerabhadreshwara-temple-indavara-chikkamagaluru",
       "title": "Shree Veerabhadreshwara Temple – Indavara, Chikkamagaluru.",
       "type": "temple",
       "place": "Indavara",
       "description": "This temple is constructed entirely out of rock stone, and its construction work was completed within two years.\r\n\r\nIt features a Garbhagriha (sanctum sanctorum), a Sabhamantapa (assembly hall), and a Mukhamantapa (entrance porch). The Panchanga (basement) includes a row of carved elephants, intricate filigree work on the Kumuda (molding), wall pilasters on the walls, and stone lattices at the main entrance. Similarly, beautifully sculpted Vyali pillars adorn the Mukhamantapa.",
-      "materials": [
-        "Rock-stone"
-      ],
+      "materials": ["Rock-stone"],
       "duration": "2 years",
       "ledBy": "Eshwara Chandra",
       "status": "Completed",
@@ -47,9 +77,7 @@
           "title": "ಶ್ರೀ ವೀರಭದ್ರೇಶ್ವರ ದೇವಸ್ಥಾನ – ಇಂದಾವರ, ಚಿಕ್ಕಮಗಳೂರು.",
           "place": "ಇಂದಾವರ",
           "description": "ಈ ದೇವಸ್ಥಾನವು ಸಂಪೂರ್ಣವಾಗಿ ಶಿಲಾಕಲ್ಲಿನಿಂದ ನಿರ್ಮಾಣವಾಗಿದ್ದು, ಇದರ ನಿರ್ಮಾಣ ಕಾರ್ಯವು ಎರಡು ವರ್ಷಗಳಲ್ಲಿ ಪೂರ್ಣಗೊಂಡಿದೆ.\r\n\r\nಇದು ಗರ್ಭಗೃಹ, ಸಭಾಮಂಟಪ ಹಾಗೂ ಮುಖಮಂಟಪವನ್ನು ಹೊಂದಿದೆ. ಪಂಚಾಂಗದಲ್ಲಿ ಆನೆಯ ಸಾಲು, ಕುಮುದದಲ್ಲಿ ಕುಸುರಿ ಕೆಲಸ, ಗೋಡೆಗಳಲ್ಲಿ ಭಿತ್ತಿಸ್ತಂಭ ಹಾಗೂ ಗಣದ್ವಾರದ ಜಾಲಂಧ್ರಗಳನ್ನು ಒಳಗೊಂಡಿದೆ. ಹಾಗೆಯೇ ಮುಖಮಂಟಪದಲ್ಲಿ ವ್ಯಾಳಿ ಕಂಬಗಳು ಸೊಗಸಾಗಿ ಮೂಡಿಬಂದಿವೆ.",
-          "materials": [
-            "ಶಿಲಾಕಲ್ಲು"
-          ],
+          "materials": ["ಶಿಲಾಕಲ್ಲು"],
           "duration": "2 years",
           "ledBy": "ಈಶ್ವರ ಚಂದ್ರ",
           "status": "ಪೂರ್ಣಗೊಂಡಿದೆ"
@@ -64,9 +92,7 @@
       "place": "Navi Mumbai",
       "year": 2010,
       "description": "Built using unique stone sourced from near Badami, this temple features high-end intricate carvings, elegant stone pillars, and a magnificent stone spire (Gopura). This beautiful temple was constructed in the year 2010.\r\n\r\nThe completely air-conditioned sanctum sanctorum (Garbhagriha) stands as an excellent example of our traditional sculpture and architecture. Within a very short span of time, the masterful craftsmanship of numerous skilled artisans has brought out these detailed carvings and artworks with absolute precision and elegance.",
-      "materials": [
-        "Rock-stone"
-      ],
+      "materials": ["Rock-stone"],
       "duration": "2 years",
       "teamSize": "60",
       "ledBy": "Eshwara Chandra",
@@ -84,9 +110,7 @@
           "title": "ಶಿವ ದೇವಸ್ಥಾನ – ದಿವಾಳೆಗಾಂವ್, ನವಿ ಮುಂಬೈ",
           "place": "ನವಿ ಮುಂಬೈ",
           "description": "ಬಾದಾಮಿ ಬಳಿಯ ವಿಶಿಷ್ಟ ಶಿಲಾಕಲ್ಲಿನಿಂದ ನಿರ್ಮಿತವಾಗಿರುವ ಈ ದೇವಸ್ಥಾನವು, ಅತ್ಯಂತ ಉನ್ನತ ಮಟ್ಟದ ಸೂಕ್ಷ್ಮ ಕುಸುರಿ ಕೆತ್ತನೆಗಳು, ಸೊಗಸಾದ ಶಿಲಾ ಕಂಬಗಳು ಹಾಗೂ ಭವ್ಯವಾದ ಶಿಲಾ ಗೋಪುರವನ್ನು ಒಳಗೊಂಡಿದೆ. ಈ ಸುಂದರ ದೇವಾಲಯವನ್ನು 2010ರಲ್ಲಿ ನಿರ್ಮಿಸಲಾಯಿತು.\r\n\r\nಸಂಪೂರ್ಣ ಹವಾನಿಯಂತ್ರಿತ (Air-conditioned) ಸೌಲಭ್ಯವನ್ನು ಹೊಂದಿರುವ ಇಲ್ಲಿನ ಗರ್ಭಗೃಹವು, ನಮ್ಮ ಸಾಂಪ್ರದಾಯಿಕ ಶಿಲ್ಪಕಲೆಗೆ ಅತ್ಯುತ್ತಮ ಉದಾಹರಣೆಯಾಗಿದೆ. ಅತ್ಯಂತ ಕಡಿಮೆ ಅವಧಿಯಲ್ಲಿ, ಹಲವಾರು ನುರಿತ ಶಿಲ್ಪಿಗಳ ಕುಶಲ ಕೈಚಳಕದಿಂದ ಮೂಡಿಬಂದಿರುವ ಇಲ್ಲಿನ ಕಲಾಕೃತಿಗಳು ಹಾಗೂ ಕುಸುರಿ ಕೆಲಸಗಳು ಅತ್ಯಂತ ಅಚ್ಚುಕಟ್ಟಾಗಿ ಮತ್ತು ಸೊಗಸಾಗಿ ಮೂಡಿಬಂದಿವೆ.",
-          "materials": [
-            "ಶಿಲಾಕಲ್ಲು"
-          ],
+          "materials": ["ಶಿಲಾಕಲ್ಲು"],
           "duration": "2 years",
           "teamSize": "60",
           "ledBy": "ಈಶ್ವರ ಚಂದ್ರ",
